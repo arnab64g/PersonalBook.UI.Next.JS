@@ -1,0 +1,25 @@
+form{
+    width: 50%;
+    justify-content:center; 
+}
+.center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;  
+  }
+.field{
+    margin-top: 10px;
+    width: 100%;
+}
+
+h1{
+    text-align: center;
+}
+
+.name {
+    width: 49%;
+}
+.gap{
+    width: 2%;
+}
