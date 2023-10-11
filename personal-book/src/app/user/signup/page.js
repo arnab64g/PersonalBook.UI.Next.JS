@@ -3,9 +3,12 @@
 import React, {useState, useEffect} from "react";
 import { TextField, Button } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.css';
-import './page.css'
+import './page.css';
+import Toast from "toastr";
+import { useRouter } from 'next/navigation'
 
 export default function Signup(){
+    const router = useRouter();
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState(''); 
     const [password, setPassword] = useState(''); 
@@ -13,7 +16,6 @@ export default function Signup(){
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhone] = useState('');
     const [errors, setErrors] = useState({}); 
-    
     const [isFormValid, setIsFormValid] = useState(false); 
 
     useEffect(() => { 
@@ -38,9 +40,11 @@ export default function Signup(){
         if (!email) { 
             errors.email = true; 
         }  
+
         if (!phoneNumber) {
             errors.phoneNumber = true;
         }
+
         if (!password || password.length < 6) { 
             errors.password = true; 
         } 
@@ -48,19 +52,32 @@ export default function Signup(){
         setErrors(errors); 
         setIsFormValid(Object.keys(errors).length === 0); 
     }; 
-    const registerUser = async (e) => {
-        e.preventDefault();
-        var formData = new FormData(e.target);
+
+    const registerUser = async (event) => {
+        event.preventDefault();
+        var formData = new FormData(event.target);
         const form_values = Object.fromEntries(formData);
-        console.log('form values: ', isFormValid);
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form_values)
-        };
-        let v = await fetch('http://localhost:7108/api/User', requestOptions);
-        console.log(await v.json());
+
+        if (isFormValid) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form_values)
+            };
+    
+            const res = await fetch('http://localhost:7108/api/User', requestOptions);
+            const result = await res.json();
+            console.log(result);
+            if (!result.successed) {
+                Toast.error(result.errors, "Error");
+            }
+            else{
+                Toast.success("User created successfully", "Successed");
+                const x = router.replace("/user/login");
+            }
+        }
     }
+
     return (
     <div>
         <form className='center' onSubmit={registerUser} method="post">
