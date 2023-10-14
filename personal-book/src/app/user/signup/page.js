@@ -18,7 +18,7 @@ export default function Signup(){
     const [errors, setErrors] = useState({}); 
     const [isFormValid, setIsFormValid] = useState(false); 
 
-    useEffect(() => { 
+    useEffect(() => {  
         validateForm(); 
     }, [firstName, lastName, username, email, phoneNumber, password]); 
 
@@ -67,13 +67,13 @@ export default function Signup(){
     
             const res = await fetch('http://localhost:7108/api/User', requestOptions);
             const result = await res.json();
-            console.log(result);
+            
             if (!result.successed) {
                 Toast.error(result.errors, "Error");
             }
             else{
                 Toast.success("User created successfully", "Successed");
-                const x = router.replace("/user/login");
+                router.replace("/user/login");
             }
         }
     }
