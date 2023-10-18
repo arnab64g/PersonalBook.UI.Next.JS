@@ -5,7 +5,8 @@ import React, {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import './page.css';
 import { useRouter } from 'next/navigation';
-import Toast from 'toastr';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { setToken } from '@/app/tokenHandle/tokenHandle';
 
 const Login = () =>{
@@ -48,10 +49,10 @@ const Login = () =>{
             const result = await res.json();
 
             if (!result.successed) {
-                Toast.error(result.message, "Failed");
+                toast.error(result.message, {position:'top-right'});
             }
             else{
-                Toast.success('Log in successfully','Successed');
+                toast.success('Log in successfully', {position:'top-right'});
                 setToken(result.token);
                 router.refresh();
                 router.replace("/");
@@ -60,6 +61,7 @@ const Login = () =>{
     }
 
     return (
+        <>
         <form className='center' onSubmit={loginUser} method="post">
             <h1>Log in</h1> 
             <TextField className='field' label="Username" id="username" name="username"
@@ -70,6 +72,8 @@ const Login = () =>{
             error={errors.password}> </TextField>
             <Button type='submit' className='field' variant='contained'>Log in</Button>
         </form>
+        <ToastContainer></ToastContainer>
+        </>
     );
 }
 

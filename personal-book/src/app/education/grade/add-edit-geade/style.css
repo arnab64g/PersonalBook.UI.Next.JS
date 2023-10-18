@@ -1,0 +1,21 @@
+form{
+    padding: 10px;
+}
+
+.row{
+    width: 500px;
+}
+
+.col1{
+    width: 46%;
+    margin: 1%;
+}
+
+.col2{
+    width: 30%;
+    margin: 1%;
+}
+
+h1{
+    margin: 20px;
+}

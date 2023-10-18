@@ -1,9 +1,13 @@
 "use client";
 
 import { getToken, isAdmin } from "@/app/tokenHandle/tokenHandle";
-import { Button, Dialog, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Button, Dialog, IconButton, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddEditGrade from "../add-edit-geade/add-edit-grade";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+import "./style.css"
 
 export default function GradeList() {
     const isaAdmin  = isAdmin();
@@ -13,10 +17,11 @@ export default function GradeList() {
     const [scale, setScale] = useState(4);
     const [listView, selectListView] = useState([]);
 
-    useEffect(()=>{fetchGrades()}, []);
+    useEffect(()=>{fetchGrades()}, [isOpen]);
 
     const addEditGrade = async(id) =>{
-        let grd;
+        let grd = {};
+
         if (id == 0) {
             grd = {
                 id : 0,
@@ -36,7 +41,6 @@ export default function GradeList() {
     }
 
     const selectScale = async (event) => {
-        console.log(event.target.value);
         setScale(event.target.value);
         const filtered = grades.filter(x => x.scale == event.target.value);
         selectListView(filtered);
@@ -55,34 +59,36 @@ export default function GradeList() {
         setGrades(result);
         const filtered = result.filter(x => x.scale == scale);
         selectListView(filtered);
-        console.log(filtered);
     }
     
     return (
-        <div>
-            <Button variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button>
-            <Select value={scale} onChange={selectScale}>
+        <div className="cont">
+            <Button className="options" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button>
+            <Select className="options" size="small" value={scale} onChange={selectScale}>
                 <MenuItem value={4}> Scale 4.0 </MenuItem>
                 <MenuItem value={5}> Scale 5.0 </MenuItem>
             </Select>
             <Dialog open={isOpen} >
                 <AddEditGrade grade={grade} closeAction={setIsOpen}></AddEditGrade>
             </Dialog>
-            <Table>
-                <TableHead>
-                    <TableCell>Grade</TableCell>
-                    <TableCell>Points</TableCell>
-                    <TableCell> Numbers </TableCell>
+            <Table className="table">
+                <TableHead className="thead">
+                    <TableCell className="thead">Grade</TableCell>
+                    <TableCell className="thead">Points</TableCell>
+                    <TableCell className="thead">Numbers</TableCell>
+                    {
+                        isaAdmin ? <TableCell className="thead"> </TableCell> : null
+                    }
                 </TableHead>
                 <TableBody>
                     { listView.map( grade => (<TableRow>
-                            <TableCell> {grade.gradeName}</TableCell>
-                            <TableCell> {grade.points} </TableCell>
-                            <TableCell> {grade.minNumber} - {grade.maxNumber} </TableCell>
+                            <TableCell className="tbody"> {grade.gradeName}</TableCell>
+                            <TableCell className="tbody"> {grade.points} </TableCell>
+                            <TableCell className="tbody"> {grade.minNumber} - {grade.maxNumber} </TableCell>
                             {isaAdmin ? 
-                            <TableCell>
-                                <Button onClick={() => {addEditGrade(grade.id)}}>Edit</Button> 
-                                <Button>Delete</Button>
+                            <TableCell className="tbody">
+                                <IconButton aria-label="edit" onClick={() => {addEditGrade(grade.id)}}> <EditIcon color="primary"></EditIcon>  </IconButton> 
+                                <IconButton aria-label="delete" className="delete"> <DeleteIcon ></DeleteIcon>  </IconButton>
                             </TableCell> : null}
                         </TableRow> ))}
                 </TableBody>

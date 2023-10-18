@@ -4,8 +4,10 @@ import React, {useState, useEffect} from "react";
 import { TextField, Button } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.css';
 import './page.css';
-import Toast from "toastr";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'
+import { string } from "yup";
 
 export default function Signup(){
     const router = useRouter();
@@ -69,10 +71,10 @@ export default function Signup(){
             const result = await res.json();
             
             if (!result.successed) {
-                Toast.error(result.errors, "Error");
+                toast.error(String(result.errors), {position:'top-right'});
             }
             else{
-                Toast.success("User created successfully", "Successed");
+                toast.success("User created successfully", {position:'top-right'});
                 router.replace("/user/login");
             }
         }
@@ -111,6 +113,7 @@ export default function Signup(){
             ></TextField>
             <Button type='submit' className='field' variant='contained'> Register </Button>
         </form>
+        <ToastContainer></ToastContainer>
     </div>
     );
 }

@@ -27,7 +27,7 @@ export function getUsername(){
 
     if (token) {
         const decoded = jwtDecode(token);
-        console.log(decoded);
+
         return decoded.actort;
     }
     else {
@@ -47,10 +47,12 @@ export function getToken(){
 }
 
 export function isAdmin(){
+    
     const token = getCookie('personalBookNJ');
 
     if (token) {
         const decode = jwtDecode(token);
+        
         if (decode.role == 'Admin') {
             return true;
         }

@@ -2,11 +2,11 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GradeList from '../grade/list/page';
-
+import "./style.css"
 export default function EducationTab() {
     return(
         <div>
-            <Tabs>
+            <Tabs className='tabs'>
                 <TabList>
                     <Tab>Secondary</Tab>
                     <Tab>Graduation</Tab>
