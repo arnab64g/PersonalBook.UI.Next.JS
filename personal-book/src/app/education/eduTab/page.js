@@ -3,6 +3,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GradeList from '../grade/list/page';
 import "./style.css"
+import SemesterList from '../graduation/semester/list/page'
+
 export default function EducationTab() {
     return(
         <div>
@@ -30,7 +32,7 @@ export default function EducationTab() {
 
                         </TabPanel>
                         <TabPanel>
-
+                            <SemesterList></SemesterList>
                         </TabPanel>
                     </Tabs>
                 </TabPanel>
