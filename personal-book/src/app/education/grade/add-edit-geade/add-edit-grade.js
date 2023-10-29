@@ -46,7 +46,11 @@ export default function AddEditGrade({grade, closeAction}) {
             const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
             result = await res.json();
             if (result) {
+                alert("Saved Successfully");
                 closeAction(false);
+            }
+            else{
+                alert("Save failed");
             }
         }
         
@@ -59,10 +63,6 @@ export default function AddEditGrade({grade, closeAction}) {
 
         if (!gradeName) {
             errors.gradeName = true;
-        }
-
-        if(points == 0){
-            errors.points = true;
         }
 
         setErrors(errors);
@@ -90,9 +90,10 @@ export default function AddEditGrade({grade, closeAction}) {
             </Select>
             </div>
             <div className="row">
+                <Button className="col1" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>
+                <Button className="col1" variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
             </div>
-            <Button className="col1" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>
-            <Button className="col1" variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
+            
         </form>
         
     </div>);

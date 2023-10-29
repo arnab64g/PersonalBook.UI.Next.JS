@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import AddEditGrade from "../add-edit-geade/add-edit-grade";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteGrade from "./delete";
 
 import "./style.css"
 
@@ -13,11 +14,12 @@ export default function GradeList() {
     const isaAdmin  = isAdmin();
     const [grades, setGrades] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const [grade, setGrade] = useState({});
     const [scale, setScale] = useState(4);
     const [listView, selectListView] = useState([]);
 
-    useEffect(()=>{fetchGrades()}, [isOpen]);
+    useEffect(()=>{fetchGrades()}, [isOpen, isDeleteOpen]);
 
     const addEditGrade = async(id) =>{
         let grd = {};
@@ -45,6 +47,13 @@ export default function GradeList() {
         const filtered = grades.filter(x => x.scale == event.target.value);
         selectListView(filtered);
     } 
+
+    const deleteGrade = async (id) => {
+        const del = grades.filter(x => x.id == id)[0];
+
+        setGrade(del);
+        setIsDeleteOpen(true);
+    }
 
     const fetchGrades = async() => {
         const requestOptions = {
@@ -88,11 +97,14 @@ export default function GradeList() {
                             {isaAdmin ? 
                             <TableCell className="tbody">
                                 <IconButton aria-label="edit" onClick={() => {addEditGrade(grade.id)}}> <EditIcon color="primary"></EditIcon>  </IconButton> 
-                                <IconButton aria-label="delete" className="delete"> <DeleteIcon ></DeleteIcon>  </IconButton>
+                                <IconButton aria-label="delete" className="delete" onClick={() => {deleteGrade(grade.id)}}> <DeleteIcon ></DeleteIcon>  </IconButton>
                             </TableCell> : null}
                         </TableRow> ))}
                 </TableBody>
             </Table>
+            <Dialog open = {isDeleteOpen}>
+                <DeleteGrade grade={grade} isOpen={setIsDeleteOpen}></DeleteGrade>
+            </Dialog>
         </div>
     );
 }

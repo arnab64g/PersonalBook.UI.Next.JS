@@ -2,17 +2,21 @@
 
 import { Month } from "@/app/tokenHandle/month";
 import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
-import { Button, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Button, Dialog, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./style.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import AddEditSemester from "../add-edit-semester/addedit";
 
 export default function SemesterList(){
     const [semesterList, setSemesterList] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const month = Month;
-
+    const addEdit = async () => {
+        console.log("IOpen");
+        setIsOpen(true);
+    }
     useEffect(() => {fetchSemester();}, isOpen);
     const fetchSemester = async () =>{
         const userId = getUserId();
@@ -28,12 +32,11 @@ export default function SemesterList(){
         console.log(result);
         console.log("Now");
         setSemesterList(result);
-
     }
     
     return(<>
     <h1>Semester List</h1>
-    <Button variant="contained">Add Semester</Button>
+    <Button variant="contained" onClick={addEdit}>Add Semester</Button>
 
     <Table className="table">
         <TableHead className="thead">
@@ -56,5 +59,8 @@ export default function SemesterList(){
             }
         </TableBody>
     </Table>
+    <Dialog open={isOpen} >
+        <AddEditSemester isOpenDialog={setIsOpen}></AddEditSemester>
+    </Dialog>
     </>)
 }

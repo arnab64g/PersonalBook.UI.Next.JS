@@ -32,3 +32,16 @@
 .delete{
     color: brown;
 }
+
+.delete-table{
+    margin: 20px;
+    padding: 50px;
+    width:  50%;
+    justify-content: center;
+}
+
+.delete-col{
+    flex-direction: row;
+    margin: 2%;
+    width: 46%;
+}
