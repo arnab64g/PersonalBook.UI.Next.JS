@@ -14,23 +14,19 @@ export default function SemesterList(){
     const [isOpen, setIsOpen] = useState(false);
     const month = Month;
     const addEdit = async () => {
-        console.log("IOpen");
         setIsOpen(true);
     }
     useEffect(() => {fetchSemester();}, isOpen);
     const fetchSemester = async () =>{
         const userId = getUserId();
-        console.log(getToken( ));
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' ,
                         'authorization' : `bearer ${getToken()}` }
         };
-        console.log("UserId: ", userId);
         const res = await fetch(`http://localhost:7108/api/Semester?id=${userId}`, requestOptions);
         const result = await res.json();
-        console.log(result);
-        console.log("Now");
+
         setSemesterList(result);
     }
     

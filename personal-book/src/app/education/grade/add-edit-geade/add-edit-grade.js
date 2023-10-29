@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, MenuItem, Select, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 import "./style.css";
@@ -43,8 +43,10 @@ export default function AddEditGrade({grade, closeAction}) {
                     body: JSON.stringify(grd)
                 };
             }
+
             const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
             result = await res.json();
+            
             if (result) {
                 alert("Saved Successfully");
                 closeAction(false);
@@ -73,28 +75,28 @@ export default function AddEditGrade({grade, closeAction}) {
     <div>
         <h1>Add or Edit Grade</h1>
         <form>
-            <div className="row">
-            <TextField className="col1" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
-            onChange={(gn) => {setGradeName(gn.target.value)}} error={errors.gradeName}></TextField>
-            <TextField className="col1" label="Points" type="number" id="points" name="points" value={points}
-            onChange={(p) => setPoints(p.target.value)} error={errors.points}></TextField>
-            </div>
-            <div className="row">
-            <TextField className="col2" label="Minimum Number" type="number" value={minNumber}
-            onChange={(e) => setMinNumber(e.target.value)}></TextField>
-            <TextField className="col2" label="Maximum Number" type="number" value={maxNumber}
-            onChange={(e) => setMaxNumber(e.target.value)}></TextField>
-            <Select className="col2" value={scale} onChange={(e) => setScale(e.target.value)}>
-                <MenuItem value={4}> Scale 4.0 </MenuItem>
-                <MenuItem value={5}> Scale 5.0 </MenuItem>
-            </Select>
-            </div>
-            <div className="row">
-                <Button className="col1" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>
-                <Button className="col1" variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
-            </div>
-            
+            <Box className='row'>
+                <div className="row">
+                    <TextField className="col1" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
+                    onChange={(gn) => {setGradeName(gn.target.value)}} error={errors.gradeName}></TextField>
+                    <TextField className="col1" label="Points" type="number" id="points" name="points" value={points}
+                    onChange={(p) => setPoints(p.target.value)} error={errors.points}></TextField>
+                </div>
+                <div className="row">
+                    <TextField className="col2" label="Minimum Number" type="number" value={minNumber}
+                    onChange={(e) => setMinNumber(e.target.value)}></TextField>
+                    <TextField className="col2" label="Maximum Number" type="number" value={maxNumber}
+                    onChange={(e) => setMaxNumber(e.target.value)}></TextField>
+                    <Select className="col2" value={scale} onChange={(e) => setScale(e.target.value)}>
+                        <MenuItem value={4}> Scale 4.0 </MenuItem>
+                        <MenuItem value={5}> Scale 5.0 </MenuItem>
+                    </Select>
+                </div>
+                <div className="row">
+                    <Button className="col1" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>
+                    <Button className="col1"  variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
+                </div>
+            </Box>
         </form>
-        
     </div>);
 }

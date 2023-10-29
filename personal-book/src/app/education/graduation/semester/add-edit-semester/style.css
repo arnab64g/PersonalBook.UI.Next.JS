@@ -1,0 +1,10 @@
+.row{
+    width: 500px;
+    margin: 5px;
+}
+
+.col{
+    margin: 1%;
+    width: 49%;
+}
+
