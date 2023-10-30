@@ -1,18 +1,29 @@
 
-.row{
-    width: 500px;
+.field{
+    margin-top: 10px;
+    width: 100%;
 }
 
-.col1{
-    width: 46%;
-    margin: 1%;
+.double {
+    width: 49%;
 }
 
-.col2{
-    width: 30%;
-    margin: 1%;
+.gap{
+    width: 2%;
 }
-
+.triple{
+    width: 32%;
+}
 h1{
-    margin: 20px;
+    margin: 10px;
+}
+
+div{
+    width: 100%;
+}
+
+form{
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
 }

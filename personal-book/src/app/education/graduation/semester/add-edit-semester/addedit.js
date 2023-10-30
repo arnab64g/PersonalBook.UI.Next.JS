@@ -2,7 +2,7 @@ import { Month } from "@/app/tokenHandle/month";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import "./style.css"
 
-export default function AddEditSemester({isOpenDialog}) {
+export default function AddEditSemester({semester, isOpenDialog}) {
     const month = Month;
     console.log(month);
     const closeDialog = async () => {
@@ -10,20 +10,25 @@ export default function AddEditSemester({isOpenDialog}) {
     }
     return(
         <>
+        <form>
         <h1> Semester </h1>
-        <div className="row">
-            <TextField className="col1" required label="Semester Name"></TextField>
+        <div className="field">
+            <TextField  required label="Semester Name"></TextField>
         </div>
-        <div className="row">
-            <Select className="col" label="Month">
+        <div className="field">
+            <Select className="col" label="Month" placeholder="Select MOnth">
                 {month.map(m => (<MenuItem value={m.id}> {m.name} </MenuItem>))}
             </Select>
+            <label className="gap"></label>
             <TextField className="col" label="Year"></TextField>
         </div>
-        <div>
-            <Button variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
-            <Button variant="contained"> Save </Button>
+        <div className="field">
+            <Button  className="col" variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
+            <label className="gap"></label>
+            <Button className="col" variant="contained"> Save </Button>
         </div>
+        </form>
+        
         </>
     );
 }

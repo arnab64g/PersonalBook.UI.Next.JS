@@ -1,10 +1,14 @@
-.row{
-    width: 500px;
-    margin: 5px;
+.field{
+    margin-top: 10px;
+    width: 100%;
 }
 
 .col{
-    margin: 1%;
     width: 49%;
 }
-
+.gap{
+    width: 2%;
+}
+form{
+    padding: 10px;
+}
