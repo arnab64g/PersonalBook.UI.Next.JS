@@ -8,15 +8,35 @@ import "./style.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddEditSemester from "../add-edit-semester/addedit";
+import DeleteSemester from "./deleteSemester";
 
 export default function SemesterList(){
     const [semesterList, setSemesterList] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [semester, setSemester] = useState({});
     const month = Month;
-    const addEdit = async () => {
+
+    const addEdit = async (id) => {
+        if (id == 0) {
+            const newSemester = {
+                id:0,
+                userId : getUserId(),
+                semesterName : "",
+                monthBng : new Date().getMonth(),
+                year : new Date().getFullYear()
+            };
+            setSemester(newSemester);
+        }
+        else{
+            const selectedSemester = semesterList.filter(x => x.id == id)[0];
+            setSemester(selectedSemester);
+        }
         setIsOpen(true);
     }
-    useEffect(() => {fetchSemester();}, isOpen);
+
+    useEffect(() => {fetchSemester();}, [isOpen]);
+    
     const fetchSemester = async () =>{
         const userId = getUserId();
         const requestOptions = {
@@ -32,7 +52,7 @@ export default function SemesterList(){
     
     return(<>
     <h1>Semester List</h1>
-    <Button variant="contained" onClick={addEdit}>Add Semester</Button>
+    <Button variant="contained" onClick={() => {addEdit(0);}}>Add Semester</Button>
 
     <Table className="table">
         <TableHead className="thead">
@@ -48,15 +68,18 @@ export default function SemesterList(){
                                                 <TableCell className="tbody"> {month[sem.monthBng - 1].name }</TableCell>
                                                 <TableCell className="tbody">{sem.year}</TableCell>
                                                 <TableCell className="tbody"> 
-                                                    <IconButton><EditIcon color="primary"></EditIcon></IconButton> 
-                                                    <IconButton className="delete"> <DeleteIcon></DeleteIcon></IconButton>
+                                                    <IconButton onClick={() => {addEdit(sem.id)}}><EditIcon color="primary"></EditIcon></IconButton> 
+                                                    <IconButton onClick={() => {setIsDeleteOpen(true)}} className="delete"> <DeleteIcon></DeleteIcon></IconButton>
                                                 </TableCell>
                                             </TableRow>))
             }
         </TableBody>
     </Table>
     <Dialog open={isOpen} >
-        <AddEditSemester isOpenDialog={setIsOpen}></AddEditSemester>
+        <AddEditSemester semester={semester} isOpenDialog={setIsOpen}></AddEditSemester>
+    </Dialog>
+    <Dialog open={isDeleteOpen}>
+        <DeleteSemester semester={semester} isOpenDialog={setIsDeleteOpen}></DeleteSemester>
     </Dialog>
     </>)
 }
