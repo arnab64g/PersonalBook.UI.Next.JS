@@ -35,7 +35,7 @@ export default function SemesterList(){
         setIsOpen(true);
     }
 
-    useEffect(() => {fetchSemester();}, [isOpen]);
+    useEffect(() => {fetchSemester();}, [isOpen, isDeleteOpen]);
     
     const fetchSemester = async () =>{
         const userId = getUserId();
@@ -58,8 +58,8 @@ export default function SemesterList(){
 
     return(<>
     <h1>Semester List</h1>
-    <Button variant="contained" onClick={() => {addEdit(0);}}>Add Semester</Button>
-
+    <div className="slist">
+    <Button  variant="contained" onClick={() => {addEdit(0)}}> Add Semester </Button>
     <Table className="table">
         <TableHead className="thead">
             <TableCell className="thead">Semester Name</TableCell>
@@ -81,6 +81,8 @@ export default function SemesterList(){
             }
         </TableBody>
     </Table>
+    </div>
+    
     <Dialog open={isOpen} >
         <AddEditSemester semester={semester} isOpenDialog={setIsOpen}></AddEditSemester>
     </Dialog>

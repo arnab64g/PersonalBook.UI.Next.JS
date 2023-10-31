@@ -56,7 +56,9 @@ export default function AddEditSemester({semester, isOpenDialog}) {
                     body: JSON.stringify(semester)                
                 };
             }
+
             const res = await fetch('http://localhost:7108/api/Semester', requestOptions);
+            
             if (res) {
                 alert("Saved Successfully.");
                 isOpenDialog(false);

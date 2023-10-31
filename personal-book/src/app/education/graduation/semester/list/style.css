@@ -1,5 +1,5 @@
 .table{
-    width: 50%;
+    width: 100%;
     border: 1px;
     border-style: solid;
     justify-content: center;
@@ -44,4 +44,10 @@
 
 .col{
     width: 48%;
+}
+
+.slist{
+    width: 60%;
+    position: absolute;
+    margin-left: 10%;
 }
