@@ -1,0 +1,29 @@
+.delete{
+    color: brown;
+}
+
+.thead{
+    color: white;
+    background-color: cornflowerblue;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+.tbody{
+    border: 1px;
+    border-style: solid;
+}
+
+.select{
+    width: 200px;
+}
+
+.option{
+    margin: 10px;
+}
+
+.gap{
+    width: 5%;
+    background-color: black;
+}

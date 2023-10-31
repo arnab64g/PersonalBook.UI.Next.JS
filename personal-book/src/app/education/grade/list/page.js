@@ -73,7 +73,7 @@ export default function GradeList() {
     return (
         <div className="cont">
             <Button className="options" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button>
-            <Select className="options" size="small" value={scale} onChange={selectScale}>
+            <Select className="options select" size="small" value={scale} onChange={selectScale}>
                 <MenuItem value={4}> Scale 4.0 </MenuItem>
                 <MenuItem value={5}> Scale 5.0 </MenuItem>
             </Select>

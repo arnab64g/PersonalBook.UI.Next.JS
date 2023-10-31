@@ -35,7 +35,7 @@ export default function SemesterList(){
         setIsOpen(true);
     }
 
-    useEffect(() => {fetchSemester();}, [isOpen, isDeleteOpen]);
+    useEffect(() => {fetchSemester()}, [isOpen, isDeleteOpen]);
     
     const fetchSemester = async () =>{
         const userId = getUserId();
