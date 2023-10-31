@@ -50,6 +50,12 @@ export default function SemesterList(){
         setSemesterList(result);
     }
     
+    const deleteSemester = async (id) =>{
+        const sem = semesterList.filter(x => x.id == id)[0];
+        setSemester(sem);
+        setIsDeleteOpen(true);
+    }
+
     return(<>
     <h1>Semester List</h1>
     <Button variant="contained" onClick={() => {addEdit(0);}}>Add Semester</Button>
@@ -69,7 +75,7 @@ export default function SemesterList(){
                                                 <TableCell className="tbody">{sem.year}</TableCell>
                                                 <TableCell className="tbody"> 
                                                     <IconButton onClick={() => {addEdit(sem.id)}}><EditIcon color="primary"></EditIcon></IconButton> 
-                                                    <IconButton onClick={() => {setIsDeleteOpen(true)}} className="delete"> <DeleteIcon></DeleteIcon></IconButton>
+                                                    <IconButton onClick={() => { deleteSemester(sem.id)}} className="delete"> <DeleteIcon></DeleteIcon></IconButton>
                                                 </TableCell>
                                             </TableRow>))
             }

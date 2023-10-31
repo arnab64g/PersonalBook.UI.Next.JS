@@ -33,3 +33,15 @@
 .delete{
     color: brown;
 }
+
+.dialog{
+    padding: 20px;
+}
+
+.gap{
+    width: 2%;
+}
+
+.col{
+    width: 48%;
+}
