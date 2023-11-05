@@ -4,14 +4,34 @@ import { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddEditCourse from "./addEditCourse";
+import DeleteCourse from "./delete";
 
 export function Courses() {
     const [courseList, setCourseList] = useState([]);
     const [sortOption, setSortOption] = useState(1);
     const [isOpen, setIsOpen] = useState(false);
+    const [isDeletOpen, setIsDeleteOpen] = useState(false);
+    const [course, setCourse] = useState({});
 
     useEffect(() => {fetchCourses()}, []);
     
+    const addEditCourse = async (id) =>{
+        if (id == 0) {
+            setCourse({
+                id : 0,
+                userId : getUserId(),
+                courseCode : "",
+                courseTitle : "",
+                creditPoint : 0,
+            });
+        }
+        else{
+            setCourse(courseList.filter(x => x.id == id)[0]);
+        }
+
+        setIsOpen(true);
+    }
+
     const fetchCourses = async () =>{
         const userId = getUserId();
         const requestOptions = {
@@ -21,8 +41,11 @@ export function Courses() {
         };
         const res = await fetch(`http://localhost:7108/api/Course?id=${userId}`, requestOptions);
         const result = await res.json();
-        console.log(result);
         setCourseList(result);
+    }
+
+    const deleteCourse = async (id) =>{
+        setIsDeleteOpen(true);
     }
 
     return(
@@ -36,9 +59,9 @@ export function Courses() {
                 <MenuItem value={4}> Course Title [Z-A] </MenuItem>
             </Select>
             <span className="gap"></span>
-            <Button onClick={()=>{setIsOpen(true)}} variant="contained" className="options"> Add Course</Button>
+            <Button onClick={()=>{addEditCourse(0)}} variant="contained" className="options"> Add Course</Button>
         </div>
-        <Table>
+        <Table className="course-table">
             <TableHead>
                 <TableCell className="thead">Course Code</TableCell>
                 <TableCell className="thead">Course Title</TableCell>
@@ -51,14 +74,17 @@ export function Courses() {
                     <TableCell className="tbody"> {x.courseTitle} </TableCell> 
                     <TableCell className="tbody"> {x.creditPoint} </TableCell>
                     <TableCell className="tbody">
-                        <IconButton> <EditIcon color="primary"></EditIcon> </IconButton>
-                        <IconButton className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
+                        <IconButton onClick={() => {addEditCourse(x.id)}}> <EditIcon color="primary"></EditIcon> </IconButton>
+                        <IconButton onClick={() => {deleteCourse(x.id)}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
                     </TableCell>
                     </TableRow>))}
             </TableBody>
         </Table>
         <Dialog open={isOpen}>
-            <AddEditCourse isOpen={setIsOpen}></AddEditCourse>
+            <AddEditCourse course={course} isOpen={setIsOpen}></AddEditCourse>
+        </Dialog>
+        <Dialog open={isDeletOpen}>
+            <DeleteCourse course={course} isOpen={setIsDeleteOpen}></DeleteCourse>
         </Dialog>
         </>
     );

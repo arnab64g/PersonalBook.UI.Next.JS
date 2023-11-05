@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddEditSemester from "../add-edit-semester/addedit";
 import DeleteSemester from "./deleteSemester";
+import "./semester.css";
 
 export default function SemesterList(){
     const [semesterList, setSemesterList] = useState([]);
@@ -57,9 +58,9 @@ export default function SemesterList(){
 
     return(<>
     <h1>Semester List</h1>
-    <div className="slist">
+    <div className="cont">
     <Button  variant="contained" className="options" onClick={() => {addEdit(0)}}> Add Semester </Button>
-    <Table className="table">
+    <Table className="semester-table">
         <TableHead className="thead">
             <TableCell className="thead">Semester Name</TableCell>
             <TableCell className="thead">Month Started</TableCell>

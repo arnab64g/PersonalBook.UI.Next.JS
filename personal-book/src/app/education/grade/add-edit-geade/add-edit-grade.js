@@ -59,7 +59,7 @@ export default function AddEditGrade({grade, closeAction}) {
         
     }
 
-    useEffect(() => {validateForm();}, [gradeName, points]);
+    useEffect(() => {validateForm()}, [gradeName, points]);
 
     const validateForm = () =>{
         let errors = {};
@@ -74,11 +74,11 @@ export default function AddEditGrade({grade, closeAction}) {
 
     return (
     <div>
-        <h1>Add or Edit Grade</h1>
+        <h1 className="head">Add or Edit Grade</h1>
         <form>
             <div className="field">
                 <TextField className="double" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
-                onChange={(gn) => {setGradeName(gn.target.value)}} error={errors.gradeName}></TextField>
+                onChange={(gn) => {setGradeName(gn.target.value)}} required error={errors.gradeName}></TextField>
                 <label className="gap"></label>
                 <TextField className="double"  label="Points" type="number" id="points" name="points" value={points}
                 onChange={(p) => setPoints(p.target.value)} error={errors.points}></TextField>

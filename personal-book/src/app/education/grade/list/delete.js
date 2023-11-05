@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
-
+import "./grade.css"
 export default function DeleteGrade({grade, isOpen}) {
     const confirmDelete = async() => {
         const requestOptions = {
@@ -28,7 +28,7 @@ export default function DeleteGrade({grade, isOpen}) {
     }
 
     return (<>
-    <h1>Are you sure you want to delete this Grade? </h1>
+    <h1 className="head">Are you sure you want to delete this Grade? </h1>
     <table className="delete-table">
         <tr>
             <td>Grade Name</td>
@@ -43,9 +43,10 @@ export default function DeleteGrade({grade, isOpen}) {
             <td> {grade.scale} </td>
         </tr>
     </table>
-    <div>
-        <Button className="delete-col" variant="outlined" onClick={()=> {closeDialog()}}> Cancel </Button>
-        <Button className="delete-col" variant="contained" onClick={() => {confirmDelete()}}>Delete</Button>
+    <div className="field">
+        <Button className="double" variant="outlined" onClick={()=> {closeDialog()}}> Cancel </Button>
+        <label className="gap"></label>
+        <Button className="double delete-button"  variant="contained" onClick={() => {confirmDelete()}}>Delete</Button>
     </div>
     </>)
 }
