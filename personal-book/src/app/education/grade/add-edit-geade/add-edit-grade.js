@@ -3,7 +3,6 @@
 import { Button, MenuItem, Select, TextField, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
-import "./style.css";
 
 export default function AddEditGrade({grade, closeAction}) {
     const [gradeName, setGradeName] = useState(grade.gradeName);

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@mui/material";
-import "./style.css"
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 
 export default function DeleteGrade({grade, isOpen}) {

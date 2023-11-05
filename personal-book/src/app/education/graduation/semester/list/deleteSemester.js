@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import "./style.css";
 import { Month } from "@/app/tokenHandle/month";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 

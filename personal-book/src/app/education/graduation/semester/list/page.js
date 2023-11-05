@@ -4,7 +4,6 @@ import { Month } from "@/app/tokenHandle/month";
 import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
 import { Button, Dialog, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
-import "./style.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddEditSemester from "../add-edit-semester/addedit";
@@ -59,7 +58,7 @@ export default function SemesterList(){
     return(<>
     <h1>Semester List</h1>
     <div className="slist">
-    <Button  variant="contained" onClick={() => {addEdit(0)}}> Add Semester </Button>
+    <Button  variant="contained" className="options" onClick={() => {addEdit(0)}}> Add Semester </Button>
     <Table className="table">
         <TableHead className="thead">
             <TableCell className="thead">Semester Name</TableCell>

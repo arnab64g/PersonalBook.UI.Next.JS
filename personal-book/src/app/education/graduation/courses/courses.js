@@ -3,7 +3,6 @@ import { Button, Dialog, IconButton, MenuItem, Select, Table, TableBody, TableCe
 import { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import "./style.css";
 import AddEditCourse from "./addEditCourse";
 
 export function Courses() {
@@ -29,15 +28,15 @@ export function Courses() {
     return(
         <>
         <h1>List of Courses</h1>
-        <div className="option">
-            <Select size="small" className="select option" value={sortOption}>
+        <div>
+            <Select size="small" className="select options" value={sortOption}>
                 <MenuItem value={1}> Course Code [A-Z] </MenuItem>
                 <MenuItem value={2}> Course Code [Z-A] </MenuItem>
                 <MenuItem value={3}> Course Title [A-Z] </MenuItem>
                 <MenuItem value={4}> Course Title [Z-A] </MenuItem>
             </Select>
             <span className="gap"></span>
-            <Button onClick={()=>{setIsOpen(true)}} variant="contained"> Add Course</Button>
+            <Button onClick={()=>{setIsOpen(true)}} variant="contained" className="options"> Add Course</Button>
         </div>
         <Table>
             <TableHead>
@@ -59,7 +58,7 @@ export function Courses() {
             </TableBody>
         </Table>
         <Dialog open={isOpen}>
-            <AddEditCourse></AddEditCourse>
+            <AddEditCourse isOpen={setIsOpen}></AddEditCourse>
         </Dialog>
         </>
     );

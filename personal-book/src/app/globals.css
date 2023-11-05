@@ -1,3 +1,83 @@
 .main {
   margin-top: 62px;
 }
+
+.double {
+  width: 49%;
+}
+
+.triple{
+  width: 32.3%;
+}
+
+.single{
+  width: 99%;
+}
+
+.gap{
+  width: 1%;
+}
+
+.table{
+  width: 50%;
+  border: 1px;
+  border-style: solid;
+  justify-content: center;
+}
+
+.thead{
+  color: white;
+  background-color: cornflowerblue;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.tbody{
+  border: 1px;
+  border-style: solid;
+}
+
+.delete{
+  color: brown;
+}
+
+form{
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: azure;
+  padding: 10px;
+}
+
+.login-item{
+  float: right;
+}
+
+span{
+  font-size: large;
+  font-weight: bolder;
+}
+
+.center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;  
+}
+
+.field{
+ margin-top: 5px;
+}
+
+.divider{
+  flex: 1 1 auto;
+}
+
+.options{
+  margin: 5px;
+}

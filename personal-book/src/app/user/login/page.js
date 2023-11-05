@@ -3,11 +3,11 @@
 import { TextField, Button } from '@mui/material';
 import React, {useState, useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import './page.css';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setToken } from '@/app/tokenHandle/tokenHandle';
+import "./style.css"
 
 const Login = () =>{
     const router = useRouter();
@@ -62,15 +62,15 @@ const Login = () =>{
 
     return (
         <>
-        <form className='center' onSubmit={loginUser} method="post">
+        <form className='login-form center' onSubmit={loginUser} method="post">
             <h1>Log in</h1> 
-            <TextField className='field' label="Username" id="username" name="username"
+            <TextField className='single field' label="Username" id="username" name="username"
             onChange={(e) => (setUsername(e.target.value)) }
             error={errors.username}> </TextField>
-            <TextField className='field' label="Password" type='password' id="password" name='password'
+            <TextField className='single field' label="Password" type='password' id="password" name='password'
             onChange={(e) => {setPassword(e.target.value)}}
             error={errors.password}> </TextField>
-            <Button type='submit' className='field' variant='contained'>Log in</Button>
+            <Button type='submit' className='single field' variant='contained'>Log in</Button>
         </form>
         <ToastContainer></ToastContainer>
         </>

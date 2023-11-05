@@ -3,12 +3,11 @@
 import React, {useState, useEffect} from "react";
 import { TextField, Button } from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.css';
-import './page.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'
 import { string } from "yup";
-
+import "./style.css"
 export default function Signup(){
     const router = useRouter();
     const [firstName, setFirstName] = useState(''); 
@@ -82,36 +81,36 @@ export default function Signup(){
 
     return (
     <div>
-        <form className='center' onSubmit={registerUser} method="post">
+        <form className='signup-form center' onSubmit={registerUser} method="post">
             <h1 className='field'>Sign Up</h1>
             <div className='field'>
-                <TextField id='firstName' name='firstName' className='name' label="First Name"
+                <TextField required id='firstName' name='firstName' className='double' label="First Name"
                 onChange={(e) => setFirstName(e.target.value)} 
                 error={errors.firstName}>
                 </TextField>
                 <label className='gap'></label>
-                <TextField id='lastName' name='lastName' className='name'  label="Last Name"
+                <TextField required id='lastName' name='lastName' className='double'  label="Last Name"
                 onChange={(e) => {setLastName(e.target.value)}}
                 error={errors.lastName}>
                 </TextField>
             </div>
-            <TextField id='email' name="email" className='field' label="Email"
+            <TextField id='email' name="email" className='single field' label="Email"
             onChange={(e) => {setEmail(e.target.value)}}
             error={errors.email}
             ></TextField>
-            <TextField id='username' name="username" className='field' label="Username"
+            <TextField id='username' name="username" className='single field' label="Username"
             onChange={(e) => {setUsername(e.target.value)}}
             error={errors.username}>  </TextField>
-            <TextField id='phoneNumber' name="phoneNumber" className='field' label="Phone"
+            <TextField id='phoneNumber' name="phoneNumber" className='single field' label="Phone"
             onChange={(e) => {setPhone(e.target.value)}}
             error={errors.phoneNumber}
             ></TextField>
-            <TextField id='address' name="address" className='field' label="Address" multiline minRows={2}>  </TextField>
-            <TextField id='password' name="password" className='field' type='password' label="Password"
+            <TextField id='address' name="address" className='single field' label="Address" multiline minRows={2}>  </TextField>
+            <TextField id='password' name="password" className='single field' type='password' label="Password"
             onChange={(e) => {setPassword(e.target.value)}}
             error={errors.password}
             ></TextField>
-            <Button type='submit' className='field' variant='contained'> Register </Button>
+            <Button type='submit' className='single field' variant='contained'> Register </Button>
         </form>
         <ToastContainer></ToastContainer>
     </div>

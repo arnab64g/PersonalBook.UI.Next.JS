@@ -8,8 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteGrade from "./delete";
 
-import "./style.css"
-
 export default function GradeList() {
     const isaAdmin  = isAdmin();
     const [grades, setGrades] = useState([]);

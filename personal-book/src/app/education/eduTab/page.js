@@ -2,7 +2,6 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GradeList from '../grade/list/page';
-import "./style.css"
 import SemesterList from '../graduation/semester/list/page'
 import { Courses } from '../graduation/courses/courses';
 

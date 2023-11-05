@@ -2,7 +2,6 @@
 
 import { Month } from "@/app/tokenHandle/month";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
-import "./style.css"
 import { useEffect, useState } from "react";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 
@@ -73,8 +72,8 @@ export default function AddEditSemester({semester, isOpenDialog}) {
         <>
         <form>
             <h1> Semester </h1>
-        <div className="field">
-            <TextField value={semesterName} onChange={(e)=> {setSemesterName(e.target.value)}} error={errors.semesterName} required label="Semester Name"></TextField>
+        <div>
+            <TextField className="single" value={semesterName} onChange={(e)=> {setSemesterName(e.target.value)}} error={errors.semesterName} required label="Semester Name"></TextField>
         </div>
         <div className="field">
             <Select value={monthBng} onChange={(e) => {setMonthBng(e.target.value)}} className="col" label="Month" placeholder="Select MOnth">

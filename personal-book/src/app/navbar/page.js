@@ -1,6 +1,5 @@
 "use client";
 
-import './page.css'
 import { AppBar, Toolbar } from "@mui/material";
 import Link from "next/link";
 import { deleteToken, getUsername, isLoggedin } from '../tokenHandle/tokenHandle';
@@ -18,17 +17,18 @@ const Navbar = () =>{
 
     return (
     <AppBar>
-        <Toolbar className='test'>
-            {
+        <Toolbar >
+            <span className="appname"> PersonalBook </span>
+            { 
                 value ? 
                 <div>
                     <Link className='nav-item' href="/"> Home </Link>
                     <Link className='nav-item' href="/education/eduTab"> Education </Link>
                     <Link className='nav-item' href="/user/test"> Test </Link>
                 </div> : null
-            }
-            
-            <span ></span>
+            }   
+            <span className="divider"></span>         
+            <div>
             {
                 value? 
                 <div className='login-item'>
@@ -37,11 +37,10 @@ const Navbar = () =>{
                 </div> :
                 <div className='login-item'>
                     <Link className="nav-item" href="/user/signup">Sign Up</Link>
-                    <Link className='nav-item' href="/user/login"> Log In</Link>
-                    
+                    <Link className='nav-item' href="/user/login" > Log In</Link>
                 </div>
             }
-            
+            </div>
         </Toolbar>
     </AppBar>
     );
