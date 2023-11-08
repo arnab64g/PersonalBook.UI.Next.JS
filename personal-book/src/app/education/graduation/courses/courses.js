@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddEditCourse from "./addEditCourse";
 import DeleteCourse from "./delete";
+import { sortByCourseCodeAsc, sortByCourseCodeDesc, sortByCourseTitleAsc, sortByCourseTitleDesc } from "@/app/tokenHandle/sortCourse";
 
 export function Courses() {
     const [courseList, setCourseList] = useState([]);
@@ -13,7 +14,27 @@ export function Courses() {
     const [isDeletOpen, setIsDeleteOpen] = useState(false);
     const [course, setCourse] = useState({});
 
-    useEffect(() => {fetchCourses()}, []);
+    useEffect(() => {fetchCourses()}, [isOpen, isDeletOpen]);
+
+    const sortBy = (sortOption, result) => {
+        let sorted = [];
+        setSortOption(sortOption);
+        switch(sortOption){
+            case 1:
+                sorted = sortByCourseCodeAsc(result);
+                break;
+            case 2:
+                sorted = sortByCourseCodeDesc(result);
+                break;
+            case 3:
+                sorted = sortByCourseTitleAsc(result);
+                break;
+            case 4:
+                sorted = sortByCourseTitleDesc(result);
+                break;
+        }
+        setCourseList(sorted);
+    }
     
     const addEditCourse = async (id) =>{
         if (id == 0) {
@@ -41,18 +62,20 @@ export function Courses() {
         };
         const res = await fetch(`http://localhost:7108/api/Course?id=${userId}`, requestOptions);
         const result = await res.json();
-        setCourseList(result);
+    
+        sortBy(sortOption, result);
     }
 
     const deleteCourse = async (id) =>{
+        setCourse(courseList.filter(x => x.id == id)[0]);
         setIsDeleteOpen(true);
     }
 
     return(
         <>
-        <h1>List of Courses</h1>
-        <div>
-            <Select size="small" className="select options" value={sortOption}>
+        <h1 className="head">List of Courses</h1>
+        <div className="head">
+            <Select size="small" className="select options" value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
                 <MenuItem value={1}> Course Code [A-Z] </MenuItem>
                 <MenuItem value={2}> Course Code [Z-A] </MenuItem>
                 <MenuItem value={3}> Course Title [A-Z] </MenuItem>

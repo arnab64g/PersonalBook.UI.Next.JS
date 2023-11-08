@@ -24,7 +24,6 @@ export default function AddEditGrade({grade, closeAction}) {
                 scale : scale
             }
 
-            let result = {};
             let requestOptions = {};
             
             if (grd.id == 0 ) {
@@ -46,7 +45,7 @@ export default function AddEditGrade({grade, closeAction}) {
 
             const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
 
-            result = await res.json();
+            const result = await res.json();
             
             if (result) {
                 alert("Saved Successfully");

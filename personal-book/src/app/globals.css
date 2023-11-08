@@ -82,6 +82,10 @@ span{
   background-color: brown;
 }
 
+.delete-button:hover{
+  background-color: crimson;
+}
+
 .divider{
   flex: 1 1 auto;
 }
