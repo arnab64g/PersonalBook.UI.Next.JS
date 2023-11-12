@@ -63,14 +63,20 @@ const Login = () =>{
     return (
         <>
         <form className='login-form center' onSubmit={loginUser} method="post">
-            <h1>Log in</h1> 
-            <TextField className='single field' label="Username" id="username" name="username"
-            onChange={(e) => (setUsername(e.target.value)) }
-            error={errors.username}> </TextField>
-            <TextField className='single field' label="Password" type='password' id="password" name='password'
-            onChange={(e) => {setPassword(e.target.value)}}
-            error={errors.password}> </TextField>
-            <Button type='submit' className='single field' variant='contained'>Log in</Button>
+            <h1 className='head'>Log in</h1> 
+            <div className='field'>
+                <TextField className='single' label="Username" id="username" name="username"
+                onChange={(e) => (setUsername(e.target.value)) }
+                error={errors.username}> </TextField>
+            </div>
+            <div className='field'>
+                <TextField className='single' label="Password" type='password' id="password" name='password'
+                onChange={(e) => {setPassword(e.target.value)}}
+                error={errors.password}> </TextField>
+            </div>
+            <div className='field'>
+            <Button type='submit' className='single' variant='contained'>Log in</Button>
+            </div>
         </form>
         <ToastContainer></ToastContainer>
         </>

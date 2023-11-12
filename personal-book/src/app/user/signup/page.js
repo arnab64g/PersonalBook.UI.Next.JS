@@ -94,23 +94,35 @@ export default function Signup(){
                 error={errors.lastName}>
                 </TextField>
             </div>
-            <TextField id='email' name="email" className='single field' label="Email"
-            onChange={(e) => {setEmail(e.target.value)}}
-            error={errors.email}
-            ></TextField>
-            <TextField id='username' name="username" className='single field' label="Username"
-            onChange={(e) => {setUsername(e.target.value)}}
-            error={errors.username}>  </TextField>
-            <TextField id='phoneNumber' name="phoneNumber" className='single field' label="Phone"
-            onChange={(e) => {setPhone(e.target.value)}}
-            error={errors.phoneNumber}
-            ></TextField>
-            <TextField id='address' name="address" className='single field' label="Address" multiline minRows={2}>  </TextField>
-            <TextField id='password' name="password" className='single field' type='password' label="Password"
-            onChange={(e) => {setPassword(e.target.value)}}
-            error={errors.password}
-            ></TextField>
-            <Button type='submit' className='single field' variant='contained'> Register </Button>
+            <div className="field">
+                <TextField id='email' name="email" className='single' label="Email"
+                onChange={(e) => {setEmail(e.target.value)}}
+                error={errors.email}
+                ></TextField>
+            </div>
+            <div className="field">
+                <TextField id='username' name="username" className='single' label="Username"
+                onChange={(e) => {setUsername(e.target.value)}}
+                error={errors.username}>  </TextField>
+            </div>
+            <div className="field">
+                <TextField id='phoneNumber' name="phoneNumber" className='single' label="Phone"
+                onChange={(e) => {setPhone(e.target.value)}}
+                error={errors.phoneNumber}
+                ></TextField>
+            </div>
+            <div className="field">
+                <TextField id='address' name="address" className='single' label="Address" multiline minRows={2}>  </TextField>
+            </div>
+            <div className="field">
+                <TextField id='password' name="password" className='single' type='password' label="Password"
+                onChange={(e) => {setPassword(e.target.value)}}
+                error={errors.password}
+                ></TextField>
+            </div>
+            <div className="field">
+                <Button type='submit' className='single' variant='contained'> Register </Button>
+            </div>
         </form>
         <ToastContainer></ToastContainer>
     </div>
