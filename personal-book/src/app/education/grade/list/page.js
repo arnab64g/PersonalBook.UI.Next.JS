@@ -61,8 +61,15 @@ export default function GradeList() {
         };
 
         const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
-        const result = await res.json();
-
+        let result = await res.json();
+        result = result.sort((a, b) => {
+            if (a.points > b.points) {
+                return -1;
+            }
+            else{
+                return 1;
+            }
+        })
         setGrades(result);
         const filtered = result.filter(x => x.scale == scale);
         selectListView(filtered);
@@ -70,14 +77,15 @@ export default function GradeList() {
     
     return (
         <div className="cont">
-            <Button className="options" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button>
+            {
+                isaAdmin ? <Button className="options" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button> : null 
+            }
+            
             <Select className="options select" size="small" value={scale} onChange={selectScale}>
                 <MenuItem value={4}> Scale 4.0 </MenuItem>
                 <MenuItem value={5}> Scale 5.0 </MenuItem>
             </Select>
-            <Dialog open={isOpen} >
-                <AddEditGrade grade={grade} closeAction={setIsOpen}></AddEditGrade>
-            </Dialog>
+            
             <Table className="table">
                 <TableHead className="thead">
                     <TableCell className="thead">Grade</TableCell>
@@ -102,6 +110,9 @@ export default function GradeList() {
             </Table>
             <Dialog open = {isDeleteOpen}>
                 <DeleteGrade grade={grade} isOpen={setIsDeleteOpen}></DeleteGrade>
+            </Dialog>
+            <Dialog open={isOpen} >
+                <AddEditGrade grade={grade} closeAction={setIsOpen}></AddEditGrade>
             </Dialog>
         </div>
     );

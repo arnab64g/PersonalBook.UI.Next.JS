@@ -4,22 +4,26 @@ import { AppBar, Toolbar } from "@mui/material";
 import Link from "next/link";
 import { deleteToken, getUsername, isLoggedin } from '../tokenHandle/tokenHandle';
 import { useRouter } from 'next/navigation';
+import { useState } from "react";
 
 const Navbar = () =>{
-    let value = isLoggedin();
+    const value = isLoggedin();
     const router = useRouter();
     const name = getUsername();
-    console.log(name);
+    
     const logOut = async() =>{
         deleteToken();
-        router.refresh();
-        
+        router.refresh();    
+    }
+
+    const goHome = () =>{
+        router.replace("/");
     }
 
     return (
     <AppBar>
         <Toolbar >
-            <span className="appname"> PersonalBook </span>
+            <span className="appname" onClick={goHome}> PersonalBook </span>
             { 
                 value ? 
                 <div>

@@ -1,9 +1,14 @@
 import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
-import { Button, MenuItem, Select } from "@mui/material";
+import { Button, Dialog, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
+import AddResult from "./addSecondaryResult";
+import DeleteResult from "./deleteSecondaryResult";
 
 export default function SecondaryResult(){
-    const [choice, setChoice] = useState(1);
+    const [choice, setChoice] = useState(10); 
+    const [isOpen, setIsOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+    const [result, setResult] = useState({});
 
     useEffect(() => {fetchSecondaryResult()}, []);
 
@@ -19,6 +24,22 @@ export default function SecondaryResult(){
         console.log(result);
     }
 
+    const addEditResult = (id) =>{
+        let result = {};
+        if (id == 0) {
+            result = {
+                id : 0,
+                userId : getUserId(),
+                isOptional : 0,
+                level : choice,
+                sl: 0,
+                gradeId : 0
+            }
+            setResult(result);
+            setIsOpen(true);
+        }
+    } 
+
     const choiceChange = async (opt) =>{
         setChoice(opt);
     }
@@ -26,10 +47,17 @@ export default function SecondaryResult(){
     return(<>
     <div>
         <Select value={choice} size="small" onChange={(e) => {choiceChange(e.target.value)} }>
-            <MenuItem value={1}>SSC</MenuItem>
-            <MenuItem value={2}>HSC</MenuItem>
+            <MenuItem value={10}>SSC</MenuItem>
+            <MenuItem value={12}>HSC</MenuItem>
         </Select>
-        <Button></Button>
+        <label className="gap"></label>
+        <Button variant="contained" onClick={() => {addEditResult(0)}}>Add Result</Button>
     </div>
+    <Dialog open={isOpen}>
+        <AddResult result={result} isOpen={setIsOpen}></AddResult>
+    </Dialog>
+    <Dialog open={isDeleteOpen}>
+        <DeleteResult></DeleteResult>
+    </Dialog>
     </>);
 }

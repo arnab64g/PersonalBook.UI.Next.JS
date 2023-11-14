@@ -54,8 +54,8 @@ const Login = () =>{
             else{
                 toast.success('Log in successfully', {position:'top-right'});
                 setToken(result.token);
-                router.refresh();
                 router.replace("/");
+                router.refresh();
             }
         }
     }
@@ -75,7 +75,7 @@ const Login = () =>{
                 error={errors.password}> </TextField>
             </div>
             <div className='field'>
-            <Button type='submit' className='single' variant='contained'>Log in</Button>
+                <Button type='submit' className='single' variant='contained'>Log in</Button>
             </div>
         </form>
         <ToastContainer></ToastContainer>
