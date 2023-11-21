@@ -1,7 +1,7 @@
 "use client";
 
 import { getToken } from "@/app/tokenHandle/tokenHandle";
-import { Select, TextField, Checkbox, Button, MenuItem } from "@mui/material";
+import { Select, TextField, Checkbox, Button, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function AddResult({result, isOpen}) {
@@ -10,6 +10,7 @@ export default function AddResult({result, isOpen}) {
     const [subject, setSubject] = useState(result.subject);
     const [grade, setGrade] = useState(result.gradeId);
     const [gradeList, setGradeList] = useState([]);
+    const [isOpt, setIsOpt] = useState(result.isOptional);
     useEffect(() => {fetchGradeList()}, []);
     useEffect(() => {}, []);
 
@@ -25,6 +26,20 @@ export default function AddResult({result, isOpen}) {
 
         setGradeList(result.filter(x => x.scale == 5));
     }
+
+    const saveResult = async () => {
+        console.log("jhkhkhk");
+        const res = {
+            id : result.id,
+            level : result.level,
+            sl : sl,
+            userId : result.userId,
+            isOptional : isOpt
+        }
+        console.log(isOpt);
+        console.log(res);
+    }
+    
     return(<>
     {
         level == 10 ? <h1 className="head">SSC Result</h1> : <h1 className="head">HSC Result</h1>
@@ -37,18 +52,28 @@ export default function AddResult({result, isOpen}) {
             <TextField label="Subject" className="double" required value={subject}></TextField>
         </div>
         <div className="field">
-            <Select className="double" label="Grade">
-                {
-                    gradeList.map(grade => (<MenuItem value={grade.id}> {grade.gradeName} </MenuItem>))
-                }
-            </Select>
-            <Checkbox ></Checkbox><label>Is Optional</label>
+            <FormControl className="double">
+                <InputLabel>Grade</InputLabel>
+                <Select label="Grade" value={grade}>
+                    {
+                        gradeList.map(grade => (<MenuItem value={grade.id}> {grade.gradeName} </MenuItem>))
+                    }
+                </Select>
+            </FormControl>
+            <Checkbox checked={isOpt} onChange={() => {
+            if (isOpt) {
+                setIsOpt(0);
+            }
+            else{
+                setIsOpt(1)
+            }}}></Checkbox><label>Is Optional</label>
+
         </div>
         <div className="field">
             <Button variant="outlined" className="double" onClick={() => {isOpen(false)}}>Cancel</Button>
-            <Button variant="contained" className="double">Save</Button>
-        </div>
-        
+            <label className="gap"></label>
+            <Button variant="contained" className="double" onClick={saveResult}>Save</Button>
+        </div>    
     </form>
     </>);
 }

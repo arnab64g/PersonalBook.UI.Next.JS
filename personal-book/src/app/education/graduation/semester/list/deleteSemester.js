@@ -24,10 +24,10 @@ export default function DeleteSemester({semester, isOpenDialog}) {
 
     return(<>
         <div className="dialog">
-            <h2> Are you sure you want ro delete this semester? </h2>
+            <h2 className="head"> Are you sure you want ro delete this semester? </h2>
             <div>
-                <table>
-                    <tr>
+                <table className="delete-table">
+                    <tr >
                         <td>Semester Name: </td>
                         <td> {semester.semesterName} </td>
                     </tr>
@@ -41,10 +41,10 @@ export default function DeleteSemester({semester, isOpenDialog}) {
                     </tr>
                 </table>
             </div>
-            <div>
-                <Button  variant="outlined" className="col" onClick={() => {isOpenDialog(false)}}> Cancel </Button>
+            <div className="field">
+                <Button  variant="outlined" className="double" onClick={() => {isOpenDialog(false)}}> Cancel </Button>
                 <label className="gap"></label>
-                <Button variant="contained" className="col" onClick={deleteSemester}> Delete </Button>
+                <Button variant="contained" className="double delete-button" onClick={deleteSemester}> Delete </Button>
             </div>
         </div>
     </>);

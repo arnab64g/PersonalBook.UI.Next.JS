@@ -72,18 +72,18 @@ export default function AddEditSemester({semester, isOpenDialog}) {
         <>
         <form className="sem-form">
             <h1> Semester </h1>
-        <div>
+        <div className="field">
             <TextField className="single" value={semesterName} onChange={(e)=> {setSemesterName(e.target.value)}} error={errors.semesterName} required label="Semester Name"></TextField>
         </div>
         <div className="field">
-            <Select  value={monthBng} onChange={(e) => {setMonthBng(e.target.value)}} className="double" label="Month" >
+            <Select value={monthBng} onChange={(e) => {setMonthBng(e.target.value)}} className="double" label="Month" >
                 {month.map(m => (<MenuItem value={m.id}> {m.name} </MenuItem>))}
             </Select>
             <label className="gap"></label>
             <TextField value={year} type="number" onChange={(e) => {setYear(e.target.value);}} className="double" label="Year"></TextField>
         </div>
         <div className="field">
-            <Button  className="double" variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
+            <Button className="double" variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
             <label className="gap"></label>
             <Button className="double" variant="contained" onClick={saveChange}> Save </Button>
         </div>

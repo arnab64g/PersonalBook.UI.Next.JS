@@ -36,10 +36,10 @@ export default function DeleteCourse({course, isOpen}) {
                     <td>Course Title:</td>
                     <td> {course.courseTitle} </td>
                 </tr>
-                <td>
+                <tr>
                     <td>Credit Hour:</td>
                     <td> {course.creditPoint} </td>
-                </td>
+                </tr>
             </table>
             <Button className="double" variant="outlined" onClick={() => {isOpen(false)}}> Cancel </Button>
             <label className="gap"></label>
