@@ -14,7 +14,7 @@ export default function SecondaryResult(){
     const [results, setResults] = useState([]);
     const [viewResults, setViewResults] = useState([]);
 
-    useEffect(() => {fetchSecondaryResult()}, []);
+    useEffect(() => {fetchSecondaryResult()}, [isOpen, isDeleteOpen]);
 
     const fetchSecondaryResult = async () =>{
         const userId = getUserId();
@@ -67,6 +67,12 @@ export default function SecondaryResult(){
         setViewResults(result);
     }
 
+    const deleteRes = async (id) =>{
+        const result = results.filter(x => x.id == id)[0];
+        setResult(result)
+        setIsDeleteOpen(true);
+    }
+
     return(<>
     <div>
         <Select value={choice} size="small" onChange={(e) => {choiceChange(e.target.value)} }>
@@ -93,7 +99,7 @@ export default function SecondaryResult(){
                     <TableCell className="tbody"> {re.isOptional ? re.points - 2 : re.points} </TableCell>
                     <TableCell className="tbody">
                         <IconButton onClick={() => {addEditResult(re.id)}}> <EditIcon color="primary"></EditIcon></IconButton>
-                        <IconButton> <DeleteIcon className="delete"></DeleteIcon> </IconButton>
+                        <IconButton onClick={() => {deleteRes(re.id)}}> <DeleteIcon className="delete"></DeleteIcon> </IconButton>
                     </TableCell>
                 </TableRow>)
             }
@@ -103,7 +109,7 @@ export default function SecondaryResult(){
         <AddResult result={result} isOpen={setIsOpen}></AddResult>
     </Dialog>
     <Dialog open={isDeleteOpen}>
-        <DeleteResult></DeleteResult>
+        <DeleteResult result={result} isOpen={setIsDeleteOpen}></DeleteResult>
     </Dialog>
     </>);
 }

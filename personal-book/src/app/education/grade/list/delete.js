@@ -3,6 +3,7 @@
 import { Button } from "@mui/material";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 import "./grade.css"
+
 export default function DeleteGrade({grade, isOpen}) {
     const confirmDelete = async() => {
         const requestOptions = {

@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'
-import { string } from "yup";
 import "./style.css"
+
 export default function Signup(){
     const router = useRouter();
     const [firstName, setFirstName] = useState(''); 

@@ -28,16 +28,48 @@ export default function AddResult({result, isOpen}) {
     }
 
     const saveResult = async () => {
-        console.log("jhkhkhk");
         const res = {
             id : result.id,
             level : result.level,
             sl : sl,
             userId : result.userId,
-            isOptional : isOpt
+            isOptional : isOpt,
+            subject : subject,
+            gradeId : grade
         }
-        console.log(isOpt);
-        console.log(res);
+        
+        let resultNew = {};
+
+        if (res.id == 0) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' ,
+                            'authorization' : `bearer ${getToken()}` },
+                body : JSON.stringify(res)
+            };
+    
+            resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
+        }
+        else{
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' ,
+                            'authorization' : `bearer ${getToken()}` },
+                body : JSON.stringify(res)
+            };
+    
+            resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
+        }
+
+        resultNew = await resultNew.json();
+
+        if (resultNew) {
+            alert("Saved Successfully.");
+            isOpen(false);
+        }
+        else{
+            alert("Unable to Save");
+        }
     }
     
     return(<>
@@ -49,12 +81,12 @@ export default function AddResult({result, isOpen}) {
             <TextField label="Sl" className="double" required type="number" value={sl}
             onChange={(e) => {setSl(e.target.value)}}></TextField>
             <label className="gap"></label>
-            <TextField label="Subject" className="double" required value={subject}></TextField>
+            <TextField label="Subject" className="double" required value={subject} onChange={(e) => {setSubject(e.target.value)}}></TextField>
         </div>
         <div className="field">
             <FormControl className="double">
                 <InputLabel>Grade</InputLabel>
-                <Select label="Grade" value={grade}>
+                <Select label="Grade" value={grade} onChange={(e) => {setGrade(e.target.value)}}>
                     {
                         gradeList.map(grade => (<MenuItem value={grade.id}> {grade.gradeName} </MenuItem>))
                     }
