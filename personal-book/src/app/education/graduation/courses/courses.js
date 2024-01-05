@@ -74,14 +74,14 @@ export function Courses() {
     return(
         <>
         <h1 className="head">List of Courses</h1>
-        <div className="head">
+        <div className="options">
             <Select size="small" className="select options" value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
                 <MenuItem value={1}> Course Code [A-Z] </MenuItem>
                 <MenuItem value={2}> Course Code [Z-A] </MenuItem>
                 <MenuItem value={3}> Course Title [A-Z] </MenuItem>
                 <MenuItem value={4}> Course Title [Z-A] </MenuItem>
             </Select>
-            <span className="gap"></span>
+            <label className="gap"></label>
             <Button onClick={()=>{addEditCourse(0)}} variant="contained" className="options"> Add Course</Button>
         </div>
         <Table className="course-table">

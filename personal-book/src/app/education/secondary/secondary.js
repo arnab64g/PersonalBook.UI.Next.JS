@@ -75,7 +75,7 @@ export default function SecondaryResult(){
 
     return(<>
     <div>
-        <Select value={choice} size="small" onChange={(e) => {choiceChange(e.target.value)} }>
+        <Select className="options" value={choice} size="small" onChange={(e) => {choiceChange(e.target.value)} }>
             <MenuItem value={10}>SSC</MenuItem>
             <MenuItem value={12}>HSC</MenuItem>
         </Select>

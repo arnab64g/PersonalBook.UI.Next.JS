@@ -8,7 +8,7 @@ import SecondaryResult from '../secondary/secondary';
 
 export default function EducationTab() {
     return(
-        <div>
+        <div className='tabs'>
             <Tabs className='tabs'>
                 <TabList>
                     <Tab>Secondary</Tab>
