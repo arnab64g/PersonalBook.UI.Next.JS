@@ -1,10 +1,12 @@
 "use client";
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GradeList from '../grade/list/page';
-import SemesterList from '../graduation/semester/list/page'
+import SemesterList from '../graduation/semester/list/page';
 import { Courses } from '../graduation/courses/courses';
 import SecondaryResult from '../secondary/secondary';
+import Result from '../graduation/result/result';
 
 export default function EducationTab() {
     return(
@@ -27,7 +29,7 @@ export default function EducationTab() {
                             <Tab> Semester </Tab>
                         </TabList>
                         <TabPanel>
-
+                           <Result>    </Result>
                         </TabPanel>
                         <TabPanel>
                             <Courses></Courses>

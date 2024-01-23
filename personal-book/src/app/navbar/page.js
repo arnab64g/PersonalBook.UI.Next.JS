@@ -4,7 +4,6 @@ import { AppBar, Toolbar } from "@mui/material";
 import Link from "next/link";
 import { deleteToken, getUsername, isLoggedin } from '../tokenHandle/tokenHandle';
 import { useRouter } from 'next/navigation';
-import { useState } from "react";
 
 const Navbar = () =>{
     const value = isLoggedin();
@@ -29,7 +28,7 @@ const Navbar = () =>{
                 <div>
                     <Link className='nav-item' href="/"> Home </Link>
                     <Link className='nav-item' href="/education/eduTab"> Education </Link>
-                    <Link className='nav-item' href="/user/test"> Test </Link>
+                    <Link className='nav-item' href="/finance"> Expense </Link>
                 </div> : null
             }   
             <span className="divider"></span>         
