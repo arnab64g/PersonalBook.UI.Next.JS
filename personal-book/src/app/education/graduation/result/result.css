@@ -1,3 +1,9 @@
 .select-semester{
-    width: 150px;
+    width: 250px;
+    margin-right: 5px;
+}
+
+.btns{
+    margin-left: 10px;
+    height: 55px;
 }

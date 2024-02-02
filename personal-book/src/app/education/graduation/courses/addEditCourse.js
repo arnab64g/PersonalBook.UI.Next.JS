@@ -38,8 +38,8 @@ export default function AddEditCourse( {course, isOpen} ){
             requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' ,
-                            'authorization' : `bearer ${getToken()}` },
-                body: JSON.stringify(course)                
+                            'authorization' : `bearer ${getToken()}`},
+                body: JSON.stringify(course)
             };
         }
         else{
