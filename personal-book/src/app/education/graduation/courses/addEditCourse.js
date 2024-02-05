@@ -1,4 +1,5 @@
 import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { addCourse, updateCourse } from "@/services/courseService";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -31,28 +32,13 @@ export default function AddEditCourse( {course, isOpen} ){
         course.courseCode = courseCode;
         course.courseTitle = courseTitle;
         course.creditPoint = creditPoint;
-
-        let requestOptions = {};
-
+        let result = {};
         if (course.id == 0) {
-            requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' ,
-                            'authorization' : `bearer ${getToken()}`},
-                body: JSON.stringify(course)
-            };
+            result = await addCourse(course);
         }
         else{
-            requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' ,
-                            'authorization' : `bearer ${getToken()}` },
-                body: JSON.stringify(course)                
-            };
+            result = await updateCourse(course);
         }
-
-        const res = await fetch('http://localhost:7108/api/Course', requestOptions);
-        const result = await res.json();
 
         if (result) {
             alert("Save Changed.");

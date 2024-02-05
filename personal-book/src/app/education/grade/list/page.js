@@ -36,7 +36,7 @@ export default function GradeList() {
         else{
             grd = grades.filter(x => x.id == id)[0];
         }
-        
+
         setGrade(grd);
         setIsOpen(true);
     }
@@ -45,7 +45,7 @@ export default function GradeList() {
         setScale(event.target.value);
         const filtered = grades.filter(x => x.scale == event.target.value);
         selectListView(filtered);
-    } 
+    }
 
     const deleteGrade = async (id) => {
         const del = grades.filter(x => x.id == id)[0];
@@ -61,18 +61,18 @@ export default function GradeList() {
         const filtered = result.filter(x => x.scale == scale);
         selectListView(filtered);
     }
-    
+
     return (
         <div className="cont">
             {
                 isaAdmin ? <Button className="options" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button> : null 
             }
-            
+
             <Select className="options select" size="small" value={scale} onChange={selectScale}>
                 <MenuItem value={4}> Scale 4.0 </MenuItem>
                 <MenuItem value={5}> Scale 5.0 </MenuItem>
             </Select>
-            
+
             <Table className="table">
                 <TableHead className="thead">
                     <TableCell className="thead">Grade</TableCell>
@@ -87,7 +87,7 @@ export default function GradeList() {
                             <TableCell className="tbody"> {grade.gradeName}</TableCell>
                             <TableCell className="tbody"> {grade.points} </TableCell>
                             <TableCell className="tbody"> {grade.minNumber} - {grade.maxNumber} </TableCell>
-                            {isaAdmin ? 
+                            {isaAdmin ?
                             <TableCell className="tbody">
                                 <IconButton aria-label="edit" onClick={() => {addEditGrade(grade.id)}}> <EditIcon color="primary"></EditIcon>  </IconButton> 
                                 <IconButton aria-label="delete" className="delete" onClick={() => {deleteGrade(grade.id)}}> <DeleteIcon ></DeleteIcon>  </IconButton>

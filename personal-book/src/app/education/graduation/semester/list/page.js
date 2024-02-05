@@ -1,7 +1,7 @@
 "use client";
 
 import { Month } from "@/app/tokenHandle/month";
-import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
+import { getUserId } from "@/app/tokenHandle/tokenHandle";
 import { Button, Dialog, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -9,6 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddEditSemester from "../add-edit-semester/addedit";
 import DeleteSemester from "./deleteSemester";
 import "./semester.css";
+import { getSemester } from "@/services/semesterService";
+import { sortSemester } from "@/app/tokenHandle/sortSemester";
 
 export default function SemesterList(){
     const [semesterList, setSemesterList] = useState([]);
@@ -36,20 +38,13 @@ export default function SemesterList(){
     }
 
     useEffect(() => {fetchSemester()}, [isOpen, isDeleteOpen]);
-    
-    const fetchSemester = async () =>{
-        const userId = getUserId();
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/Semester?id=${userId}`, requestOptions);
-        const result = await res.json();
 
-        setSemesterList(result);
+    const fetchSemester = async () =>{
+        const result = await getSemester();
+        const sorted = sortSemester(result);
+        setSemesterList(sorted);
     }
-    
+
     const deleteSemester = async (id) =>{
         const sem = semesterList.filter(x => x.id == id)[0];
         setSemester(sem);
@@ -82,7 +77,6 @@ export default function SemesterList(){
         </TableBody>
     </Table>
     </div>
-    
     <Dialog open={isOpen} >
         <AddEditSemester semester={semester} isOpenDialog={setIsOpen}></AddEditSemester>
     </Dialog>

@@ -38,13 +38,13 @@ export default function AddEditSemester({semester, isOpenDialog}) {
             semester.year = year;
 
             let requestOptions = {};
-            
+
             if (semester.id == 0) {
                 requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' ,
                                 'authorization' : `bearer ${getToken()}` },
-                    body: JSON.stringify(semester)                
+                    body: JSON.stringify(semester)
                 };
             }
             else{
@@ -52,12 +52,12 @@ export default function AddEditSemester({semester, isOpenDialog}) {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' ,
                                 'authorization' : `bearer ${getToken()}` },
-                    body: JSON.stringify(semester)                
+                    body: JSON.stringify(semester)
                 };
             }
 
             const res = await fetch('http://localhost:7108/api/Semester', requestOptions);
-            
+
             if (res) {
                 alert("Saved Successfully.");
                 isOpenDialog(false);

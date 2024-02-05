@@ -1,14 +1,14 @@
-export function sortSemester(results) {
+export function sortResults(results) {
     return results.sort((a, b) => {
-        if(a.year > b.year){
+        if(a.semester.year > b.semester.year){
             return 1;
         }
-        else if(a.year < b.year)
+        else if(a.semester.year < b.semester.year)
         {
             return -1
         }
         else{
-            if(a.monthBng > b.monthBng){
+            if(a.semester.monthBng > b.semester.monthBng){
                 return 1;
             }
             else{

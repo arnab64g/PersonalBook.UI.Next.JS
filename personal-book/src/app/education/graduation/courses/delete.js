@@ -1,19 +1,11 @@
 import { Button } from "@mui/material";
 import "./course.css";
-import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { deleteCourseS } from "@/services/courseService";
 
 export default function DeleteCourse({course, isOpen}) {
-    console.log(course);
     const deleteCourse = async () =>{
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}`},
-        };
-
-        const res = await fetch(`http://localhost:7108/api/Course?id=${course.id}`, requestOptions);
-        const result = await res.json()
-
+        const result = await deleteCourseS(course.id);
+        
         if (result) {
             alert("Deleted successfully.");
             isOpen(false);
@@ -41,7 +33,8 @@ export default function DeleteCourse({course, isOpen}) {
                     <td> {course.creditPoint} </td>
                 </tr>
             </table>
-            <Button className="double" variant="outlined" onClick={() => {isOpen(false)}}> Cancel </Button>
+            <Button className="double" 
+             onClick={() => {isOpen(false)}}> Cancel </Button>
             <label className="gap"></label>
             <Button className="double delete-button" onClick={deleteCourse}> Delete </Button>
         </div>

@@ -1,34 +1,35 @@
-import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
 import { useEffect, useState } from "react";
-import { MenuItem, Button, Select, FormControl, InputLabel, Dialog, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { IconButton, MenuItem, Button, Select, FormControl, InputLabel, Dialog, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import "./result.css";
 import AddEditResult from "./addEditResults";
+import { getResults } from "@/services/resultService";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { sortResults } from "@/app/tokenHandle/sortResults";
 
 export default function Result() {
     const [resultsView, setResults] = useState([]);
     const [open, setIsOpen] = useState(false);
+    const [final, setFinal] = useState({});
 
     useEffect(() => {fetchComponent()}, []);
 
     const fetchComponent = async() => {
-        const userId  = getUserId();
-        const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' ,
-                    'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/Result?id=${userId}`, requestOptions);
-        const rawData = await res.json();
+        const rawData = await getResults();
         const results = [];
         rawData.summary.forEach(element => {
             const sem = rawData.results.filter(x => x.semesterId == element.semId)[0];
             const result = rawData.results.filter(x => x.semesterId == element.semId);
-            const semData = {semester: sem, result: result};
-            console.log(sem);
+            const summaries = rawData.summary.filter(x => x.semId == sem.semesterId)[0];
+            const semData = {semester: sem, result: result, summary: summaries};
             results.push(semData);
         });
-        console.log(results);
-        setResults(results);
+        const result = sortResults(results);
+        setResults(result);
+        console.log(result);
+        const x = {total : rawData.totalPoints, credit: rawData.totalCredit};
+        setFinal(x);
+        console.log(x);
     }
 
     return (<>
@@ -43,11 +44,13 @@ export default function Result() {
         </FormControl>
 
         <Button className="btns" size="large" variant="contained" onClick={()=> {setIsOpen(true)}}>Add Result</Button>
+        <div className="final">
+            <h4>Total Credit Earned: <i>{final.credit}</i> </h4>
+            <h4> CGPA: <i>{ Math.round(100*final.total/final.credit)/100}</i>  </h4>
+        </div>
         {
             resultsView.map(data => (<>
-            <div>
-                <h3>{data.semester.semesterName} ({data.semester.year})</h3>
-            </div>
+                <h4>{data.semester.semesterName} ({data.semester.year})</h4>
                 <Table className="table">
                     <TableHead>
                         <TableCell>Course Code</TableCell>
@@ -67,14 +70,19 @@ export default function Result() {
                                     <TableCell> {x.gradeName}</TableCell>
                                     <TableCell> {x.points}</TableCell>
                                     <TableCell>
-                                        <Button>Edit</Button>
-                                        <Button>Delete</Button>
+                                    <IconButton onClick={() => {}}> <EditIcon color="primary"></EditIcon> </IconButton>
+                                    <IconButton onClick={() => {}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))
                         }
                     </TableBody>
                 </Table>
+                <div className="final-sm">
+                    
+                    <p> <b> Total Credit Earned: </b>  <i>{data.summary.totalCredit}</i> </p>
+                    <p> <b> CGPA: </b> <i>{data.summary.totalPoints / data.summary.totalCredit}</i>  </p>
+                </div>
             </>))
         }
         <Dialog open={open}>

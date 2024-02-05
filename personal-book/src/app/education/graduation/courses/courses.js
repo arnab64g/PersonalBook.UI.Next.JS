@@ -1,4 +1,4 @@
-import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
+import { getUserId } from "@/app/tokenHandle/tokenHandle";
 import { Button, Dialog, IconButton, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddEditCourse from "./addEditCourse";
 import DeleteCourse from "./delete";
 import { sortByCourseCodeAsc, sortByCourseCodeDesc, sortByCourseTitleAsc, sortByCourseTitleDesc } from "@/app/tokenHandle/sortCourse";
+import { getCourses } from "@/services/courseService";
 
 export function Courses() {
     const [courseList, setCourseList] = useState([]);
@@ -35,7 +36,7 @@ export function Courses() {
         }
         setCourseList(sorted);
     }
-    
+
     const addEditCourse = async (id) =>{
         if (id == 0) {
             setCourse({
@@ -54,14 +55,7 @@ export function Courses() {
     }
 
     const fetchCourses = async () =>{
-        const userId = getUserId();
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/Course?id=${userId}`, requestOptions);
-        const result = await res.json();
+        const result = await getCourses();
     
         sortBy(sortOption, result);
     }

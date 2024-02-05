@@ -11,3 +11,21 @@
 .select-opt{
     margin: 5px;
 }
+
+.pop-up{
+    width: 500px;
+}
+
+.final{
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.final-sm{
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
