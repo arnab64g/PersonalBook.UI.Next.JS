@@ -37,7 +37,7 @@ export function getUsername(){
 
 export function getToken(){
     const token = getCookie('personalBookNJ');
-    
+
     if (token) {
         return token;
     }
@@ -47,12 +47,11 @@ export function getToken(){
 }
 
 export function isAdmin(){
-    
     const token = getCookie('personalBookNJ');
 
     if (token) {
         const decode = jwtDecode(token);
-        
+
         if (decode.role == 'Admin') {
             return true;
         }

@@ -3,16 +3,11 @@
 import { Button } from "@mui/material";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
 import "./grade.css"
+import { deleteGrade } from "@/services/gradeService";
 
 export default function DeleteGrade({grade, isOpen}) {
     const confirmDelete = async() => {
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/Grade?id=${grade.id}`, requestOptions);
-        const result = await res.json();
+        const result = deleteGrade(grade.id);
 
         if (result) {
             alert("Deleted successed");

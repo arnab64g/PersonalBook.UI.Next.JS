@@ -30,9 +30,7 @@ export default function Result() {
         console.log(results);
         setResults(results);
     }
-    
-    
-    
+
     return (<>
         <h1>Result</h1>
         <FormControl className="select-semester">
@@ -41,10 +39,9 @@ export default function Result() {
             {
                 resultsView.map(sem => (<MenuItem value={sem.semester.semesterId}> {sem.semester.semesterName} ({sem.semester.year})</MenuItem>))
             }
-            
         </Select>
         </FormControl>
-        
+
         <Button className="btns" size="large" variant="contained" onClick={()=> {setIsOpen(true)}}>Add Result</Button>
         {
             resultsView.map(data => (<>

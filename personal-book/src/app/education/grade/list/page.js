@@ -1,12 +1,13 @@
 "use client";
 
-import { getToken, isAdmin } from "@/app/tokenHandle/tokenHandle";
+import { isAdmin } from "@/app/tokenHandle/tokenHandle";
 import { Button, Dialog, IconButton, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddEditGrade from "../add-edit-geade/add-edit-grade";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteGrade from "./delete";
+import { getGrades } from "@/services/gradeService";
 
 export default function GradeList() {
     const isaAdmin  = isAdmin();
@@ -54,22 +55,8 @@ export default function GradeList() {
     }
 
     const fetchGrades = async() => {
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
+        const result =await getGrades();
 
-        const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
-        let result = await res.json();
-        result = result.sort((a, b) => {
-            if (a.points > b.points) {
-                return -1;
-            }
-            else{
-                return 1;
-            }
-        })
         setGrades(result);
         const filtered = result.filter(x => x.scale == scale);
         selectListView(filtered);

@@ -2,7 +2,7 @@
 
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { addGrade, updateGrade } from "@/services/gradeService";
 
 export default function AddEditGrade({grade, closeAction}) {
     const [gradeName, setGradeName] = useState(grade.gradeName);
@@ -24,31 +24,17 @@ export default function AddEditGrade({grade, closeAction}) {
                 scale : scale
             }
 
-            let requestOptions = {};
-            
+            let res = {};
+
             if (grd.id == 0 ) {
-                requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' ,
-                                'authorization' : `bearer ${getToken()}` },
-                    body: JSON.stringify(grd)                
-                };
+                res = await addGrade(grd);
             }
             else{
-                requestOptions = {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' ,
-                                'authorization' : `bearer ${getToken()}`},
-                    body: JSON.stringify(grd)
-                };
+                res = await updateGrade(grd);
             }
-
-            const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
-           
+            console.log(res);
             const result = await res.json();
 
-            
-            
             if (result) {
                 alert("Saved Successfully");
                 closeAction(false);
@@ -57,7 +43,6 @@ export default function AddEditGrade({grade, closeAction}) {
                 alert("Save failed");
             }
         }
-        
     }
 
     useEffect(() => {validateForm()}, [gradeName, points]);
