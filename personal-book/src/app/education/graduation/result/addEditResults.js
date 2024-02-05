@@ -1,11 +1,20 @@
+import { getGrades } from "@/services/gradeService";
 import {Button, Select, FormControl, InputLabel, MenuItem} from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AddEditResult({data, isOpen}) {
     const [courses, setCourses] = useState([]);
     const [semesters, setSemesters] = useState([]);
     const [grades, setGrades] = useState([]);
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async function name() {
+        const gradeList = (await getGrades()).filter(x => x.scale == 4);
+        setGrades(gradeList);
+    }
     return(<>
     <h1>Add or Edit Results</h1>
     <FormControl className='select-opt'>
@@ -23,6 +32,9 @@ export default function AddEditResult({data, isOpen}) {
     <FormControl className="select-opt">
         <InputLabel>Grade</InputLabel>
         <Select label="Grade">
+            {
+                grades.map(g=>(<MenuItem value={g.id}>{g.gradeName}</MenuItem>))
+            }
             <MenuItem></MenuItem>
         </Select>
     </FormControl>
