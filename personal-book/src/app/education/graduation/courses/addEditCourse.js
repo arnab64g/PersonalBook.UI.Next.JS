@@ -1,4 +1,3 @@
-import { getToken } from "@/app/tokenHandle/tokenHandle";
 import { addCourse, updateCourse } from "@/services/courseService";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
@@ -9,14 +8,14 @@ export default function AddEditCourse( {course, isOpen} ){
     const [courseTitle, setcourseTitle] = useState(course.courseTitle);
     const [creditPoint, setCreditPoint] = useState(course.creditPoint);
     const [error, setError] = useState({});
-    
+
     useEffect(() => {isValid()}, [courseCode, courseTitle, creditPoint]);
 
     const isValid = () =>{
         let errors = {};
 
         if (!courseCode) {
-            errors.courseCode = true;   
+            errors.courseCode = true;
         }
         if (!courseTitle) {
             errors.courseTitle = true;

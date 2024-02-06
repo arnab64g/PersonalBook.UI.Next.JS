@@ -1,18 +1,13 @@
 import { Button } from "@mui/material";
 import { Month } from "@/app/tokenHandle/month";
-import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { deleteCourseS } from "@/services/courseService";
 
 export default function DeleteSemester({semester, isOpenDialog}) {
+    console.log(semester);
     const month = Month;
     const deleteSemester =  async () =>{
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/Semester?id=${semester.id}`, requestOptions);
-        const result = await res.json();
-        
+        const result = await deleteCourseS(semester.id);
+        console.log(result);
         if (result) {
             alert("Semester deleted successfully.");
             isOpenDialog(false);

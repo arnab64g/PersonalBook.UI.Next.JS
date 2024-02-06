@@ -5,7 +5,7 @@ import { deleteCourseS } from "@/services/courseService";
 export default function DeleteCourse({course, isOpen}) {
     const deleteCourse = async () =>{
         const result = await deleteCourseS(course.id);
-        
+
         if (result) {
             alert("Deleted successfully.");
             isOpen(false);
@@ -34,7 +34,7 @@ export default function DeleteCourse({course, isOpen}) {
                 </tr>
             </table>
             <Button className="double" 
-             onClick={() => {isOpen(false)}}> Cancel </Button>
+            onClick={() => {isOpen(false)}}> Cancel </Button>
             <label className="gap"></label>
             <Button className="double delete-button" onClick={deleteCourse}> Delete </Button>
         </div>

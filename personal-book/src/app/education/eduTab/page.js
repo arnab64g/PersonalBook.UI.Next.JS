@@ -29,7 +29,7 @@ export default function EducationTab() {
                             <Tab> Semester </Tab>
                         </TabList>
                         <TabPanel>
-                           <Result>    </Result>
+                            <Result></Result>
                         </TabPanel>
                         <TabPanel>
                             <Courses></Courses>

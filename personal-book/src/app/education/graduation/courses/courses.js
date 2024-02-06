@@ -56,7 +56,7 @@ export function Courses() {
 
     const fetchCourses = async () =>{
         const result = await getCourses();
-    
+
         sortBy(sortOption, result);
     }
 

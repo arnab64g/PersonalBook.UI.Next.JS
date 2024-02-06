@@ -14,3 +14,16 @@ export async function getSemester() {
 
         return result;
 }
+
+export async function deleteSemesterS(id) {
+    console.log(id);
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' ,
+                    'authorization' : `bearer ${getToken()}` }
+    };
+    const res = await fetch(`http://localhost:7108/api/Semester?id=${id}`, requestOptions);
+    const result = await res.json();
+
+    return result;
+}

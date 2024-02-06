@@ -79,7 +79,6 @@ export default function Result() {
                     </TableBody>
                 </Table>
                 <div className="final-sm">
-                    
                     <p> <b> Total Credit Earned: </b>  <i>{data.summary.totalCredit}</i> </p>
                     <p> <b> CGPA: </b> <i>{data.summary.totalPoints / data.summary.totalCredit}</i>  </p>
                 </div>
