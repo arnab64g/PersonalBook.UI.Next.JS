@@ -7,28 +7,29 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'
 import "./style.css"
+import { signUpUser } from "@/services/userService";
 
 export default function Signup(){
     const router = useRouter();
-    const [firstName, setFirstName] = useState(''); 
-    const [lastName, setLastName] = useState(''); 
-    const [password, setPassword] = useState(''); 
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [phoneNumber, setPhone] = useState('');
-    const [errors, setErrors] = useState({}); 
-    const [isFormValid, setIsFormValid] = useState(false); 
+    const [errors, setErrors] = useState({});
+    const [isFormValid, setIsFormValid] = useState(false);
 
-    useEffect(() => {  
-        validateForm(); 
-    }, [firstName, lastName, username, email, phoneNumber, password]); 
+    useEffect(() => {
+        validateForm();
+    }, [firstName, lastName, username, email, phoneNumber, password]);
 
-    const validateForm = () => { 
-        let errors = {}; 
-  
-        if (!firstName) { 
-            errors.firstName = true; 
-        } 
+    const validateForm = () => {
+        let errors = {};
+
+        if (!firstName) {
+            errors.firstName = true;
+        }
 
         if (!lastName) {
             errors.lastName = true;
@@ -37,22 +38,22 @@ export default function Signup(){
         if (!username) {
             errors.username = true;
         }
-  
-        if (!email) { 
-            errors.email = true; 
-        }  
+
+        if (!email) {
+            errors.email = true;
+        }
 
         if (!phoneNumber) {
             errors.phoneNumber = true;
         }
 
-        if (!password || password.length < 6) { 
-            errors.password = true; 
-        } 
+        if (!password || password.length < 6) {
+            errors.password = true;
+        }
 
-        setErrors(errors); 
-        setIsFormValid(Object.keys(errors).length === 0); 
-    }; 
+        setErrors(errors);
+        setIsFormValid(Object.keys(errors).length === 0);
+    };
 
     const registerUser = async (event) => {
         event.preventDefault();
@@ -60,15 +61,8 @@ export default function Signup(){
         const form_values = Object.fromEntries(formData);
 
         if (isFormValid) {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form_values)
-            };
-    
-            const res = await fetch('http://localhost:7108/api/User', requestOptions);
-            const result = await res.json();
-            
+            const result = await signUpUser(form_values);
+
             if (!result.successed) {
                 toast.error(String(result.errors), {position:'top-right'});
             }
@@ -85,7 +79,7 @@ export default function Signup(){
             <h1 className='field'>Sign Up</h1>
             <div className='field'>
                 <TextField required id='firstName' name='firstName' className='double' label="First Name"
-                onChange={(e) => setFirstName(e.target.value)} 
+                onChange={(e) => setFirstName(e.target.value)}
                 error={errors.firstName}>
                 </TextField>
                 <label className='gap'></label>

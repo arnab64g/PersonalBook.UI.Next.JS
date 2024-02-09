@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setToken } from '@/app/tokenHandle/tokenHandle';
 import "./style.css"
+import { loginUserService } from '@/services/userService';
 
 const Login = () =>{
     const router = useRouter();
@@ -30,7 +31,7 @@ const Login = () =>{
             errors.password = true;
         }
 
-        setErrors(errors); 
+        setErrors(errors);
         setIsFormValid(Object.keys(errors).length === 0); 
     }
 
@@ -38,16 +39,10 @@ const Login = () =>{
         const data = event.target;
         const formData = new FormData(data);
         const formValues = Object.fromEntries(formData);
-
+        console.log(formValues);
         if (isFormValid) {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formValues)
-            };
-            const res = await fetch('http://localhost:7108/api/User/login', requestOptions);
-            const result = await res.json();
-
+            const result = await loginUserService(formValues);
+            console.log(result);
             if (!result.successed) {
                 toast.error(result.message, {position:'top-right'});
             }
@@ -63,7 +58,7 @@ const Login = () =>{
     return (
         <>
         <form className='login-form center' onSubmit={loginUser} method="post">
-            <h1 className='head'>Log in</h1> 
+            <h1 className='head'>Log in</h1>
             <div className='field'>
                 <TextField className='single' label="Username" id="username" name="username"
                 onChange={(e) => (setUsername(e.target.value)) }

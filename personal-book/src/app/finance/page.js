@@ -19,6 +19,5 @@ export default function Expense(params) {
         </TabPanel>
     </Tabs>
     </div>
-    
     </>)
 }

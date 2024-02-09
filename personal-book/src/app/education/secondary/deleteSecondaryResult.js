@@ -1,15 +1,10 @@
 import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { deleteSecondaryResult } from "@/services/secondaryResultService";
 import { Button } from "@mui/material";
 
 export default function DeleteResult({result, isOpen}) {
     const deleteRes = async () => {
-        const requestOptions = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/SecondaryResult?id=${result.id}`, requestOptions);
-        const result1 = await res.json();
+        const result1 = await deleteSecondaryResult(result.id)
 
         if (result1) {
             alert("Deleted successed");

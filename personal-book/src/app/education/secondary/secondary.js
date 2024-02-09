@@ -1,10 +1,11 @@
-import { getToken, getUserId } from "@/app/tokenHandle/tokenHandle";
+import { getUserId } from "@/app/tokenHandle/tokenHandle";
 import { IconButton, Button, Dialog, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddResult from "./addSecondaryResult";
 import DeleteResult from "./deleteSecondaryResult";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getSecondaryResults } from "@/services/secondaryResultService";
 
 export default function SecondaryResult(){
     const [choice, setChoice] = useState(10); 
@@ -17,15 +18,8 @@ export default function SecondaryResult(){
     useEffect(() => {fetchSecondaryResult()}, [isOpen, isDeleteOpen]);
 
     const fetchSecondaryResult = async () =>{
-        const userId = getUserId();
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-        const res = await fetch(`http://localhost:7108/api/SecondaryResult?id=${userId}`, requestOptions);
-        let result = await res.json();
-        
+        let result = await getSecondaryResults();
+
         result.results = result.results.sort((a, b) => {
             if (a.sl > b.sl) {
                 return 1;
@@ -34,14 +28,14 @@ export default function SecondaryResult(){
                 return -1;
             }
         });
-        
+
         setResults(result.results);
         setViewResults(result.results.filter(x => x.level == choice));
     }
 
     const addEditResult = (id) =>{
         let result = {};
-        
+
         if (id == 0) {
             result = {
                 id : 0,
@@ -58,7 +52,7 @@ export default function SecondaryResult(){
 
         setResult(result);
         setIsOpen(true);
-    } 
+    }
 
     const choiceChange = async (opt) =>{
         setChoice(opt);

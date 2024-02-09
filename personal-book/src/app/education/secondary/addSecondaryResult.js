@@ -1,6 +1,7 @@
 "use client";
 
-import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { getGrades } from "@/services/gradeService";
+import { addSecondaryResult, updateSecondaryResult } from "@/services/secondaryResultService";
 import { Select, TextField, Checkbox, Button, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -15,14 +16,7 @@ export default function AddResult({result, isOpen}) {
     useEffect(() => {}, []);
 
     const fetchGradeList = async () =>{
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        'authorization' : `bearer ${getToken()}` }
-        };
-
-        const res = await fetch('http://localhost:7108/api/Grade', requestOptions);
-        const result = await res.json();
+        const result = await getGrades();
 
         setGradeList(result.filter(x => x.scale == 5));
     }
@@ -37,28 +31,14 @@ export default function AddResult({result, isOpen}) {
             subject : subject,
             gradeId : grade
         }
-        
+
         let resultNew = {};
 
         if (res.id == 0) {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' ,
-                            'authorization' : `bearer ${getToken()}` },
-                body : JSON.stringify(res)
-            };
-    
-            resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
+            resultNew = await addSecondaryResult(res);
         }
         else{
-            const requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' ,
-                            'authorization' : `bearer ${getToken()}` },
-                body : JSON.stringify(res)
-            };
-    
-            resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
+            resultNew= await updateSecondaryResult(res);
         }
 
         resultNew = await resultNew.json();
@@ -71,7 +51,7 @@ export default function AddResult({result, isOpen}) {
             alert("Unable to Save");
         }
     }
-    
+
     return(<>
     {
         level == 10 ? <h1 className="head">SSC Result</h1> : <h1 className="head">HSC Result</h1>
@@ -105,7 +85,7 @@ export default function AddResult({result, isOpen}) {
             <Button variant="outlined" className="double" onClick={() => {isOpen(false)}}>Cancel</Button>
             <label className="gap"></label>
             <Button variant="contained" className="double" onClick={saveResult}>Save</Button>
-        </div>    
+        </div>
     </form>
     </>);
 }
