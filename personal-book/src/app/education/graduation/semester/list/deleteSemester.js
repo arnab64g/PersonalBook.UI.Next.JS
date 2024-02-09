@@ -1,13 +1,12 @@
 import { Button } from "@mui/material";
 import { Month } from "@/app/tokenHandle/month";
-import { deleteCourseS } from "@/services/courseService";
+import { deleteSemesterS } from "@/services/semesterService";
 
 export default function DeleteSemester({semester, isOpenDialog}) {
-    console.log(semester);
     const month = Month;
     const deleteSemester =  async () =>{
-        const result = await deleteCourseS(semester.id);
-        console.log(result);
+        const result = await deleteSemesterS(semester.id);
+
         if (result) {
             alert("Semester deleted successfully.");
             isOpenDialog(false);

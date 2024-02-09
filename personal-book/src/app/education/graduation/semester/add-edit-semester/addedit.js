@@ -4,6 +4,7 @@ import { Month } from "@/app/tokenHandle/month";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { addSemester, editSemester } from "@/services/semesterService";
 
 export default function AddEditSemester({semester, isOpenDialog}) {
     const month = Month;
@@ -37,26 +38,14 @@ export default function AddEditSemester({semester, isOpenDialog}) {
             semester.monthBng = monthBng;
             semester.year = year;
 
-            let requestOptions = {};
+            let res = {};
 
             if (semester.id == 0) {
-                requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' ,
-                                'authorization' : `bearer ${getToken()}` },
-                    body: JSON.stringify(semester)
-                };
+                res = await addSemester(semester);
             }
             else{
-                requestOptions = {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' ,
-                                'authorization' : `bearer ${getToken()}` },
-                    body: JSON.stringify(semester)
-                };
+                res = await editSemester(semester);
             }
-
-            const res = await fetch('http://localhost:7108/api/Semester', requestOptions);
 
             if (res) {
                 alert("Saved Successfully.");
