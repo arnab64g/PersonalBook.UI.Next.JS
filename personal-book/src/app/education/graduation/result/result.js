@@ -11,6 +11,7 @@ export default function Result() {
     const [resultsView, setResults] = useState([]);
     const [open, setIsOpen] = useState(false);
     const [final, setFinal] = useState({});
+    const [finalResult, setFinalResult] = useState({});
 
     useEffect(() => {fetchComponent()}, []);
 
@@ -29,7 +30,13 @@ export default function Result() {
         console.log(result);
         const x = {total : rawData.totalPoints, credit: rawData.totalCredit};
         setFinal(x);
-        console.log(x);
+        if(final.credit > 0){
+            setFinalResult({totalCredit : final.credit, cgpa : data.summary.totalPoints / data.summary.totalCredit});
+        }
+        else{
+            setFinalResult({totalCredit : 0, cgpa : 0});
+        }
+        console.log("This: ", final.credit);
     }
 
     return (<>
@@ -45,8 +52,8 @@ export default function Result() {
 
         <Button className="btns" size="large" variant="contained" onClick={()=> {setIsOpen(true)}}>Add Result</Button>
         <div className="final">
-            <h4>Total Credit Earned: <i>{final.credit}</i> </h4>
-            <h4> CGPA: <i>{ Math.round(100*final.total/final.credit)/100}</i>  </h4>
+            <h4>Total Credit Earned: <i>{finalResult.totalCredit}</i> </h4>
+            <h4> CGPA: <i>{ finalResult.cgpa }</i>  </h4>
         </div>
         {
             resultsView.map(data => (<>
@@ -79,8 +86,8 @@ export default function Result() {
                     </TableBody>
                 </Table>
                 <div className="final-sm">
-                    <p> <b> Total Credit Earned: </b>  <i>{data.summary.totalCredit}</i> </p>
-                    <p> <b> CGPA: </b> <i>{data.summary.totalPoints / data.summary.totalCredit}</i>  </p>
+                    <p> <b> Total Credit Earned: </b>  <i>{finalResult.totalCredit}</i> </p>
+                    <p> <b> CGPA: </b> <i>{finalResult.cgpa}</i>  </p>
                 </div>
             </>))
         }
