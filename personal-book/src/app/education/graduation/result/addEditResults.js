@@ -6,46 +6,52 @@ import { useState, useEffect } from "react";
 import "./result.css";
 
 export default function AddEditResult({data, isOpen}) {
-    const [courses, setCourses] = useState([]);
-    const [semesters, setSemesters] = useState([]);
-    const [grades, setGrades] = useState([]);
+    const [courseList, setCourseList] = useState([]);
+    const [semesterList, setSemesterList] = useState([]);
+    const [gradeList, setGradeList] = useState([]);
+    const [result, setResult] = useState({course : 0, grade: 0, semester: 0});
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    useEffect(() => { fetchData(); }, []);
 
     const fetchData = async function name() {
         const gradeList = (await getGrades()).filter(x => x.scale == 4);
-        setGrades(gradeList);
+        setGradeList(gradeList);
         const semesterList = await getSemester();
-        console.log(semesterList);
-        setSemesters(semesterList);
+        setSemesterList(semesterList);
         const courseList = await getCourses();
-        setCourses(courseList);
+        setCourseList(courseList);
+        if (data.id) {
+            setResult(data);
+        }
+        console.log("Passed", data);
+        
     }
     return(<>
     <h1>Add or Edit Results</h1>
     <FormControl className='select-opt'>
         <InputLabel>Course</InputLabel>
-        <Select label="Course">
+        <Select label="Course" value={result.course}>
+            <MenuItem disabled value={0}> Select Coourse </MenuItem>
             {
-                courses.map(c => (<MenuItem value={c.id}>{c.courseCode}</MenuItem>))
+                courseList.map(c => (<MenuItem value={c.id}>  {c.courseCode}</MenuItem>))
             }
         </Select>
     </FormControl>
     <FormControl className="select-opt">
         <InputLabel>Semester</InputLabel>
-        <Select label="Semester">
+        <Select label="Semester" value={result.semester}>
+            <MenuItem disabled value={0}> Select Semester </MenuItem>
             {
-                semesters.map(sem => (<MenuItem value={sem.id}>{sem.semesterName} ({sem.year}) </MenuItem>))
+                semesterList.map(sem => (<MenuItem value={sem.id}>{sem.semesterName} ({sem.year}) </MenuItem>))
             }
         </Select>
     </FormControl>
     <FormControl className="select-opt">
         <InputLabel>Grade</InputLabel>
-        <Select label="Grade">
+        <Select label="Grade" value={result.grade}>
+            <MenuItem value={0}> Select Grade </MenuItem>
             {
-                grades.map(g=>(<MenuItem value={g.id}>{g.gradeName}</MenuItem>))
+                gradeList.map(g=>(<MenuItem value={g.id}>{g.gradeName}</MenuItem>))
             }
             <MenuItem></MenuItem>
         </Select>

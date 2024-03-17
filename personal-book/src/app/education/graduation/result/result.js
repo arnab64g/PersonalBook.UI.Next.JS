@@ -6,18 +6,21 @@ import { getResults } from "@/services/resultService";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { sortResults } from "@/app/tokenHandle/sortResults";
+import { filterSemesterResult } from "@/app/tokenHandle/result";
 
 export default function Result() {
-    const [resultsView, setResults] = useState([]);
+    const [resultsView, setResultView] = useState([]);
+    const [results, setResults] = useState([]);
     const [open, setIsOpen] = useState(false);
-    const [final, setFinal] = useState({});
     const [finalResult, setFinalResult] = useState({});
-
-    useEffect(() => {fetchComponent()}, []);
+    const [result, setResult] = useState({id : 0});
+    const [data, setRawData] = useState([]);
+    useEffect(() => {fetchComponent()}, [open]);
 
     const fetchComponent = async() => {
         const rawData = await getResults();
         const results = [];
+        setRawData(rawData.results);
         rawData.summary.forEach(element => {
             const sem = rawData.results.filter(x => x.semesterId == element.semId)[0];
             const result = rawData.results.filter(x => x.semesterId == element.semId);
@@ -26,31 +29,45 @@ export default function Result() {
             results.push(semData);
         });
         const result = sortResults(results);
+        setResultView(result);
         setResults(result);
-        console.log(result);
-        const x = {total : rawData.totalPoints, credit: rawData.totalCredit};
-        setFinal(x);
-        if(final.credit > 0){
-            setFinalResult({totalCredit : final.credit, cgpa : data.summary.totalPoints / data.summary.totalCredit});
+        if(rawData.totalCredit){
+            setFinalResult({totalCredit : rawData.totalCredit, cgpa : Math.round(rawData.totalPoints * 100 / rawData.totalCredit)/100});
         }
         else{
             setFinalResult({totalCredit : 0, cgpa : 0});
         }
-        console.log("This: ", final.credit);
+    }
+
+    const semesterSelected = (e, results) => {
+        if (e.target.value == 0) {
+            setResultView(results);
+        }
+        else{
+            const list = filterSemesterResult(e.target.value, results);
+            setResultView(list);
+        }
+    }
+
+    const updateResult = (id) =>{
+        const res = data.filter(x => x.id == id)[0];
+        setResult({id : id, course: res.courseId, grade : res.gradeId, semester: res.semesterId});
+        setIsOpen(true);
     }
 
     return (<>
         <h1>Result</h1>
         <FormControl className="select-semester">
             <InputLabel>Semester</InputLabel>
-        <Select  label="Select">
+        <Select  label="Select" onChange={(e) => {semesterSelected(e, results)}}>
+            <MenuItem value={0}>All Semester</MenuItem>
             {
-                resultsView.map(sem => (<MenuItem value={sem.semester.semesterId}> {sem.semester.semesterName} ({sem.semester.year})</MenuItem>))
+                results.map(sem => (<MenuItem value={sem.semester.semesterId}> {sem.semester.semesterName} ({sem.semester.year})</MenuItem>))
             }
         </Select>
         </FormControl>
 
-        <Button className="btns" size="large" variant="contained" onClick={()=> {setIsOpen(true)}}>Add Result</Button>
+        <Button className="btns" size="large" variant="contained" onClick={()=> {setResult({id : 0}); setIsOpen(true)}}>Add Result</Button>
         <div className="final">
             <h4>Total Credit Earned: <i>{finalResult.totalCredit}</i> </h4>
             <h4> CGPA: <i>{ finalResult.cgpa }</i>  </h4>
@@ -60,25 +77,25 @@ export default function Result() {
                 <h4>{data.semester.semesterName} ({data.semester.year})</h4>
                 <Table className="table">
                     <TableHead>
-                        <TableCell>Course Code</TableCell>
-                        <TableCell>Course Title</TableCell>
-                        <TableCell>Credit</TableCell>
-                        <TableCell>Grade</TableCell>
-                        <TableCell>Points</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell className="thead">Course Code</TableCell>
+                        <TableCell className="thead">Course Title</TableCell>
+                        <TableCell className="thead">Credit</TableCell>
+                        <TableCell className="thead">Grade</TableCell>
+                        <TableCell className="thead">Points</TableCell>
+                        <TableCell className="thead"></TableCell>
                     </TableHead>
                     <TableBody>
                         {
                             data.result.map(x => (
                                 <TableRow>
-                                    <TableCell> {x.courseCode}</TableCell>
-                                    <TableCell> {x.courseTitle}</TableCell>
-                                    <TableCell> {x.creditPoint}</TableCell>
-                                    <TableCell> {x.gradeName}</TableCell>
-                                    <TableCell> {x.points}</TableCell>
-                                    <TableCell>
-                                    <IconButton onClick={() => {}}> <EditIcon color="primary"></EditIcon> </IconButton>
-                                    <IconButton onClick={() => {}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
+                                    <TableCell className="tbody"> {x.courseCode}</TableCell>
+                                    <TableCell className="tbody"> {x.courseTitle}</TableCell>
+                                    <TableCell className="tbody"> {x.creditPoint}</TableCell>
+                                    <TableCell className="tbody"> {x.gradeName}</TableCell>
+                                    <TableCell className="tbody"> {x.points}</TableCell>
+                                    <TableCell className="tbody">
+                                        <IconButton onClick={() => {updateResult(x.id)}}> <EditIcon color="primary"></EditIcon> </IconButton>
+                                        <IconButton onClick={() => {}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))
@@ -86,13 +103,13 @@ export default function Result() {
                     </TableBody>
                 </Table>
                 <div className="final-sm">
-                    <p> <b> Total Credit Earned: </b>  <i>{finalResult.totalCredit}</i> </p>
-                    <p> <b> CGPA: </b> <i>{finalResult.cgpa}</i>  </p>
+                    <p> <b> Total Credit Earned: </b>  <i>{data.summary.totalCredit}</i> </p>
+                    <p> <b> CGPA: </b> <i>{Math.round(data.summary.totalPoints * 100 / data.summary.totalCredit)/ 100}</i>  </p>
                 </div>
             </>))
         }
         <Dialog open={open}>
-            <AddEditResult data={1} isOpen={setIsOpen}></AddEditResult>
+            <AddEditResult data={result} isOpen={setIsOpen}></AddEditResult>
         </Dialog>
         </>);
 }
