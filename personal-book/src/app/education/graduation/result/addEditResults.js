@@ -4,42 +4,72 @@ import { getSemester } from "@/services/semesterService";
 import {Button, Select, FormControl, InputLabel, MenuItem} from "@mui/material";
 import { useState, useEffect } from "react";
 import "./result.css";
+import { addResultAsync } from "@/services/resultService";
 
 export default function AddEditResult({data, isOpen}) {
     const [courseList, setCourseList] = useState([]);
     const [semesterList, setSemesterList] = useState([]);
     const [gradeList, setGradeList] = useState([]);
-    const [result, setResult] = useState({course : 0, grade: 0, semester: 0});
+    const [course, setCourse] = useState(0);
+    const [semester, setSemester] = useState(0);
+    const [grade, setGrade] = useState(0);
 
     useEffect(() => { fetchData(); }, []);
 
     const fetchData = async function name() {
-        const gradeList = (await getGrades()).filter(x => x.scale == 4);
-        setGradeList(gradeList);
-        const semesterList = await getSemester();
-        setSemesterList(semesterList);
-        const courseList = await getCourses();
-        setCourseList(courseList);
+        const gList = (await getGrades()).filter(x => x.scale == 4);
+        setGradeList(gList);
+        const sList = await getSemester();
+        setSemesterList(sList);
+        const cList = await getCourses();
+        console.log(cList);
+        setCourseList(cList);
         if (data.id) {
-            setResult(data);
+            setCourse(data.course);
+            setGrade(data.grade);
+            setSemester(data.semester);
         }
         console.log("Passed", data);
         
     }
+
+    const saveChange = async () =>{
+        const result = {
+            id: data.id,
+            semesterId : semester,
+            courseId : course,
+            gradeId : grade
+        };
+
+        if (data.id == 0) {
+            const res = await addResultAsync(result);
+            
+            if (res) {
+                alert("Saved Successfully");
+            }
+            else{
+                alert("Unable to save.");
+            }
+        }
+        else{
+
+        }
+    }
+
     return(<>
     <h1>Add or Edit Results</h1>
     <FormControl className='select-opt'>
         <InputLabel>Course</InputLabel>
-        <Select label="Course" value={result.course}>
+        <Select label="Course" value={course} onChange={(e) => {setCourse(e.target.value) }}>
             <MenuItem disabled value={0}> Select Coourse </MenuItem>
             {
-                courseList.map(c => (<MenuItem value={c.id}>  {c.courseCode}</MenuItem>))
+                courseList.map(c => (<MenuItem value={c.id}>   {c.courseCode}</MenuItem>))
             }
         </Select>
     </FormControl>
     <FormControl className="select-opt">
         <InputLabel>Semester</InputLabel>
-        <Select label="Semester" value={result.semester}>
+        <Select label="Semester" value={semester} onChange={(e) => {setSemester(e.target.value)}}>
             <MenuItem disabled value={0}> Select Semester </MenuItem>
             {
                 semesterList.map(sem => (<MenuItem value={sem.id}>{sem.semesterName} ({sem.year}) </MenuItem>))
@@ -48,7 +78,7 @@ export default function AddEditResult({data, isOpen}) {
     </FormControl>
     <FormControl className="select-opt">
         <InputLabel>Grade</InputLabel>
-        <Select label="Grade" value={result.grade}>
+        <Select label="Grade" value={grade} onChange={(e) => {setGrade(e.target.value)}}>
             <MenuItem value={0}> Select Grade </MenuItem>
             {
                 gradeList.map(g=>(<MenuItem value={g.id}>{g.gradeName}</MenuItem>))
@@ -59,7 +89,7 @@ export default function AddEditResult({data, isOpen}) {
     <div className="select-opt">
         <Button variant="outlined" className="double" onClick={() => {isOpen(false)}}>Close</Button>
         <label className="gap"></label>
-        <Button className="double" variant="contained">Save</Button>
+        <Button className="double" variant="contained" onClick={() => {saveChange()}}>Save</Button>
     </div>
     </>)
 }

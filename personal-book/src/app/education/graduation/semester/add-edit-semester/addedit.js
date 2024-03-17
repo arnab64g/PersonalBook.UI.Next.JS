@@ -3,7 +3,6 @@
 import { Month } from "@/app/tokenHandle/month";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getToken } from "@/app/tokenHandle/tokenHandle";
 import { addSemester, editSemester } from "@/services/semesterService";
 
 export default function AddEditSemester({semester, isOpenDialog}) {
