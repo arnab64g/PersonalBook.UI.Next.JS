@@ -7,15 +7,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { sortResults } from "@/app/tokenHandle/sortResults";
 import { filterSemesterResult } from "@/app/tokenHandle/result";
+import Delete from "./deleteResult";
 
 export default function Result() {
     const [resultsView, setResultView] = useState([]);
     const [results, setResults] = useState([]);
     const [open, setIsOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
     const [finalResult, setFinalResult] = useState({});
     const [result, setResult] = useState({id : 0});
     const [data, setRawData] = useState([]);
-    useEffect(() => {fetchComponent()}, [open]);
+    useEffect(() => {fetchComponent()}, [open, deleteOpen]);
 
     const fetchComponent = async() => {
         const rawData = await getResults();
@@ -53,6 +55,12 @@ export default function Result() {
         const res = data.filter(x => x.id == id)[0];
         setResult({id : id, course: res.courseId, grade : res.gradeId, semester: res.semesterId});
         setIsOpen(true);
+    }
+
+    const deleteResult = (id) => {
+        const res = data.filter(x => x.id == id)[0];
+        setResult({id : res.id, courseCode : res.courseCode, courseTitle : res.courseTitle, grade : res.gradeName})
+        setDeleteOpen(true);
     }
 
     return (<>
@@ -95,7 +103,7 @@ export default function Result() {
                                     <TableCell className="tbody"> {x.points}</TableCell>
                                     <TableCell className="tbody">
                                         <IconButton onClick={() => {updateResult(x.id)}}> <EditIcon color="primary"></EditIcon> </IconButton>
-                                        <IconButton onClick={() => {}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
+                                        <IconButton onClick={() => {deleteResult(x.id)}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))
@@ -110,6 +118,9 @@ export default function Result() {
         }
         <Dialog open={open}>
             <AddEditResult data={result} isOpen={setIsOpen}></AddEditResult>
+        </Dialog>
+        <Dialog open={deleteOpen} >
+            <Delete data={result} isOpen={setDeleteOpen}></Delete>
         </Dialog>
         </>);
 }

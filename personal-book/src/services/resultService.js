@@ -33,3 +33,35 @@ export async function addResultAsync(result) {
     
     return await r.json();
 }
+
+export async function updateResultAsync(result) {
+    const userId = getUserId();
+    const res = {
+        id : result.id,
+        userId : userId,
+        courseId : result.courseId,
+        semesterId : result.semesterId,
+        gradeId : result.gradeId
+    }
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' ,
+                'authorization' : `bearer ${getToken()}`},
+        body: JSON.stringify(res)
+    };
+    const r = await fetch('http://localhost:7108/api/Result', requestOptions);
+    
+    return await r.json();
+}
+
+export async function deleteResultS(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' ,
+                    'authorization' : `bearer ${getToken()}` }
+    };
+    const res = await fetch(`http://localhost:7108/api/Result?id=${id}`, requestOptions);
+    const result = await res.json();
+
+    return result;
+}

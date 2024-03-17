@@ -4,7 +4,7 @@ import { getSemester } from "@/services/semesterService";
 import {Button, Select, FormControl, InputLabel, MenuItem} from "@mui/material";
 import { useState, useEffect } from "react";
 import "./result.css";
-import { addResultAsync } from "@/services/resultService";
+import { addResultAsync, updateResultAsync } from "@/services/resultService";
 
 export default function AddEditResult({data, isOpen}) {
     const [courseList, setCourseList] = useState([]);
@@ -46,13 +46,22 @@ export default function AddEditResult({data, isOpen}) {
             
             if (res) {
                 alert("Saved Successfully");
+                isOpen(false);
             }
             else{
                 alert("Unable to save.");
             }
         }
         else{
+            const res = await updateResultAsync(result);
 
+            if (res) {
+                alert("Updated Successfully.");
+                isOpen(false);
+            }
+            else{
+                alert("Unable to Update.");
+            }
         }
     }
 
