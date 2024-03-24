@@ -1,3 +1,6 @@
+import {faHome, faBus, faBurger, faTools, faReceipt, faHospital, faShirt, faShoppingCart, 
+    faPerson, faSchool, faVideo, faMoneyBill} from "@fortawesome/free-solid-svg-icons";
+
 export const Category = [
     {id : 1, name : 'Housing', icon: 'home'},
     {id : 2, name : 'Transport', icon: 'commute'},
@@ -12,3 +15,6 @@ export const Category = [
     {id : 11, name : 'Entertainment', icon: 'theaters'},
     {id : 12, name : 'Others', icon: 'local_atm'},
 ]
+
+export const Icons = [faHome, faBus, faBurger, faTools, faReceipt, faHospital, faShirt, 
+    faShoppingCart, faPerson, faSchool, faVideo, faMoneyBill];

@@ -1,9 +1,7 @@
-import { Select, MenuItem, FormControl, InputLabel, Button } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel, Button, Dialog } from "@mui/material";
 import "./finance.css";
 import { useState } from "react";
-import { Category } from "../tokenHandle/objects";
-import {faHome, faBus, faBurger, faTools, faReceipt, faHospital, faShirt, faShoppingCart, 
-    faPerson, faSchool, faVideo, faMoneyBill} from "@fortawesome/free-solid-svg-icons";
+import { Category, Icons } from "../tokenHandle/objects";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,17 +10,18 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import AddEditExpense from "./addExpense";
 
 export default function Expense() {
     const [filter, setFilter] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
     const [fromDate, setFormDate] = useState((new Date()).toISOString());
     const [toDate, setToDate] = useState();
     const categories = Category;
     const selectCategory = (e) => {
         setFilter(e);
     }
-    const icons = [faHome, faBus, faBurger, faTools, faReceipt, faHospital, faShirt, 
-        faShoppingCart, faPerson, faSchool, faVideo, faMoneyBill];
+    const icons = Icons;
     
 
     return (<>
@@ -47,14 +46,13 @@ export default function Expense() {
                 </FormControl>
                 <DatePicker label="From Date"></DatePicker>
                 <DatePicker label="To Date"></DatePicker>
-                <Button variant="contained">Add Expense</Button>
+                <Button onClick={() => { setIsOpen(true);}} variant="contained">Add</Button>
             </DemoContainer>
         </LocalizationProvider>
+        <Button variant="contained" onClick={()=> {console.log("hex");}} >Hexa</Button>
     </div>
-    <div>
-        
-        
-        
-    </div>
+    <Dialog open={isOpen}>
+        <AddEditExpense></AddEditExpense>
+    </Dialog>
     </>)
 }
