@@ -1,0 +1,27 @@
+.filter{
+    width: 800px;
+    margin-bottom: 10px;
+}
+
+.opt{
+    width: 200px;
+}
+
+.date{
+    height: 53px;
+    border-color: rgb(188, 188, 188);
+    border-style:double;
+    border-width: 1px;
+    border-radius: 4px;
+    font-size:large;
+    color: rgb(188, 188, 188);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cat-select{
+    width: 800px;
+}
+
+.date{
+    width: 150px;
+}

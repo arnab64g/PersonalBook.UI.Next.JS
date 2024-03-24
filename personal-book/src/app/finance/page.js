@@ -2,8 +2,9 @@
 
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
+import Expense from "./expense";
 
-export default function Expense(params) {
+export default function Finance() {
     return(<>
     <div className="tabs">
     <Tabs className="tabs">
@@ -12,7 +13,7 @@ export default function Expense(params) {
             <Tab>Category</Tab>
         </TabList>
         <TabPanel>
-            <h1>Expense</h1>
+            <Expense></Expense>
         </TabPanel>
         <TabPanel>
             <h1>Category</h1>

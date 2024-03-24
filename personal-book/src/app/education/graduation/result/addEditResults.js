@@ -78,7 +78,7 @@ export default function AddEditResult({data, isOpen}) {
     </FormControl>
     <FormControl className="select-opt">
         <InputLabel>Semester</InputLabel>
-        <Select label="Semester" value={semester} onChange={(e) => {setSemester(e.target.value)}}>
+        <Select label="Semester" value={semester} onChange={(e) => {setSemester(e.target.value)}} >
             <MenuItem disabled value={0}> Select Semester </MenuItem>
             {
                 semesterList.map(sem => (<MenuItem value={sem.id}>{sem.semesterName} ({sem.year}) </MenuItem>))

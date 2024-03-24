@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { IconButton, MenuItem, Button, Select, FormControl, InputLabel, Dialog, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { IconButton, MenuItem, Button, Select, FormControl, InputLabel, Dialog, Table, TableBody, TableCell, 
+    TableHead, TableRow } from "@mui/material";
 import "./result.css";
 import AddEditResult from "./addEditResults";
 import { getResults } from "@/services/resultService";
