@@ -22,7 +22,6 @@ export default function Expense() {
         setFilter(e);
     }
     const icons = Icons;
-    
 
     return (<>
     <div className="filter">
@@ -51,8 +50,8 @@ export default function Expense() {
         </LocalizationProvider>
         <Button variant="contained" onClick={()=> {console.log("hex");}} >Hexa</Button>
     </div>
-    <Dialog open={isOpen}>
-        <AddEditExpense></AddEditExpense>
+    <Dialog open={isOpen} >
+        <AddEditExpense data={0} isOpen={setIsOpen}></AddEditExpense>
     </Dialog>
     </>)
 }

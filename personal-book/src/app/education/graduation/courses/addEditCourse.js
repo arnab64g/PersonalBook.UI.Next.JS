@@ -1,6 +1,5 @@
 import { addCourse, updateCourse } from "@/services/courseService";
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function AddEditCourse( {course, isOpen} ){
