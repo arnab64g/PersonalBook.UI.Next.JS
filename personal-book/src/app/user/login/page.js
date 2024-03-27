@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./style.css";
 import { setToken } from '@/app/tokenHandle/tokenHandle';
-import "./style.css"
 import { loginUserService } from '@/services/userService';
 
 const Login = () =>{

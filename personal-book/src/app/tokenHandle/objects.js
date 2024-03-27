@@ -2,6 +2,7 @@ import {faHome, faBus, faBurger, faTools, faReceipt, faHospital, faShirt, faShop
     faPerson, faSchool, faVideo, faMoneyBill} from "@fortawesome/free-solid-svg-icons";
 
 export const Category = [
+    {id : 0, name : "Select Category"},
     {id : 1, name : 'Housing', icon: 'home'},
     {id : 2, name : 'Transport', icon: 'commute'},
     {id : 3, name : 'Food', icon: 'fastfood'},
