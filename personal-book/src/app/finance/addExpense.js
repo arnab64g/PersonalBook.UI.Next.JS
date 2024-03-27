@@ -8,6 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { addExpenseAsync, updateExpenseAsync } from "@/services/expenseService";
+import { dateOnly } from "../tokenHandle/dateOnly";
 
 export default function AddEditExpense({data, isOpen}) {
     const [category, setCategory] = useState(data.category);
@@ -17,16 +18,12 @@ export default function AddEditExpense({data, isOpen}) {
     const icons = Icons;
     const categories = Category;
     const saveChange = async () => {
-        let dateOnly = new Date(date);
-        dateOnly.setHours(0);
-        dateOnly.setMinutes(0);
-        dateOnly.setSeconds(0);
         
         if (!data.id) {
             const expense = {
                 userId : "", 
                 category : category,
-                date : dateOnly,
+                date : dateOnly(date),
                 amount : amount,
                 description : description
             }
@@ -44,7 +41,7 @@ export default function AddEditExpense({data, isOpen}) {
                 id : data.id,
                 userId : data.userId,
                 category : category,
-                date : dateOnly,
+                date : dateOnly(date),
                 amount : amount,
                 description : description
             }

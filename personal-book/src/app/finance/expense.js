@@ -13,23 +13,47 @@ import AddEditExpense from "./addExpense";
 import { getExpensesAsync } from "@/services/expenseService";
 import DeleteExpense from "./deleteExpense";
 import {orderByCategory, sortByAmountHigh_Low, sortByAmountLow_High, sortByDateNew_Old, sortByDateOld_New} from "../tokenHandle/sortExpense";
+import dayjs from "dayjs";
+import { dateOnly } from "../tokenHandle/dateOnly";
 
 export default function Expense() {
-    const [filter, setFilter] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-    const [fromDate, setFormDate] = useState((new Date()).toISOString());
+    const [fromDate, setFormDate] = useState();
     const [toDate, setToDate] = useState();
+    const [filterCategories, setFilterCategories] = useState([]);
     const [expenseList, setExpenseList] = useState([]);
+    const [expenseListView, setExpenseListView] = useState([]);
     const [expense, setExpense] = useState({});
     const [sortOpt, setSortOpt] = useState(1);
 
     const categories = Category;
-    const selectCategory = (e) => {
-        setFilter(e);
-    }
     const icons = Icons;
+
     useEffect(() => {fetchExpenses()}, [isOpen, isDeleteOpen]);
+
+    const filterExpenses = (expenses, fromDate, toDate, categories) =>  {
+        let filtered = expenses;
+        const cset = new Set(categories);
+        
+        if (cset.size != 0) {
+          filtered = filtered.filter(e => cset.has(Number(e.category)));
+        }
+       
+        if (fromDate) {
+            fromDate = dateOnly(fromDate);
+            fromDate = new Date(fromDate);
+            filtered = filtered.filter(e => (new Date(e.date)).getTime() >= fromDate.getTime());
+        }
+        
+        if (toDate) {
+            toDate = dateOnly(toDate);
+            toDate = new Date(toDate);
+            filtered = filtered.filter(e => (new Date(e.date)).getTime() <= toDate.getTime());
+        }
+
+        return filtered;
+      }
 
     const sortExpense = (list, opt) =>{
         let sortedList = [];
@@ -50,13 +74,14 @@ export default function Expense() {
                 sortedList = orderByCategory(list);
                 break;
         }
-        setExpenseList(list);
+        setExpenseList(sortedList);
+        const filtered = filterExpenses(sortedList, fromDate, toDate, filterCategories);
+        setExpenseListView(filtered);
     }
 
     const fetchExpenses = async () => {
         const expList = await getExpensesAsync();
         sortExpense(expList, sortOpt);
-
     }
 
     const deleteExpense = (id) => {
@@ -75,7 +100,8 @@ export default function Expense() {
     <div className="filter">
         <FormControl>
             <InputLabel>Select Categories </InputLabel>
-            <Select label="Select Cate" multiple className="cat-select" value={filter} onChange={ (e) => {selectCategory(e.target.value)}}>
+            <Select label="Select Cate" multiple className="cat-select" value={filterCategories} onChange={ (e) => {setFilterCategories(e.target.value); 
+                setExpenseListView(filterExpenses(expenseList, fromDate, toDate, e.target.value))}}>
                 {categories.map((cat) => (<MenuItem value={cat.id}> <FontAwesomeIcon icon={icons[cat.id-1]}></FontAwesomeIcon> {cat.name}</MenuItem>))}
             </Select>
         </FormControl>
@@ -91,8 +117,8 @@ export default function Expense() {
                         <MenuItem value={5}> Order by Category </MenuItem>
                     </Select>
                 </FormControl>
-                <DatePicker label="From Date" ></DatePicker>
-                <DatePicker label="To Date"></DatePicker>
+                <DatePicker label="From Date" onChange={(e) => {setFormDate(dayjs(e).toISOString()); setExpenseListView(filterExpenses(expenseList, dayjs(e).toISOString(), toDate, filterCategories))}}></DatePicker>
+                <DatePicker label="To Date" onChange={(e) => {setToDate(dayjs(e).toISOString()); setExpenseListView(filterExpenses(expenseList, fromDate, dayjs(e).toISOString(), filterCategories))}}></DatePicker>
                 <Button onClick={() => { setExpense({id : 0, userId : "", category : 0, data : new Date(), amount : 0, description : ""}) ; setIsOpen(true);}} variant="contained">Add</Button>
             </DemoContainer>
         </LocalizationProvider>
@@ -108,7 +134,7 @@ export default function Expense() {
         </TableHead>
         <TableBody>
             {
-                expenseList.map( x => (<TableRow className="tbody">
+                expenseListView.map( x => (<TableRow className="tbody">
                     <TableCell> <FontAwesomeIcon icon={icons[x.category - 1]}></FontAwesomeIcon> </TableCell>
                     <TableCell> {categories[x.category].name} </TableCell>
                     <TableCell> {(new Date( x.date)).toDateString()} </TableCell>
