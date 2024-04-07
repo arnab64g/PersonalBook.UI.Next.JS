@@ -4,8 +4,8 @@ import { AppBar, Toolbar } from "@mui/material";
 import Link from "next/link";
 import { deleteToken, getUsername, isLoggedin } from '../tokenHandle/tokenHandle';
 import { useRouter } from 'next/navigation';
-
-const Navbar = () =>{
+ 
+export default function Navbar(){
     const value = isLoggedin();
     const router = useRouter();
     const name = getUsername();
@@ -49,5 +49,3 @@ const Navbar = () =>{
     </AppBar>
     );
 }
-
-module.exports = Navbar

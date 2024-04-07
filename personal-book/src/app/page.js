@@ -28,16 +28,23 @@ export default function Home() {
     router.replace("/user/login");
   }
 
+  const goEdu = () =>{
+    router.replace('/education/eduTab');
+  }
+
+  const goExp = () =>{
+    router.replace('/finance')
+  }
   return (
     <main className={styles.main}>
         {
           value ? 
           <div>
-            <Button variant='outlined' className='card'> 
+            <Button variant='outlined' className='card' onClick={goExp}> 
               <MonetizationOnIcon></MonetizationOnIcon>
               Finance 
             </Button>
-            <Button variant='outlined' className='card'>
+            <Button variant='outlined' className='card' onClick={goEdu}>
               <SchoolIcon></SchoolIcon>
               Education 
             </Button>
