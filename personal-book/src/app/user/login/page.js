@@ -10,7 +10,7 @@ import "./style.css";
 import { setToken } from '@/app/tokenHandle/tokenHandle';
 import { loginUserService } from '@/services/userService';
 
-const Login = () =>{
+export default function Login(){
     const router = useRouter();
 
     const [username, setUsername] = useState("");
@@ -36,13 +36,14 @@ const Login = () =>{
     }
 
     const loginUser = async (event) =>{
+
         const data = event.target;
         const formData = new FormData(data);
         const formValues = Object.fromEntries(formData);
         console.log(formValues);
         if (isFormValid) {
             const result = await loginUserService(formValues);
-            console.log(result);
+            console.log("exe : ", result);
             if (!result.successed) {
                 toast.error(result.message, {position:'top-right'});
             }
@@ -77,5 +78,3 @@ const Login = () =>{
         </>
     );
 }
-
-export default Login;

@@ -30,8 +30,5 @@ export default function Delete({data, isOpen}) {
                 <Button className="double delete-button" variant="contained" onClick={() => {deleteResult()}}> Delete </Button>
             </div>
         </form>
-        
-        
-        
     </>)
 }
