@@ -2,7 +2,6 @@
 
 import { TextField, Button } from '@mui/material';
 import React, {useState, useEffect} from "react";
-import 'bootstrap/dist/css/bootstrap.css';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
