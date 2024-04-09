@@ -29,14 +29,14 @@ export default function EducationTab() {
                         <Tab label="Grade" value={3}></Tab>
                     </TabList>                
                 </Box>
-                <TabPanel value={1}>
+                <TabPanel  value={1}>
                     <SecondaryResult></SecondaryResult>
                 </TabPanel>
-                <TabPanel value={2}>
-                    <Box>
-                        <TabContext value={value2}>
-                            <Box>
-                                <TabList onChange={(e, v) => {handelChange2(e, v)}}>
+                <TabPanel className='graduation' value={2}>
+                    <Box >
+                        <TabContext  value={value2}>
+                            <Box >
+                                <TabList  onChange={(e, v) => {handelChange2(e, v)}}>
                                     <Tab label='Result' value={1}></Tab>
                                     <Tab label="Course" value={2}></Tab>
                                     <Tab label="Semester" value={3}></Tab>
