@@ -1,3 +1,52 @@
 .signup-form{
-    width: 600px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 400px;
+    width: 50%;
+    max-width: 500px;
+    border-color: blue;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgb(52, 52, 233);
+}
+
+.first-name{
+    width: 49%;
+}
+
+.last-name{
+    margin-left: 2%;
+    width: 49%;
+}
+
+.email{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.username{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.phone{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.address{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.password{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.submit{
+    margin-top: 10px;
+    width: 100%;
 }

@@ -2,22 +2,6 @@
   margin-top: 62px;
 }
 
-.double {
-  width: 49%;
-}
-
-.triple{
-  width: 32%;
-}
-
-.single{
-  width: 99%;
-}
-
-.gap{
-  width: 1%;
-}
-
 .table{
   margin-top: 5px;
   margin-bottom: 5px;
@@ -64,13 +48,6 @@ span{
   font-weight: bolder;
 }
 
-.center {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;  
-}
-
 .field{
   margin-left: 15px;
  margin-top: 15px;
@@ -106,3 +83,12 @@ span{
   width: 250px;
   margin: 20px;
 }
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  cursor:pointer;
+}
+

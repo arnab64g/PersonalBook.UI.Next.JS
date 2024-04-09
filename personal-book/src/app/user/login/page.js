@@ -35,14 +35,12 @@ export default function Login(){
     }
 
     const loginUser = async (event) =>{
-
+        event.preventDefault();
         const data = event.target;
         const formData = new FormData(data);
         const formValues = Object.fromEntries(formData);
-        console.log(formValues);
         if (isFormValid) {
             const result = await loginUserService(formValues);
-            console.log("exe : ", result);
             if (!result.successed) {
                 toast.error(result.message, {position:'top-right'});
             }

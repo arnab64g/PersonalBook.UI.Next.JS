@@ -1,5 +1,4 @@
 export async function loginUserService(formValues) {
-    console.log(formValues);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

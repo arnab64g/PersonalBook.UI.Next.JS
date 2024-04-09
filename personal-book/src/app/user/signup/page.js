@@ -74,48 +74,33 @@ export default function Signup(){
 
     return (
     <div>
-        <form className='signup-form center' onSubmit={registerUser} method="post">
+        <form className='signup-form' onSubmit={registerUser} method="post">
             <h1 className='field'>Sign Up</h1>
-            <div className='field'>
-                <TextField required id='firstName' name='firstName' className='double' label="First Name"
+            <TextField required id='firstName' name='firstName' className='first-name' label="First Name"
                 onChange={(e) => setFirstName(e.target.value)}
                 error={errors.firstName}>
-                </TextField>
-                <label className='gap'></label>
-                <TextField required id='lastName' name='lastName' className='double'  label="Last Name"
+            </TextField>
+            <TextField required id='lastName' name='lastName' className='last-name'  label="Last Name"
                 onChange={(e) => {setLastName(e.target.value)}}
                 error={errors.lastName}>
-                </TextField>
-            </div>
-            <div className="field">
-                <TextField id='email' name="email" className='single' label="Email"
+            </TextField>
+            <TextField id='email' className="email" name="email" label="Email"
                 onChange={(e) => {setEmail(e.target.value)}}
                 error={errors.email}
-                ></TextField>
-            </div>
-            <div className="field">
-                <TextField id='username' name="username" className='single' label="Username"
+            ></TextField>
+            <TextField id='username' name="username" className='username' label="Username"
                 onChange={(e) => {setUsername(e.target.value)}}
-                error={errors.username}>  </TextField>
-            </div>
-            <div className="field">
-                <TextField id='phoneNumber' name="phoneNumber" className='single' label="Phone"
+            error={errors.username}>  </TextField>
+            <TextField id='phoneNumber' name="phoneNumber" className='phone' label="Phone"
                 onChange={(e) => {setPhone(e.target.value)}}
                 error={errors.phoneNumber}
-                ></TextField>
-            </div>
-            <div className="field">
-                <TextField id='address' name="address" className='single' label="Address" multiline minRows={2}>  </TextField>
-            </div>
-            <div className="field">
-                <TextField id='password' name="password" className='single' type='password' label="Password"
+            ></TextField>
+            <TextField id='address' name="address" className='address' label="Address" multiline minRows={2}>  </TextField>
+            <TextField id='password' name="password" className='password' type='password' label="Password"
                 onChange={(e) => {setPassword(e.target.value)}}
                 error={errors.password}
-                ></TextField>
-            </div>
-            <div className="field">
-                <Button type='submit' className='single' variant='contained'> Register </Button>
-            </div>
+            ></TextField>
+            <Button type='submit' className='submit' variant='contained'> Register </Button>
         </form>
         <ToastContainer></ToastContainer>
     </div>

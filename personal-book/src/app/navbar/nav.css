@@ -1,0 +1,12 @@
+.drawer{
+  background-color: cornflowerblue;
+}
+
+span{
+  flex: 1 1 auto;
+}
+
+.box{
+  background-color: cornflowerblue;
+  height: 100vh;
+}

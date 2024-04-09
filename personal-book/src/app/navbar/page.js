@@ -1,55 +1,80 @@
 "use client";
 
-import { AppBar, Button, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Divider, IconButton, ListItem, ListItemButton, Toolbar } from "@mui/material";
+import Drawer from "@mui/material/Drawer";
 import Link from "next/link";
 import { deleteToken, getUsername, isLoggedin } from '../tokenHandle/tokenHandle';
 import { useRouter } from 'next/navigation';
- 
+import "../navbar/nav.css";
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from "react";
+
 export default function Navbar(){
     const value = isLoggedin();
     const router = useRouter();
     const name = getUsername();
+    const [open, setOpen] = useState(false);
     
-    const logOut = async() =>{
+    const logOut =() =>{
         deleteToken();
+        setOpen(false)
+        router.replace("/user/login");
         router.refresh();    
     }
 
     const goHome = () =>{
+        setOpen(false);
         router.replace("/");
     }
 
-    const goLogin = () => {
-        router.replace("/user/login");
-    }
-
     return (
-    <AppBar>
-        <Toolbar >
-            <span className="appname" onClick={goHome}> PersonalBook </span>
-            { 
-                value ? 
-                <div>
-                    <Link className='nav-item' href="/"> Home </Link>
-                    <Link className='nav-item' href="/education/eduTab"> Education </Link>
-                    <Link className='nav-item'  href="/finance"> Expense </Link>
-                </div> : null
-            }   
-            <span className="divider"></span>         
-            <div>
-            {
-                value? 
-                <div className='login-item'>
-                    <Link className='nav-item' href="/login" onClick={logOut}> Log Out </Link>
-                    <Link className='nav-item' href="/"> {name} </Link>
-                </div> :
-                <div className='login-item'>
-                    <Link className="nav-item" href="/user/signup">Sign Up</Link>
-                    <span className='nav-item' onClick={goLogin}  > Log In</span>
-                </div>
-            }
-            </div>
-        </Toolbar>
-    </AppBar>
+        <>
+            <AppBar>
+                <Toolbar >
+                    <IconButton onClick={() => setOpen(true)}> <MenuIcon></MenuIcon> </IconButton>
+                    <span className="appname" onClick={goHome}> PersonalBook </span>
+                    {
+                        value ? <Link className='nav-item' href="/"> {name} </Link> : null
+                    }
+                </Toolbar>
+            </AppBar>
+            <Drawer open={open} onClose={() => setOpen(false)} >
+                <Box className="box">
+                { 
+                        value ? 
+                        <div>
+                            <ListItem className="nav-item">  
+                                <ListItemButton href="/" onClick={() => {setOpen(false)}} color="primary"> Home </ListItemButton>
+                            </ListItem>
+                            <ListItem className='nav-item'>
+                                <ListItemButton onClick={() => {setOpen(false)}}  href="/education/eduTab"> Education </ListItemButton>
+                            </ListItem>
+                            <ListItem className="nav-item">
+                                <ListItemButton onClick={() => {setOpen(false)}}  href="/finance"> Expense </ListItemButton>
+                            </ListItem>
+                        </div> : null
+                    }
+                    <Divider></Divider>
+                    <div>
+                    {
+                        value? 
+                        <div >
+                            <ListItem className="nav-item">
+                                <ListItemButton onClick={() => {setOpen(false); logOut()}}> Log Out </ListItemButton>
+                            </ListItem>
+                        </div> :
+                        <div className='login-item d-div'>
+                            <ListItem className="nav-item">
+                                <ListItemButton onClick={() => {setOpen(false)}}  href="/user/signup">Sign Up</ListItemButton>
+                            </ListItem>
+                            <ListItem className="nav-item">
+                                <ListItemButton onClick={() => {setOpen(false)}}  href="/user/login"> Log In </ListItemButton>
+                            </ListItem>
+                        </div>
+                    }
+                    </div>
+                </Box>
+            </Drawer>
+        </>
     );
 }
