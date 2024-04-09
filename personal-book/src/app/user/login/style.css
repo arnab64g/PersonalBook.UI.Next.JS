@@ -4,10 +4,23 @@
     border-color: blue;
     border-style: solid;
     min-width: 400px;
-    max-height: 600px;
+    max-width: 500px;
     width: 50%;
     border-width: 1px;
     box-shadow: 5px 5px cornflowerblue;
     margin-left: auto;
     margin-right: auto;
+}
+.username{
+    width: 100%;
+}
+
+.password{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.login{
+    margin-top: 10px;
+    width: 100%;
 }

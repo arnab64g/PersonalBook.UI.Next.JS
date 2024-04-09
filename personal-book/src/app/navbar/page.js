@@ -31,7 +31,7 @@ export default function Navbar(){
         <>
             <AppBar>
                 <Toolbar >
-                    <IconButton onClick={() => setOpen(true)}> <MenuIcon></MenuIcon> </IconButton>
+                    <IconButton sx={{ color: '#fff' }} onClick={() => setOpen(true)}> <MenuIcon></MenuIcon> </IconButton>
                     <span className="appname" onClick={goHome}> PersonalBook </span>
                     {
                         value ? <Link className='nav-item' href="/"> {name} </Link> : null
@@ -41,38 +41,38 @@ export default function Navbar(){
             <Drawer open={open} onClose={() => setOpen(false)} >
                 <Box className="box">
                 { 
-                        value ? 
-                        <div>
-                            <ListItem className="nav-item">  
-                                <ListItemButton href="/" onClick={() => {setOpen(false)}} color="primary"> Home </ListItemButton>
-                            </ListItem>
-                            <ListItem className='nav-item'>
-                                <ListItemButton onClick={() => {setOpen(false)}}  href="/education/eduTab"> Education </ListItemButton>
-                            </ListItem>
-                            <ListItem className="nav-item">
-                                <ListItemButton onClick={() => {setOpen(false)}}  href="/finance"> Expense </ListItemButton>
-                            </ListItem>
-                        </div> : null
-                    }
-                    <Divider></Divider>
+                    value ? 
                     <div>
-                    {
-                        value? 
-                        <div >
-                            <ListItem className="nav-item">
-                                <ListItemButton onClick={() => {setOpen(false); logOut()}}> Log Out </ListItemButton>
-                            </ListItem>
-                        </div> :
-                        <div className='login-item d-div'>
-                            <ListItem className="nav-item">
-                                <ListItemButton onClick={() => {setOpen(false)}}  href="/user/signup">Sign Up</ListItemButton>
-                            </ListItem>
-                            <ListItem className="nav-item">
-                                <ListItemButton onClick={() => {setOpen(false)}}  href="/user/login"> Log In </ListItemButton>
-                            </ListItem>
-                        </div>
-                    }
+                        <ListItem className="nav-item">  
+                            <ListItemButton href="/" onClick={() => {setOpen(false)}} color="primary"> Home </ListItemButton>
+                        </ListItem>
+                        <ListItem className='nav-item'>
+                            <ListItemButton onClick={() => {setOpen(false)}}  href="/education/eduTab"> Education </ListItemButton>
+                        </ListItem>
+                        <ListItem className="nav-item">
+                            <ListItemButton onClick={() => {setOpen(false)}}  href="/finance"> Expense </ListItemButton>
+                        </ListItem>
+                    </div> : null
+                }
+                <Divider></Divider>
+                <div>
+                {
+                    value? 
+                    <div >
+                        <ListItem className="nav-item">
+                            <ListItemButton onClick={() => {setOpen(false); logOut()}}> Log Out </ListItemButton>
+                        </ListItem>
+                    </div> :
+                    <div className='login-item d-div'>
+                        <ListItem className="nav-item">
+                            <ListItemButton onClick={() => {setOpen(false)}}  href="/user/signup">Sign Up</ListItemButton>
+                        </ListItem>
+                        <ListItem className="nav-item">
+                            <ListItemButton onClick={() => {setOpen(false)}}  href="/user/login"> Log In </ListItemButton>
+                        </ListItem>
                     </div>
+                }
+                </div>
                 </Box>
             </Drawer>
         </>

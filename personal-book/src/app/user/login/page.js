@@ -57,19 +57,15 @@ export default function Login(){
         <>
         <form className='login-form center' onSubmit={loginUser} method="post">
             <h1 className='head'>Log in</h1>
-            <div className='field'>
-                <TextField className='single' label="Username" id="username" name="username"
+            <TextField className='username' label="Username" id="username" name="username"
                 onChange={(e) => (setUsername(e.target.value)) }
-                error={errors.username}> </TextField>
-            </div>
-            <div className='field'>
-                <TextField className='single' label="Password" type='password' id="password" name='password'
+                error={errors.username}> 
+            </TextField>
+            <TextField className='password' label="Password" type='password' id="password" name='password'
                 onChange={(e) => {setPassword(e.target.value)}}
-                error={errors.password}> </TextField>
-            </div>
-            <div className='field'>
-                <Button type='submit' className='single' variant='contained'>Log in</Button>
-            </div>
+                error={errors.password}> 
+            </TextField>
+            <Button type='submit' className='login' variant='contained'>Log in</Button>
         </form>
         <ToastContainer></ToastContainer>
         </>
