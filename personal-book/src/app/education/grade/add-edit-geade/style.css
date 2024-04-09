@@ -1,0 +1,42 @@
+.grade{
+    width: 49%;
+    height: 70px;
+}
+
+.point{
+    margin-left: 2%;
+    width: 49%;
+    height: 70px;
+}
+
+.min{
+    width: 33%;
+    height: 70px;
+}
+
+.max{
+    margin-left: 1%;
+    width: 33%;
+    height: 70px;
+}
+
+.scale{
+    margin-left: 1%;
+    width: 32%;
+    margin-bottom: 15px;
+}
+
+.cancel{
+    width: 49%;
+}
+
+.save{
+    margin-left: 2%;
+    width: 49%;
+}
+
+.add-edit{
+    padding: 15px;
+    min-width: 400px;
+    max-width: 500px;
+}

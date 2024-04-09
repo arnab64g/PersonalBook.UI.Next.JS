@@ -3,6 +3,7 @@
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { addGrade, updateGrade } from "@/services/gradeService";
+import "./style.css";
 
 export default function AddEditGrade({grade, closeAction}) {
     const [gradeName, setGradeName] = useState(grade.gradeName);
@@ -60,32 +61,27 @@ export default function AddEditGrade({grade, closeAction}) {
 
     return (
     <div>
-        <h1 className="head">Add or Edit Grade</h1>
-        <form>
-            <div className="field">
-                <TextField className="double" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
-                onChange={(gn) => {setGradeName(gn.target.value)}} required error={errors.gradeName}></TextField>
-                <label className="gap"></label>
-                <TextField className="double"  label="Points" type="number" id="points" name="points" value={points}
-                onChange={(p) => setPoints(p.target.value)} error={errors.points}></TextField>
-            </div>
-            <div className="field">
-                <TextField className="triple" label="Minimum Number" type="number" value={minNumber}
-                onChange={(e) => setMinNumber(e.target.value)}></TextField>
-                <label className="gap"></label>
-                <TextField className="triple" label="Maximum Number" type="number" value={maxNumber}
-                onChange={(e) => setMaxNumber(e.target.value)}></TextField>
-                <label className="gap"></label>
-                <Select className="triple" value={scale} onChange={(e) => setScale(e.target.value)}>
-                    <MenuItem value={4}> Scale 4.0 </MenuItem>
-                    <MenuItem value={5}> Scale 5.0 </MenuItem>
-                </Select>
-            </div>
-            <div className="field">
-                <Button className="double" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>
-                <label className="gap"></label>
-                <Button className="double"  variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
-            </div>
+        
+        <form className="add-edit">
+            <h1 >Add or Edit Grade</h1>
+            <TextField className="grade" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
+                onChange={(gn) => {setGradeName(gn.target.value)}} required error={errors.gradeName}>
+            </TextField>
+            <TextField className="point"  label="Points" type="number" id="points" name="points" value={points}
+                onChange={(p) => setPoints(p.target.value)} error={errors.points}>    
+            </TextField>
+            <TextField className="min" label="Minimum Number" type="number" value={minNumber}
+                onChange={(e) => setMinNumber(e.target.value)}>
+            </TextField>    
+            <TextField className="max" label="Maximum Number" type="number" value={maxNumber}
+                onChange={(e) => setMaxNumber(e.target.value)}>
+            </TextField>
+            <Select className="scale" value={scale} onChange={(e) => setScale(e.target.value)}>
+                <MenuItem value={4}> Scale 4.0 </MenuItem>
+                <MenuItem value={5}> Scale 5.0 </MenuItem>
+            </Select>
+            <Button className="cancel" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>    
+            <Button className="save"  variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
         </form>
     </div>);
 }

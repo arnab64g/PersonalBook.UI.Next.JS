@@ -1,6 +1,6 @@
 "use client";
 
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Box, FormControl } from '@mui/material';
 import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
@@ -55,16 +55,19 @@ export default function Login(){
 
     return (
         <>
-        <form className='login-form center' onSubmit={loginUser} method="post">
-            <h1 className='head'>Log in</h1>
-            <TextField className='username' label="Username" id="username" name="username"
-                onChange={(e) => (setUsername(e.target.value)) }
-                error={errors.username}> 
-            </TextField>
-            <TextField className='password' label="Password" type='password' id="password" name='password'
-                onChange={(e) => {setPassword(e.target.value)}}
-                error={errors.password}> 
-            </TextField>
+        <form className='login-form' onSubmit={loginUser} method="post">
+            <h1>Log in</h1>
+            <Box>
+                <TextField  className='username' label="Username" id="username" name="username"
+                    onChange={(e) => (setUsername(e.target.value)) }
+                    error={errors.username}> 
+                </TextField>
+                <TextField className='password' label="Password" type='password' id="password" name='password'
+                    onChange={(e) => {setPassword(e.target.value)}}
+                    error={errors.password}> 
+                </TextField>
+            </Box>
+            
             <Button type='submit' className='login' variant='contained'>Log in</Button>
         </form>
         <ToastContainer></ToastContainer>
