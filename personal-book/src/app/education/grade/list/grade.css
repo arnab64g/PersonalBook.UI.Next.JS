@@ -3,3 +3,37 @@
     padding: 10px;
     margin: 10px;
 }
+
+.cont{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    min-width: 400px;
+}
+
+.top-action-content{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.grade-table{
+    width: 100%;
+}
+
+.add-btn{
+    margin-left: 2%;
+    width: 49%;
+    height: 55px;
+}
+
+.scale-filter{
+    width: 49%;
+}
+
+p{
+    text-align: center;
+}
+
+.delete-container{
+    padding: 15px;
+}

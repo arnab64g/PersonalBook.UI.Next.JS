@@ -61,7 +61,6 @@ export default function AddEditGrade({grade, closeAction}) {
 
     return (
     <div>
-        
         <form className="add-edit">
             <h1 >Add or Edit Grade</h1>
             <TextField className="grade" label="Grade Name" id="gradeName" name="gradeName" value={gradeName}
@@ -80,8 +79,8 @@ export default function AddEditGrade({grade, closeAction}) {
                 <MenuItem value={4}> Scale 4.0 </MenuItem>
                 <MenuItem value={5}> Scale 5.0 </MenuItem>
             </Select>
-            <Button className="cancel" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>    
-            <Button className="save"  variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
+            <Button className="cancel-button" variant="outlined" type='button' onClick={() => closeAction(false)}> Cancel </Button>    
+            <Button className="save-button"  variant="contained" type='button' onClick={() => {addEditsGrade()}} > Save </Button>
         </form>
     </div>);
 }

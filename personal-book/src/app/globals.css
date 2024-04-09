@@ -2,17 +2,9 @@
   margin-top: 62px;
 }
 
-.table{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border: 1px;
-  border-style: solid;
-  justify-content: center;
-}
-
 .thead{
   color: white;
-  background-color: cornflowerblue;
+  background-color: rgb(93, 128, 192);
   border: 1px;
   border-style: solid;
   border-color: black;
@@ -21,10 +13,6 @@
 .tbody{
   border: 1px;
   border-style: solid;
-}
-
-.delete{
-  color: brown;
 }
 
 form{
@@ -39,9 +27,6 @@ form{
   padding: 10px;
 }
 
-.login-item{
-  float: right;
-}
 
 span{
   font-size: large;
@@ -56,8 +41,23 @@ span{
 }
 
 .delete-button{
+  width: 49%;
+  margin-left: 2%;
   color: white;
   background-color: brown;
+}
+
+.save-button{
+  margin-left: 2%;
+  width: 49%;
+}
+
+.cancel-button{
+  width: 49%;
+}
+
+.delete-icon-button{
+  color: brown;
 }
 
 .delete-button:hover{

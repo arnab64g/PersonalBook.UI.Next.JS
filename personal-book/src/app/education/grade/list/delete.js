@@ -23,25 +23,14 @@ export default function DeleteGrade({grade, isOpen}) {
     }
 
     return (<>
-    <h1 className="head">Are you sure you want to delete this Grade? </h1>
-    <table className="delete-table">
-        <tr>
-            <td>Grade Name</td>
-            <td> {grade.gradeName} </td>
-        </tr>
-        <tr>
-            <td>Points</td>
-            <td>{grade.points}</td>
-        </tr>
-        <tr>
-            <td>Scale</td>
-            <td> {grade.scale} </td>
-        </tr>
-    </table>
-    <div className="field">
-        <Button className="double" variant="outlined" onClick={()=> {closeDialog()}}> Cancel </Button>
-        <label className="gap"></label>
-        <Button className="double delete-button"  variant="contained" onClick={() => {confirmDelete()}}>Delete</Button>
+    <div className="delete-container">
+        <h3>Are you sure you want to delete this Grade? </h3>
+        <p> Grade : {grade.gradeName}</p>
+        <p> Point: {grade.points} </p>
+        <p> Scale : {grade.scale} </p>
+        <Button className="cancel-button" variant="outlined" onClick={()=> {closeDialog()}}> Cancel </Button>
+        <Button className="delete-button"  variant="contained" onClick={() => {confirmDelete()}}>Delete</Button>
     </div>
+        
     </>)
 }

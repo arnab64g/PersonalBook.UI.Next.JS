@@ -26,17 +26,8 @@
     margin-bottom: 15px;
 }
 
-.cancel{
-    width: 49%;
-}
-
-.save{
-    margin-left: 2%;
-    width: 49%;
-}
-
 .add-edit{
     padding: 15px;
     min-width: 400px;
-    max-width: 500px;
+    max-width: 420px;
 }
