@@ -8,7 +8,7 @@ import DeleteCourse from "./delete";
 import { sortByCourseCodeAsc, sortByCourseCodeDesc, sortByCourseTitleAsc, sortByCourseTitleDesc } from "@/app/tokenHandle/sortCourse";
 import { getCourses } from "@/services/courseService";
 
-export function Courses() {
+export default function Courses() {
     const [courseList, setCourseList] = useState([]);
     const [sortOption, setSortOption] = useState(1);
     const [isOpen, setIsOpen] = useState(false);
