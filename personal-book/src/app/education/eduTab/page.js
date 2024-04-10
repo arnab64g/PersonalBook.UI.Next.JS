@@ -19,6 +19,7 @@ export default function EducationTab() {
     const handelChange2 = (event, value) => {
         setValue2(value)
     }
+
     return(
         <Box>
             <TabContext value={value1}>
@@ -59,7 +60,5 @@ export default function EducationTab() {
                 </TabPanel>
             </TabContext>
         </Box>
-        
-        
     );
 }

@@ -1,3 +1,21 @@
 .sem-form{
+    min-width: 400px;
+    max-width: 450px;
+    padding: 15px;
+}
+
+.sem-name{
     width: 100%;
+    margin-bottom: 15px;
+}
+
+.sem-month{
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.sem-year{
+    margin-left: 2%;
+    width: 49%;
+    margin-bottom: 15px;
 }

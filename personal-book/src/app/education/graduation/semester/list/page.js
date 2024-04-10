@@ -52,9 +52,9 @@ export default function SemesterList(){
     }
 
     return(<>
-    <h1>Semester List</h1>
-    <div className="cont">
-    <Button  variant="contained" className="options" onClick={() => {addEdit(0)}}> Add Semester </Button>
+    <div className="container">
+    <h2> List of Semesters</h2>
+    <Button className="add-btn"  variant="contained"  onClick={() => {addEdit(0)}}> Add Semester </Button>
     <Table className="semester-table">
         <TableHead className="thead">
             <TableCell className="thead">Semester Name</TableCell>
@@ -70,7 +70,7 @@ export default function SemesterList(){
                                                 <TableCell className="tbody">{sem.year}</TableCell>
                                                 <TableCell className="tbody"> 
                                                     <IconButton onClick={() => {addEdit(sem.id)}}><EditIcon color="primary"></EditIcon></IconButton> 
-                                                    <IconButton onClick={() => { deleteSemester(sem.id)}} className="delete"> <DeleteIcon></DeleteIcon></IconButton>
+                                                    <IconButton onClick={() => { deleteSemester(sem.id)}} className="delete-icon-button"> <DeleteIcon></DeleteIcon></IconButton>
                                                 </TableCell>
                                             </TableRow>))
             }

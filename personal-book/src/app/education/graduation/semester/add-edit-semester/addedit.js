@@ -4,6 +4,7 @@ import { Month } from "@/app/tokenHandle/month";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { addSemester, editSemester } from "@/services/semesterService";
+import "./addsem.css";
 
 export default function AddEditSemester({semester, isOpenDialog}) {
     const month = Month;
@@ -59,22 +60,14 @@ export default function AddEditSemester({semester, isOpenDialog}) {
     return(
         <>
         <form className="sem-form">
-            <h1> Semester </h1>
-        <div className="field">
-            <TextField className="single" value={semesterName} onChange={(e)=> {setSemesterName(e.target.value)}} error={errors.semesterName} required label="Semester Name"></TextField>
-        </div>
-        <div className="field">
-            <Select value={monthBng} onChange={(e) => {setMonthBng(e.target.value)}} className="double" label="Month" >
+            <h2> Add or Edit Semester </h2>
+            <TextField className="sem-name" value={semesterName} onChange={(e)=> {setSemesterName(e.target.value)}} error={errors.semesterName} required label="Semester Name"></TextField>
+            <Select value={monthBng} onChange={(e) => {setMonthBng(e.target.value)}} className="sem-month" label="Month" >
                 {month.map(m => (<MenuItem value={m.id}> {m.name} </MenuItem>))}
             </Select>
-            <label className="gap"></label>
-            <TextField value={year} type="number" onChange={(e) => {setYear(e.target.value);}} className="double" label="Year"></TextField>
-        </div>
-        <div className="field">
-            <Button className="double" variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
-            <label className="gap"></label>
-            <Button className="double" variant="contained" onClick={saveChange}> Save </Button>
-        </div>
+            <TextField value={year} type="number" onChange={(e) => {setYear(e.target.value);}} className="sem-year" label="Year"></TextField>
+            <Button className="cancel-button" variant="outlined" onClick={() => {closeDialog()}}> Cancel </Button>
+            <Button className="save-button" variant="contained" onClick={saveChange}> Save </Button>
         </form>
         </>
     );
