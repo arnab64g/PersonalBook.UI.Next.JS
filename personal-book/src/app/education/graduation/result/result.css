@@ -1,31 +1,20 @@
-.select-semester{
-    width: 250px;
-    margin-right: 5px;
+.add-edit-res{
+    max-width: 450px;
+    min-width: 400px;
+    padding: 15px;
 }
 
-.btns{
-    margin-left: 10px;
-    height: 55px;
+.course{
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.select-opt{
-    margin: 5px;
+.semester{
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.pop-up{
-    width: 500px;
-}
-
-.final{
-    border-width: 2px;
-    border-style: solid;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.final-sm{
-    border-width: 1px;
-    border-style: solid;
-    margin-top: 5px;
-    margin-bottom: 10px;
+.grade-add-edit{
+    width: 100%;
+    margin-bottom: 15px;
 }

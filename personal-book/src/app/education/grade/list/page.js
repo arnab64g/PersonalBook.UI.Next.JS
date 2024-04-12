@@ -65,13 +65,15 @@ export default function GradeList() {
     return (
         <div className="cont">
             <h1>List of Grades</h1>
-            <Select className="scale-filter" value={scale} onChange={selectScale}>
-                <MenuItem value={4}> Scale 4.0 </MenuItem>
-                <MenuItem value={5}> Scale 5.0 </MenuItem>
-            </Select>
-            {
-                isaAdmin ? <Button className="add-btn-grd" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button> : null 
-            }
+            <div>
+                <Select className="scale-filter" value={scale} onChange={selectScale}>
+                    <MenuItem value={4}> Scale 4.0 </MenuItem>
+                    <MenuItem value={5}> Scale 5.0 </MenuItem>
+                </Select>
+                {
+                    isaAdmin ? <Button className="add-btn-grd" variant="contained" onClick={() => {addEditGrade(0)} }>Add Grade</Button> : null 
+                }
+            </div>
             
             <Table className="grade-table">
                 <TableHead className="thead">

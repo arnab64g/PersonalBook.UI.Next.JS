@@ -65,8 +65,8 @@ export default function Result() {
     }
 
     return (<>
-        <h1>Result</h1>
-        <FormControl className="select-semester">
+        <h1>Grdduation Result</h1>
+        <FormControl >
             <InputLabel>Semester</InputLabel>
         <Select  label="Select" onChange={(e) => {semesterSelected(e, results)}}>
             <MenuItem value={0}>All Semester</MenuItem>
@@ -76,7 +76,7 @@ export default function Result() {
         </Select>
         </FormControl>
 
-        <Button className="btns" size="large" variant="contained" onClick={()=> {setResult({id : 0}); setIsOpen(true)}}>Add Result</Button>
+        <Button  variant="contained" onClick={()=> {setResult({id : 0}); setIsOpen(true)}}>Add Result</Button>
         <div className="final">
             <h4>Total Credit Earned: <i>{finalResult.totalCredit}</i> </h4>
             <h4> CGPA: <i>{ finalResult.cgpa }</i>  </h4>

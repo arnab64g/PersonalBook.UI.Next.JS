@@ -4,6 +4,7 @@ import { getGrades } from "@/services/gradeService";
 import { addSecondaryResult, updateSecondaryResult } from "@/services/secondaryResultService";
 import { Select, TextField, Checkbox, Button, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useEffect, useState } from "react";
+import "./secondary.css";
 
 export default function AddResult({result, isOpen}) {
     const level = result.level;

@@ -13,18 +13,19 @@
     width: 74%;
 }
 
-.optional{
-    margin-left: 2%;
-    width: 49%;
-}
-
 .grade{
-    width: 49%;
+    max-width: 49%;
+    margin-top: 15px;
 }
 
 .g-o{
     display: flex;
+}
+
+.optional{
     margin-top: 15px;
+    margin-left: 2%;
+    width: 49%;
 }
 
 .table{
