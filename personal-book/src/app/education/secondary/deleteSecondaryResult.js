@@ -17,21 +17,12 @@ export default function DeleteResult({result, isOpen}) {
     }
 
     return(<>
-    <h1 className="head">Are you sure you want to delete this?</h1>
-    <table className="delete-table">
-        <tr>
-            <td> {result.sl}. </td>
-            <td> {result.subject} </td>
-        </tr>
-        <tr>
-            <td> {result.gradeName} </td>
-            <td> {result.points} </td>
-        </tr>
-    </table>
-    <div className="field">
-        <Button className="double" variant="outlined" onClick={() => {isOpen(false)}}> Cancel</Button>
-        <label className="gap"></label>
-        <Button variant="contained" className="double delete-button" onClick={deleteRes}> Delete</Button>
+    <div className="del-cont">
+        <h3 >Are you sure you want to delete this?</h3>
+        <p> {result.sl} {result.subject}</p>
+        <p> Grade : {result.gradeName}({result.points}) </p>
+        <Button className="cancel-button" variant="outlined" onClick={() => {isOpen(false)}}> Cancel</Button>
+        <Button variant="contained" className="delete-button" onClick={deleteRes}> Delete</Button>
     </div>
     </>);
 }

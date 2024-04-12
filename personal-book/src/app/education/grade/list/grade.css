@@ -20,14 +20,17 @@
     width: 100%;
 }
 
-.add-btn{
+.add-btn-grd{
+    margin-top: 10px;
     margin-left: 2%;
     width: 49%;
     height: 55px;
+    margin-bottom: 15px;
 }
 
 .scale-filter{
     width: 49%;
+    margin-bottom: 15px;
 }
 
 p{

@@ -77,7 +77,7 @@ export default function Courses() {
             </Select>
             <label className="gap"></label>
             <Button onClick={()=>{addEditCourse(0)}} variant="contained" className="options"> Add Course</Button>
-        </div>
+        
         <Table className="course-table">
             <TableHead>
                 <TableCell className="thead">Course Code</TableCell>
@@ -103,6 +103,7 @@ export default function Courses() {
         <Dialog open={isDeletOpen}>
             <DeleteCourse course={course} isOpen={setIsDeleteOpen}></DeleteCourse>
         </Dialog>
+        </div>
         </>
     );
 }
