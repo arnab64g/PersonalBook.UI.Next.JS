@@ -34,17 +34,18 @@
 
 .select{
    min-width: 145px;
+   max-width: 250px;
+   max-height: 55px;
 }
 
 .add-btn{
     margin-left: 5px;
     height: 55px;
-    max-width: 250px;
 }
 
 .test{
-    place-content: start;
     display: flex;
+    max-height: 55px;
 }
 
 .del-cont{

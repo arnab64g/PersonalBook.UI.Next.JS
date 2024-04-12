@@ -67,17 +67,16 @@ export default function Courses() {
 
     return(
         <>
-        <h1 className="head">List of Courses</h1>
-        <div className="options">
-            <Select size="small" className="select options" value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
+        <div className="opt">
+            <h1>List of Courses</h1>
+            <Select  value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
                 <MenuItem value={1}> Course Code [A-Z] </MenuItem>
                 <MenuItem value={2}> Course Code [Z-A] </MenuItem>
                 <MenuItem value={3}> Course Title [A-Z] </MenuItem>
                 <MenuItem value={4}> Course Title [Z-A] </MenuItem>
-            </Select>
-            <label className="gap"></label>
-            <Button onClick={()=>{addEditCourse(0)}} variant="contained" className="options"> Add Course</Button>
-        
+            </Select>    
+            <Button className="add-btn" onClick={()=>{addEditCourse(0)}} variant="contained"> Add Course</Button>
+        </div>
         <Table className="course-table">
             <TableHead>
                 <TableCell className="thead">Course Code</TableCell>
@@ -92,7 +91,7 @@ export default function Courses() {
                     <TableCell className="tbody"> {x.creditPoint} </TableCell>
                     <TableCell className="tbody">
                         <IconButton onClick={() => {addEditCourse(x.id)}}> <EditIcon color="primary"></EditIcon> </IconButton>
-                        <IconButton onClick={() => {deleteCourse(x.id)}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
+                        <IconButton onClick={() => {deleteCourse(x.id)}} className="delete-icon-button"> <DeleteIcon></DeleteIcon> </IconButton>
                     </TableCell>
                     </TableRow>))}
             </TableBody>
@@ -103,7 +102,6 @@ export default function Courses() {
         <Dialog open={isDeletOpen}>
             <DeleteCourse course={course} isOpen={setIsDeleteOpen}></DeleteCourse>
         </Dialog>
-        </div>
         </>
     );
 }

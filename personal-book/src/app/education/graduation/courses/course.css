@@ -1,7 +1,46 @@
-.course-table{
-    margin: 0px;
+.add-course-form{
+    min-width: 400px;
+    max-width: 450px;
+    padding: 15px;
 }
 
-.del-f{
-    width: 500px;
+.ctitle{
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.ccode{
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.chour{
+    margin-left: 2%;
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.add-btn{
+    height: 55px;
+    margin-top: 10px;
+}
+
+.course-table{
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 400px;
+    width: 80%;
+}
+
+.opt{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    min-width: 400px;
+}
+
+.del-pop{
+    min-width: 400px;
+    max-width: 450px;
+    padding: 15px;
 }

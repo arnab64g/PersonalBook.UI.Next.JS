@@ -16,28 +16,16 @@ export default function DeleteCourse({course, isOpen}) {
     }
 
     return (<>
-    <h1 className="head">Delete Course</h1>
-    <form className="del-f">
-        <div className="field">
-            <table className="delete-table">
-                <tr>
-                    <td>Course Code: </td>
-                    <td>{course.courseCode}</td>
-                </tr>
-                <tr>
-                    <td>Course Title:</td>
-                    <td> {course.courseTitle} </td>
-                </tr>
-                <tr>
-                    <td>Credit Hour:</td>
-                    <td> {course.creditPoint} </td>
-                </tr>
-            </table>
-            <Button className="double" 
-            onClick={() => {isOpen(false)}}> Cancel </Button>
-            <label className="gap"></label>
-            <Button className="double delete-button" onClick={deleteCourse}> Delete </Button>
-        </div>
-    </form>
+    <div className="del-pop">
+        <h3>Are you sure you want to delete this course?</h3>
+        <p> {course.courseTitle} </p>
+        <p> Course Code: {course.courseCode} </p>
+        <p> Credit: {course.creditPoint} </p>
+        <Button className="cancel-button" variant="outlined"
+            onClick={() => {isOpen(false)}}> Cancel
+        </Button>
+        <Button className="delete-button" onClick={deleteCourse}> Delete 
+        </Button>
+    </div>
     </>)
 }

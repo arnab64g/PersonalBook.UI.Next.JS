@@ -5,7 +5,6 @@ import AddResult from "./addSecondaryResult";
 import DeleteResult from "./deleteSecondaryResult";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import "./secondary.css";
 import { getSecondaryResults } from "@/services/secondaryResultService";
 
 export default function SecondaryResult(){
@@ -20,7 +19,7 @@ export default function SecondaryResult(){
 
     const fetchSecondaryResult = async () =>{
         let result = await getSecondaryResults();
-        
+
         result.results = result.results.sort((a, b) => {
             if (a.sl > b.sl) {
                 return 1;
@@ -69,12 +68,12 @@ export default function SecondaryResult(){
     }
 
     return(<>
-    <div className="test">
-        <Select className="scale" value={choice} onChange={(e) => {choiceChange(e.target.value)} }>
+    <div>
+        <Select  className="select" value={choice} onChange={(e) => {choiceChange(e.target.value)} }>
             <MenuItem value={10}>SSC</MenuItem>
             <MenuItem value={12}>HSC</MenuItem>
         </Select>
-        <Button variant="contained" className="add-btn" onClick={() => {addEditResult(0)}}>Add Result</Button>
+        <Button className="add-btn" variant="contained" onClick={() => {addEditResult(0)}}>Add Result</Button>
     </div>
     <Table className="table">
         <TableHead className="thead">
@@ -93,7 +92,7 @@ export default function SecondaryResult(){
                     <TableCell className="tbody"> {re.isOptional ? re.points - 2 : re.points} </TableCell>
                     <TableCell className="tbody">
                         <IconButton onClick={() => {addEditResult(re.id)}}> <EditIcon color="primary"></EditIcon></IconButton>
-                        <IconButton onClick={() => {deleteRes(re.id)}}> <DeleteIcon className="delete-icon-button"></DeleteIcon> </IconButton>
+                        <IconButton onClick={() => {deleteRes(re.id)}}> <DeleteIcon className="delete"></DeleteIcon> </IconButton>
                     </TableCell>
                 </TableRow>)
             }
