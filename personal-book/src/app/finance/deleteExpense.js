@@ -1,3 +1,5 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Category, Icons } from "../tokenHandle/objects";
 import {Button} from '@mui/material'
