@@ -92,7 +92,7 @@ export default function SecondaryResult(){
                     <TableCell className="tbody"> {re.isOptional ? re.points - 2 : re.points} </TableCell>
                     <TableCell className="tbody">
                         <IconButton onClick={() => {addEditResult(re.id)}}> <EditIcon color="primary"></EditIcon></IconButton>
-                        <IconButton onClick={() => {deleteRes(re.id)}}> <DeleteIcon className="delete"></DeleteIcon> </IconButton>
+                        <IconButton onClick={() => {deleteRes(re.id)}}> <DeleteIcon className="delete-icon-button"></DeleteIcon> </IconButton>
                     </TableCell>
                 </TableRow>)
             }

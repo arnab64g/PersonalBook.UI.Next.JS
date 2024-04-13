@@ -1,27 +1,72 @@
 .filter{
-    width: 800px;
-    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 400px;
+    width: 80%;
 }
 
-.opt{
-    width: 200px;
+.category-filter{
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .date{
-    height: 53px;
-    border-color: rgb(188, 188, 188);
-    border-style:double;
-    border-width: 1px;
-    border-radius: 4px;
-    font-size:large;
-    color: rgb(188, 188, 188);
-    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 1%;
+    width: 24%;
+}
+
+.sort{
+    width: 24%;
+}
+
+.add-btn{
+    margin-left: 1%;
+    width: 25%;
+}
+
+.table-expense{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    min-width: 400px;
+    width: 80%;
+}
+
+.add-exp-form{
+    min-width: 400px;
+    max-width: 450px;
+    padding: 15px;
 }
 
 .cat-select{
-    width: 800px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.date{
-    width: 150px;
+.exp-date{
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.amount{
+    width: 49%;
+    margin-bottom: 15px;
+}
+
+.desc{
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.del-exp{
+    padding: 15px;
+}
+
+p{
+    text-align: center;
+}
+
+.demo-cont{
+    background-color: aqua;
 }

@@ -1,12 +1,14 @@
 .grade{
+    margin-top: 15px;
     width: 49%;
-    height: 70px;
+    margin-bottom: 15px;
 }
 
 .point{
+    margin-top: 15px;
     margin-left: 2%;
     width: 49%;
-    height: 70px;
+    margin-bottom: 15px;
 }
 
 .min{

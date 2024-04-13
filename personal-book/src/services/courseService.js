@@ -9,7 +9,7 @@ export async function getCourses() {
             headers: { 'Content-Type': 'application/json' ,
                         'authorization' : `bearer ${getToken()}` }
         };
-        const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Course?id=${userId}`, requestOptions);
+        const res = await fetch(`http://localhost:7108/api/Course?id=${userId}`, requestOptions);
         const result = await res.json();
 
         return result
@@ -23,7 +23,7 @@ export async function addCourse(course) {
                 body: JSON.stringify(course)
         };
 
-        const res = await fetch('https://personalbook-api-express-js.onrender.com/api/Course', requestOptions);
+        const res = await fetch('http://localhost:7108/api/Course', requestOptions);
         const result = await res.json();
 
         return result;
@@ -37,7 +37,7 @@ export async function updateCourse(course) {
                 body: JSON.stringify(course)
         };
 
-        const res = await fetch('https://personalbook-api-express-js.onrender.com/api/Course', requestOptions);
+        const res = await fetch('http://localhost:7108/api/Course', requestOptions);
         const result = await res.json();
         return result;
 }
@@ -49,7 +49,7 @@ export async function deleteCourseS(id) {
                         'authorization' : `bearer ${getToken()}`},
         };
 
-        const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Course?id=${id}`, requestOptions);
+        const res = await fetch(`http://localhost:7108/api/Course?id=${id}`, requestOptions);
         const result = await res.json();
 
         return result;

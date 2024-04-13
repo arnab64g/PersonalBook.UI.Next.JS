@@ -23,6 +23,7 @@ export default function Result() {
     const fetchComponent = async() => {
         const rawData = await getResults();
         const results = [];
+        
         setRawData(rawData.results);
         rawData.summary.forEach(element => {
             const sem = rawData.results.filter(x => x.semesterId == element.semId)[0];
@@ -34,6 +35,7 @@ export default function Result() {
         const result = sortResults(results);
         setResultView(result);
         setResults(result);
+        
         if(rawData.totalCredit){
             setFinalResult({totalCredit : rawData.totalCredit, cgpa : Math.round(rawData.totalPoints * 100 / rawData.totalCredit)/100});
         }
@@ -66,17 +68,18 @@ export default function Result() {
 
     return (<>
         <h1>Grdduation Result</h1>
-        <FormControl >
-            <InputLabel>Semester</InputLabel>
-        <Select  label="Select" onChange={(e) => {semesterSelected(e, results)}}>
-            <MenuItem value={0}>All Semester</MenuItem>
-            {
-                results.map(sem => (<MenuItem value={sem.semester.semesterId}> {sem.semester.semesterName} ({sem.semester.year})</MenuItem>))
-            }
-        </Select>
-        </FormControl>
-
-        <Button  variant="contained" onClick={()=> {setResult({id : 0}); setIsOpen(true)}}>Add Result</Button>
+        <div className="container-res">
+            <FormControl className="sem-filter">
+                <InputLabel>Semester</InputLabel>
+                <Select  label="Select" onChange={(e) => {semesterSelected(e, results)}}>
+                    <MenuItem value={0}>All Semester</MenuItem>
+                    {
+                        results.map(sem => (<MenuItem value={sem.semester.semesterId}> {sem.semester.semesterName} ({sem.semester.year})</MenuItem>))
+                    }
+                </Select>
+            </FormControl>
+            <Button className="add-btn-res" variant="contained" onClick={()=> {setResult({id : 0}); setIsOpen(true)}}>Add Result</Button>
+        </div>
         <div className="final">
             <h4>Total Credit Earned: <i>{finalResult.totalCredit}</i> </h4>
             <h4> CGPA: <i>{ finalResult.cgpa }</i>  </h4>
@@ -104,7 +107,7 @@ export default function Result() {
                                     <TableCell className="tbody"> {x.points}</TableCell>
                                     <TableCell className="tbody">
                                         <IconButton onClick={() => {updateResult(x.id)}}> <EditIcon color="primary"></EditIcon> </IconButton>
-                                        <IconButton onClick={() => {deleteResult(x.id)}} className="delete"> <DeleteIcon></DeleteIcon> </IconButton>
+                                        <IconButton onClick={() => {deleteResult(x.id)}} className="delete-icon-button"> <DeleteIcon></DeleteIcon> </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))

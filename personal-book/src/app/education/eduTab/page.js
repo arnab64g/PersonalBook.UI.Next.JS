@@ -26,7 +26,7 @@ export default function EducationTab() {
                 <Box>
                     <TabList onChange={(e, v) => {handelChange(e, v)}}>
                         <Tab  label="Secondary" value={1}></Tab>
-                        <Tab color='primary' label="graduation" value={2}></Tab>
+                        <Tab label="graduation" value={2}></Tab>
                         <Tab label="Grade" value={3}></Tab>
                     </TabList>                
                 </Box>

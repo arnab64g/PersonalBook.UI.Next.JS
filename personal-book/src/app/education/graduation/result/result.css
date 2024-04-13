@@ -18,3 +18,22 @@
     width: 100%;
     margin-bottom: 15px;
 }
+
+.sem-filter{
+    min-width: 200px;
+}
+
+.add-btn-res{
+    margin-left: 15px;
+    height: 55px;
+}
+
+.container-res{
+    width: 100%;   
+}
+
+.delete-res{
+    padding: 15px;
+    min-width: 400px;
+    max-width: 450px;
+}

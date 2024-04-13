@@ -13,22 +13,13 @@ export default function Delete({data, isOpen}) {
         }
     }
     return(<>
-        <h1 className="head">Delete Result</h1>
-        <form className="del-f">
-            <table className="delete-table">
-                <tr>
-                    <td>{data.courseTitle}</td>
-                </tr>
-                <tr>
-                    <td> {data.courseCode} </td>
-                    <td> {data.grade} </td>
-                </tr>
-            </table>
-            <div className="select-opt">
-                <Button className="double" onClick={() => { isOpen(false) }} variant="outlined"> Cancel </Button>
-                <label className="gap"></label>
-                <Button className="double delete-button" variant="contained" onClick={() => {deleteResult()}}> Delete </Button>
-            </div>
-        </form>
+    <div className="delete-res">
+        <h3 >Are you sure you want to delete this result?</h3>
+        <p> {data.courseTitle} </p>
+        <p> Course Code: {data.courseCode} </p>
+        <p> Grade: {data.grade} </p>
+        <Button className="cancel-button" onClick={() => { isOpen(false) }} variant="outlined"> Cancel </Button>
+        <Button className="delete-button" variant="contained" onClick={() => {deleteResult()}}> Delete </Button>
+    </div>
     </>)
 }

@@ -58,9 +58,9 @@ export default function AddEditExpense({data, isOpen}) {
     } 
 
     return (<>
-        <h1 className="field">Add or Edit Expense</h1>
-        <div className="field">
-            <FormControl className="single">
+        <div className="add-exp-form">
+            <h2> Add or Edit Expense</h2>
+            <FormControl className="cat-select">
                 <InputLabel>Select Category</InputLabel>
                 <Select label="Select Cat" value={category} onChange={(e)=>{setCategory(e.target.value)}}>
                     { 
@@ -68,22 +68,16 @@ export default function AddEditExpense({data, isOpen}) {
                     }
                 </Select>
             </FormControl>
-        </div>
-        <div className="field">
-            <LocalizationProvider  dateAdapter={AdapterDayjs}>
-                <DemoContainer className="field"  components={[]}>
-                    <DatePicker  onChange={(e) => { setDate(dayjs(e).toISOString())}} defaultValue={dayjs(date)} className="double" label="Date"></DatePicker>
-                    <TextField onChange={(e) => {setAmount(e.target.value)}} value={amount} className="double" label="Amount" type="number"></TextField>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer  components={[]}>
+                    <DatePicker className="exp-date"  onChange={(e) => { setDate(dayjs(e).toISOString())}} defaultValue={dayjs(date)} label="Date"></DatePicker>
+                    <TextField className="amount" onChange={(e) => {setAmount(e.target.value)}} value={amount} label="Amount" type="number"></TextField>
                 </DemoContainer>
             </LocalizationProvider>
-        </div>
-        <div className="field">
-            <TextField onChange={(e) => {setDescription(e.target.value)}} value={description} className="single" multiline rows={2} label="Description"></TextField>
-        </div>
-        <div className="field">
-            <Button className="double" variant="outlined"  onClick={() => {console.log("Clicked"); isOpen(false);}}>Cancel</Button>
-            <label className="gap"></label>
-            <Button className="double" variant="contained" onClick={() => {saveChange()}}> Save </Button>
+            
+            <TextField onChange={(e) => {setDescription(e.target.value)}} value={description} className="desc" multiline rows={2} label="Description"></TextField>
+            <Button className="cancel-button" variant="outlined"  onClick={() => {console.log("Clicked"); isOpen(false);}}>Cancel</Button>
+            <Button className="save-button" variant="contained" onClick={() => {saveChange()}}> Save </Button>
         </div>
     </>)
 }

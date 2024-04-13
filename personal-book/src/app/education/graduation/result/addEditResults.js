@@ -22,7 +22,6 @@ export default function AddEditResult({data, isOpen}) {
         const sList = await getSemester();
         setSemesterList(sList);
         const cList = await getCourses();
-        console.log(cList);
         setCourseList(cList);
         if (data.id) {
             setCourse(data.course);

@@ -7,7 +7,7 @@ export async function getSecondaryResults() {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/SecondaryResult?id=${userId}`, requestOptions);
+    const res = await fetch(`http://localhost:7108/api/SecondaryResult?id=${userId}`, requestOptions);
     const result = await res.json();
     
     return result;
@@ -21,7 +21,7 @@ export async function addSecondaryResult(res) {
         body : JSON.stringify(res)
     };
 
-    const resultNew = await fetch('https://personalbook-api-express-js.onrender.com/api/SecondaryResult', requestOptions);
+    const resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
     const result = await resultNew.json();
    
     return result;
@@ -36,7 +36,7 @@ export async function updateSecondaryResult(res) {
         body : JSON.stringify(res)
     };
 
-    const resultNew = await fetch('https://personalbook-api-express-js.onrender.com/api/SecondaryResult', requestOptions);
+    const resultNew = await fetch('http://localhost:7108/api/SecondaryResult', requestOptions);
 
     return resultNew;
 }
@@ -47,7 +47,7 @@ export async function deleteSecondaryResult(id) {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/SecondaryResult?id=${id}`, requestOptions);
+    const res = await fetch(`http://localhost:7108/api/SecondaryResult?id=${id}`, requestOptions);
     const result = await res.json();
 
     return result;
