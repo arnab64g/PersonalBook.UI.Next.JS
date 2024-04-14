@@ -4,13 +4,14 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import Expense from "./expense";
 import { useState } from "react";
-import Category from "./category";
+import CategoryComp from "./category";
 
 export default function Finance() {
     const [tab, setTab] = useState(1);
     const handelChange = (e, v) =>{
         setTab(v)
     }
+    
     return (<>
         <Box>
             <TabContext value={tab}> 
@@ -24,7 +25,7 @@ export default function Finance() {
                     <Expense></Expense>
                 </TabPanel>
                 <TabPanel value={2}>
-                    <Category></Category>
+                    <CategoryComp></CategoryComp>
                 </TabPanel>
             </TabContext>
         </Box>

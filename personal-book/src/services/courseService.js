@@ -39,6 +39,7 @@ export async function updateCourse(course) {
 
         const res = await fetch('http://localhost:7108/api/Course', requestOptions);
         const result = await res.json();
+        
         return result;
 }
 

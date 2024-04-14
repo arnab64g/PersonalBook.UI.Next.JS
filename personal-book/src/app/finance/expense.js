@@ -4,7 +4,7 @@ import { Select, MenuItem, FormControl, InputLabel, IconButton, Button, Dialog, 
 import "./finance.css";
 import { useEffect, useState } from "react";
 import { Category, Icons } from "../tokenHandle/objects";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -121,7 +121,7 @@ export default function Expense() {
                 </FormControl>
                 <DatePicker className="date" label="From Date" onChange={(e) => {setFormDate(dayjs(e).toISOString()); setExpenseListView(filterExpenses(expenseList, dayjs(e).toISOString(), toDate, filterCategories))}}></DatePicker>
                 <DatePicker className="date" label="To Date" onChange={(e) => {setToDate(dayjs(e).toISOString()); setExpenseListView(filterExpenses(expenseList, fromDate, dayjs(e).toISOString(), filterCategories))}}></DatePicker>
-                <Button className="add-btn" onClick={() => { setExpense({id : 0, userId : "", category : 0, data : new Date(), amount : 0, description : ""}) ; setIsOpen(true);}} variant="contained">Add</Button>
+                <Button className="add-btn" onClick={() => { setExpense({id : 0, userId : "", category : 0, data : (new Date()).toISOString(), amount : 0, description : ""}) ; setIsOpen(true);}} variant="contained">Add</Button>
             </DemoContainer>
         </LocalizationProvider>
     </div>

@@ -70,3 +70,17 @@ p{
 .demo-cont{
     background-color: aqua;
 }
+
+.chart{
+    min-width: 400px;
+    width: 45%;
+}
+
+.pi-chart{
+    min-width: 400px;
+    width: 45%;
+}
+
+.categ{
+    display: flex;
+}

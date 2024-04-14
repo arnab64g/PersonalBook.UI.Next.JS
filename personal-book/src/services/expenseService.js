@@ -25,9 +25,8 @@ export async function addExpenseAsync(expense) {
     };
 
     const res = await fetch(`http://localhost:7108/api/Expense`, requestOptions);
-    const result = await res.json();
 
-    return result;
+    return res;
 }
 
 export async function updateExpenseAsync(expense) {
@@ -39,9 +38,8 @@ export async function updateExpenseAsync(expense) {
     };
 
     const res = await fetch(`http://localhost:7108/api/Expense`, requestOptions);
-    const result = await res.json();
 
-    return result;
+    return res;
 }
 
 export async function deleteExpenseAsync(id) {
@@ -51,7 +49,22 @@ export async function deleteExpenseAsync(id) {
                     'authorization' : `bearer ${getToken()}` }
     };
     const res = await fetch(`http://localhost:7108/api/Expense?id=${id}`, requestOptions);
-    const result = await res.json();
 
-    return result;
+    return res;
+}
+
+export async function getCatSummary(filter) {
+   
+    const userId = getUserId();
+    filter.userId = userId;
+    console.log(filter);
+    const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' ,
+                        'authorization' : `bearer ${getToken()}` },
+            body : JSON.stringify(filter)
+        };
+        const res = await fetch(`http://localhost:7108/api/Expense/Category`, requestOptions);
+
+        return await res.json();
 }

@@ -37,13 +37,10 @@ export default function AddResult({result, isOpen}) {
 
         if (res.id == 0) {
             resultNew = await addSecondaryResult(res);
-            console.log(resultNew);
         }
         else{
             resultNew= await updateSecondaryResult(res);
         }
-
-        resultNew = await resultNew.json();
 
         if (resultNew) {
             alert("Saved Successfully.");

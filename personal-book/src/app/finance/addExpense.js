@@ -11,6 +11,7 @@ import { addExpenseAsync, updateExpenseAsync } from "@/services/expenseService";
 import { dateOnly } from "../tokenHandle/dateOnly";
 
 export default function AddEditExpense({data, isOpen}) {
+    console.log(data);
     const [category, setCategory] = useState(data.category);
     const [date, setDate] = useState(data.date);
     const [amount, setAmount] = useState(data.amount);
@@ -18,7 +19,9 @@ export default function AddEditExpense({data, isOpen}) {
     const icons = Icons;
     const categories = Category;
     const saveChange = async () => {
-        
+        if (date == null) {
+            setDate(dateOnly(new Date()))
+        }
         if (!data.id) {
             const expense = {
                 userId : "", 
@@ -70,7 +73,7 @@ export default function AddEditExpense({data, isOpen}) {
             </FormControl>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer  components={[]}>
-                    <DatePicker className="exp-date"  onChange={(e) => { setDate(dayjs(e).toISOString())}} defaultValue={dayjs(date)} label="Date"></DatePicker>
+                    <DatePicker className="exp-date"  onChange={(e) => { setDate(dayjs(e).toISOString())}} value={dayjs(date)} label="Date"></DatePicker>
                     <TextField className="amount" onChange={(e) => {setAmount(e.target.value)}} value={amount} label="Amount" type="number"></TextField>
                 </DemoContainer>
             </LocalizationProvider>
