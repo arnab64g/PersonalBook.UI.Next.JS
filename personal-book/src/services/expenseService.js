@@ -9,7 +9,7 @@ export async function getExpensesAsync() {
             headers: { 'Content-Type': 'application/json' ,
                         'authorization' : `bearer ${getToken()}` }
         };
-        const res = await fetch(`http://localhost:7108/api/Expense?id=${userId}`, requestOptions);
+        const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Expense?id=${userId}`, requestOptions);
         const result = await res.json();
 
         return result;
@@ -24,7 +24,7 @@ export async function addExpenseAsync(expense) {
         body : JSON.stringify(expense)
     };
 
-    const res = await fetch(`http://localhost:7108/api/Expense`, requestOptions);
+    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Expense`, requestOptions);
 
     return res;
 }
@@ -37,7 +37,7 @@ export async function updateExpenseAsync(expense) {
         body : JSON.stringify(expense)
     };
 
-    const res = await fetch(`http://localhost:7108/api/Expense`, requestOptions);
+    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Expense`, requestOptions);
 
     return res;
 }
@@ -48,7 +48,7 @@ export async function deleteExpenseAsync(id) {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch(`http://localhost:7108/api/Expense?id=${id}`, requestOptions);
+    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Expense?id=${id}`, requestOptions);
 
     return res;
 }
@@ -64,7 +64,7 @@ export async function getCatSummary(filter) {
                         'authorization' : `bearer ${getToken()}` },
             body : JSON.stringify(filter)
         };
-        const res = await fetch(`http://localhost:7108/api/Expense/Category`, requestOptions);
+        const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Expense/Category`, requestOptions);
 
         return await res.json();
 }

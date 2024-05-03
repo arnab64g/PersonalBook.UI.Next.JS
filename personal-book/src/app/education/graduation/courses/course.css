@@ -23,7 +23,7 @@
 .add-btn{
     height: 55px;
     margin-left: 10px;
-    margin-top: 10px;
+    
 }
 
 .course-table{
@@ -44,4 +44,14 @@
     min-width: 400px;
     max-width: 450px;
     padding: 15px;
+}
+
+.select-opt-course{
+    display: flex;
+    height: 55px;
+    padding-bottom: 20px;
+}
+
+.select-course-filter{
+    height: 55px;
 }

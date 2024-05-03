@@ -9,7 +9,7 @@ export async function getResults() {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
         };
-    const res = await fetch(`http://localhost:7108/api/Result?id=${userId}`, requestOptions);
+    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Result?id=${userId}`, requestOptions);
     console.log("Data: ", res);
     const rawData = await res.json();
 
@@ -30,7 +30,7 @@ export async function addResultAsync(result) {
                 'authorization' : `bearer ${getToken()}`},
         body: JSON.stringify(res)
     };
-    const r = await fetch('http://localhost:7108/api/Result', requestOptions);
+    const r = await fetch('https://personalbook-api-express-js.onrender.com/api/Result', requestOptions);
     
     return await r.json();
 }
@@ -50,7 +50,7 @@ export async function updateResultAsync(result) {
                 'authorization' : `bearer ${getToken()}`},
         body: JSON.stringify(res)
     };
-    const r = await fetch('http://localhost:7108/api/Result', requestOptions);
+    const r = await fetch('https://personalbook-api-express-js.onrender.com/api/Result', requestOptions);
     
     return await r.json();
 }
@@ -61,7 +61,7 @@ export async function deleteResultS(id) {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch(`http://localhost:7108/api/Result?id=${id}`, requestOptions);
+    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Result?id=${id}`, requestOptions);
     const result = await res.json();
 
     return result;

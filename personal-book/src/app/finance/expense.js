@@ -1,6 +1,7 @@
 "use client";
 
-import { Select, MenuItem, FormControl, InputLabel, IconButton, Button, Dialog, Table, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel, IconButton, Button, Dialog, Table, TableHead, 
+    TableBody, TableRow, TableCell } from "@mui/material";
 import "./finance.css";
 import { useEffect, useState } from "react";
 import { Category, Icons } from "../tokenHandle/objects";
@@ -14,7 +15,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AddEditExpense from "./addExpense";
 import { getExpensesAsync } from "@/services/expenseService";
 import DeleteExpense from "./deleteExpense";
-import {orderByCategory, sortByAmountHigh_Low, sortByAmountLow_High, sortByDateNew_Old, sortByDateOld_New} from "../tokenHandle/sortExpense";
+import {orderByCategory, sortByAmountHigh_Low, sortByAmountLow_High, sortByDateNew_Old, sortByDateOld_New} 
+            from "../tokenHandle/sortExpense";
 import dayjs from "dayjs";
 import { dateOnly } from "../tokenHandle/dateOnly";
 
@@ -27,8 +29,7 @@ export default function Expense() {
     const [expenseList, setExpenseList] = useState([]);
     const [expenseListView, setExpenseListView] = useState([]);
     const [expense, setExpense] = useState({});
-    const [sortOpt, setSortOpt] = useState(1);
-
+    const [sortOpt, setSortOpt] = useState(1);     
     const categories = Category;
     const icons = Icons;
 
@@ -104,7 +105,7 @@ export default function Expense() {
             <InputLabel>Select Categories </InputLabel>
             <Select label="Select Cate" multiple className="cat-select" value={filterCategories} onChange={ (e) => {setFilterCategories(e.target.value); 
                 setExpenseListView(filterExpenses(expenseList, fromDate, toDate, e.target.value))}}>
-                {categories.map((cat) => (<MenuItem value={cat.id}> <FontAwesomeIcon icon={icons[cat.id-1]}></FontAwesomeIcon> {cat.name}</MenuItem>))}
+                {categories.map((cat, index) => (<MenuItem value={cat.id} key={index}> <FontAwesomeIcon icon={icons[cat.id-1]}></FontAwesomeIcon> {cat.name}</MenuItem>))}
             </Select>
         </FormControl>
         <LocalizationProvider  dateAdapter={AdapterDayjs}>
@@ -136,7 +137,7 @@ export default function Expense() {
         </TableHead>
         <TableBody>
             {
-                expenseListView.map( x => (<TableRow className="tbody">
+                expenseListView.map( (x) => (<TableRow  className="tbody">
                     <TableCell> <FontAwesomeIcon icon={icons[x.category - 1]}></FontAwesomeIcon> </TableCell>
                     <TableCell> {categories[x.category].name} </TableCell>
                     <TableCell> {(new Date( x.date)).toDateString()} </TableCell>

@@ -27,6 +27,14 @@ export default function Navbar(){
         router.replace("/");
     }
 
+    const goExp = () =>{
+        router.replace('/finance')
+    }
+
+    const goEdu = () =>{
+        router.replace('/education/eduTab');
+      }
+    
     return (
         <>
             <AppBar>
@@ -47,10 +55,10 @@ export default function Navbar(){
                             <ListItemButton href="/" onClick={() => {setOpen(false)}} color="primary"> Home </ListItemButton>
                         </ListItem>
                         <ListItem className='nav-item'>
-                            <ListItemButton onClick={() => {setOpen(false)}}  href="/education/eduTab"> Education </ListItemButton>
+                            <ListItemButton onClick={() => {setOpen(false); goEdu()}} > Education </ListItemButton>
                         </ListItem>
                         <ListItem className="nav-item">
-                            <ListItemButton onClick={() => {setOpen(false)}}  href="/finance"> Expense </ListItemButton>
+                            <ListItemButton onClick={() => {setOpen(false); goExp()}} > Expense </ListItemButton>
                         </ListItem>
                     </div> : null
                 }

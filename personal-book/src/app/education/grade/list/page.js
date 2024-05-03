@@ -65,7 +65,7 @@ export default function GradeList() {
     return (
         <div className="cont">
             <h1>List of Grades</h1>
-            <div>
+            <div className="select-opt">
                 <Select className="scale-filter" value={scale} onChange={selectScale}>
                     <MenuItem value={4}> Scale 4.0 </MenuItem>
                     <MenuItem value={5}> Scale 5.0 </MenuItem>

@@ -69,13 +69,16 @@ export default function Courses() {
         <>
         <div className="opt">
             <h1>List of Courses</h1>
-            <Select  value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
-                <MenuItem value={1}> Course Code [A-Z] </MenuItem>
-                <MenuItem value={2}> Course Code [Z-A] </MenuItem>
-                <MenuItem value={3}> Course Title [A-Z] </MenuItem>
-                <MenuItem value={4}> Course Title [Z-A] </MenuItem>
-            </Select>    
-            <Button className="add-btn" onClick={()=>{addEditCourse(0)}} variant="contained"> Add Course</Button>
+            <div className="select-opt-course">
+                <Select className="select-course-filter" value={sortOption} onChange={(e) => {sortBy(e.target.value, courseList)}}>
+                    <MenuItem value={1}> Course Code [A-Z] </MenuItem>
+                    <MenuItem value={2}> Course Code [Z-A] </MenuItem>
+                    <MenuItem value={3}> Course Title [A-Z] </MenuItem>
+                    <MenuItem value={4}> Course Title [Z-A] </MenuItem>
+                </Select>    
+                <Button className="add-btn" onClick={()=>{addEditCourse(0)}} variant="contained"> Add Course</Button>
+            </div>
+            
         </div>
         <Table className="course-table">
             <TableHead>

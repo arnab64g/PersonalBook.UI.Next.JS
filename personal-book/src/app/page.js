@@ -35,6 +35,7 @@ export default function Home() {
   const goExp = () =>{
     router.replace('/finance')
   }
+  
   return (
     <main className={styles.main}>
         {
