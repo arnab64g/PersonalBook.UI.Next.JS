@@ -62,10 +62,9 @@ export function isAdmin(){
 
 export function getUserId(){
     const token = getCookie('personalBookNJ');
-
     if (token) {
         const decode = jwtDecode(token);
-        
+        console.log(decode);
         return decode.unique_name;
     }
 

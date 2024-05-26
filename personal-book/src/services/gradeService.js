@@ -1,6 +1,7 @@
 "use client";
 
 import { getToken } from "@/app/tokenHandle/tokenHandle";
+import { baseurl } from "./baseurl";
 
 export async function getGrades() {
     const requestOptions = {
@@ -8,7 +9,7 @@ export async function getGrades() {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch('https://personalbook-api-express-js.onrender.com/api/Grade', requestOptions);
+    const res = await fetch(`${baseurl}/Grade`, requestOptions);
     let result = await res.json();
     result = result.sort((a, b) => {
         if (a.points > b.points) {
@@ -29,7 +30,7 @@ export async function addGrade(grd) {
                     'authorization' : `bearer ${getToken()}` },
         body: JSON.stringify(grd)
     };
-    const res = await fetch('https://personalbook-api-express-js.onrender.com/api/Grade', requestOptions);
+    const res = await fetch(`${baseurl}/Grade`, requestOptions);
 
     return res;
 }
@@ -41,7 +42,7 @@ export async function updateGrade(grd) {
                     'authorization' : `bearer ${getToken()}`},
         body: JSON.stringify(grd)
     };
-    const res = await fetch('https://personalbook-api-express-js.onrender.com/api/Grade', requestOptions);
+    const res = await fetch(`${baseurl}/Grade`, requestOptions);
 
     return res;
 }
@@ -52,7 +53,7 @@ export async function deleteGrade(id) {
         headers: { 'Content-Type': 'application/json' ,
                     'authorization' : `bearer ${getToken()}` }
     };
-    const res = await fetch(`https://personalbook-api-express-js.onrender.com/api/Grade?id=${id}`, requestOptions);
+    const res = await fetch(`${baseurl}/Grade?id=${id}`, requestOptions);
     const result = await res.json();
 
     return result;
